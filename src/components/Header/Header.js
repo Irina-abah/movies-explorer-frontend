@@ -1,4 +1,3 @@
-import React from 'react';
 import logoPath from '../../images/logo.svg';
 import { Link, Route } from "react-router-dom";
 import Navigation from '../Header/Navigation/Navigation';

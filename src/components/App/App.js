@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { Route, Switch } from "react-router-dom";
 import Header from '../Header/Header';
@@ -10,11 +11,15 @@ import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
   return (
     <div className="App">
       <Header />
       <Switch>
         {/* <Route exact path="/">
+          {!loggedIn ? <Main /> : <Redirect to="/movies" />}
           <Main />
         </Route>
         <Route path="/movies">
