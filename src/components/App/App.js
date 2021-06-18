@@ -1,4 +1,3 @@
-// import logo from '../../images/logo.svg';
 import './App.css';
 import { Route, Switch } from "react-router-dom";
 import Header from '../Header/Header';
@@ -15,7 +14,7 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        <Route path="/">
+        {/* <Route exact path="/">
           <Main />
         </Route>
         <Route path="/movies">
@@ -35,7 +34,7 @@ function App() {
         </Route>
         <Route path="*">
           <PageNotFound />
-        </Route>
+        </Route> */}
       </Switch>
     </div>
   );
