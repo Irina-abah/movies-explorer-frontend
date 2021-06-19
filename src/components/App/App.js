@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -18,11 +18,10 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        {/* <Route exact path="/">
+        <Route exact path="/">
           {!loggedIn ? <Main /> : <Redirect to="/movies" />}
-          <Main />
         </Route>
-        <Route path="/movies">
+        {/* <Route path="/movies">
           <Movies />
         </Route>
         <Route path="/saved-movies">
