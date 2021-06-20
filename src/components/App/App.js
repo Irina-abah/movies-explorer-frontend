@@ -16,8 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <Switch>
+        <Switch>
         <Route exact path="/">
           {!loggedIn ? <Main /> : <Redirect to="/movies" />}
         </Route>
