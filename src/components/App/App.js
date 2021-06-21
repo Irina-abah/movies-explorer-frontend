@@ -24,7 +24,9 @@ function App() {
           <Footer />
         </Route>
         <Route path="/movies">
+          <Header />
           <Movies />
+          <Footer />
         </Route>
         {/* <Route path="/saved-movies">
           <SavedMovies />
