@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Switch, Redirect } from "react-router-dom";
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -18,12 +19,14 @@ function App() {
     <div className="App">
         <Switch>
         <Route exact path="/">
+          <Header />
           {!loggedIn ? <Main /> : <Redirect to="/movies" />}
+          <Footer />
         </Route>
-        {/* <Route path="/movies">
+        <Route path="/movies">
           <Movies />
         </Route>
-        <Route path="/saved-movies">
+        {/* <Route path="/saved-movies">
           <SavedMovies />
         </Route>
         <Route path="/profile">
