@@ -9,7 +9,7 @@ function SearchForm(props) {
         className="seach-form__input-container" 
         name="search" 
         onSubmit={props.onSubmit}>
-        <img className="search-form__icon" src={Magnifier} alt="Иконка поиска" />
+          <img className="search-form__icon" src={Magnifier} alt="Иконка поиска" />
           <input 
           className="seach-form__input seach-form__input_type_search"
           type="text"

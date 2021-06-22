@@ -37,10 +37,12 @@ function App() {
           isSaved={isSaved}/>
           <Footer />
         </Route>
-        {/* <Route path="/profile">
+        <Route path="/profile">
+          <Header />
           <Profile />
+          <Footer />
         </Route>
-        <Route path="/signin">
+        {/* <Route path="/signin">
           <Login />
         </Route>
         <Route path="/signup">
