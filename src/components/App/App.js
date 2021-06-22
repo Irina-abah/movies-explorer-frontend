@@ -14,6 +14,9 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isSaved, setIsSaved] = React.useState(false);
+
+
 
   return (
     <div className="App">
@@ -28,10 +31,13 @@ function App() {
           <Movies />
           <Footer />
         </Route>
-        {/* <Route path="/saved-movies">
-          <SavedMovies />
+        <Route path="/saved-movies">
+          <Header />
+          <SavedMovies 
+          isSaved={isSaved}/>
+          <Footer />
         </Route>
-        <Route path="/profile">
+        {/* <Route path="/profile">
           <Profile />
         </Route>
         <Route path="/signin">

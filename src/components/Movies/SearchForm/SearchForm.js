@@ -1,4 +1,5 @@
-import Magnifier from '../../../images/search-icon.svg'
+import Magnifier from '../../../images/search-icon.svg';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
   return (
@@ -30,14 +31,7 @@ function SearchForm(props) {
           aria-label="search a movie">
         </button>
       </div>
-      <div className="search-form__filter">
-        <input 
-        className="seach-form__input seach-form__input_type_toggle"
-        type="checkbox" 
-        id="short-movie" />
-        <span className="search-form__slider"></span>
-        <label className="search-form__filter-name" htmlFor="short-movie">Короткометражки</label>
-      </div>
+      <FilterCheckbox />
     </section>
   )
 };

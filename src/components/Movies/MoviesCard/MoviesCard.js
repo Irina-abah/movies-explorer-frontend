@@ -1,16 +1,17 @@
-import MoviePath from '../../../images/movie-image.jpg';
+function MoviesCard(props) {
 
-function MoviesCard() {
   return (
     <li className="movie">
       <div className="movie__info">
         <div className="movie__description">
-          <h2 className="movie__title">33 слова о дизайне</h2>
-          <p className="movie__duration">1ч 47м</p>
+          <h2 className="movie__title">{props.movie.nameRU}</h2>
+          <p className="movie__duration">{props.movie.duration}</p>
         </div>
-        <button className="button button_type_save" type="button" aria-label="save button"/>
+        {!props.isSaved ? 
+        (<button className="button button_type_save" type="button" aria-label="save button"/>) : 
+        (<button className="button button_type_delete" type="button" aria-label="delete button"/>) }
       </div>
-      <img className="movie__image" src={MoviePath} alt="Кадр из фильма"/>
+      <img className="movie__image" src={props.movie.thumbnail} alt={props.movie.nameRU}/>
       
     </li>
   )

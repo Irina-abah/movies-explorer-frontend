@@ -1,14 +1,12 @@
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
-
+import movies from '../../utils/constants';
 
 function Movies() {
   return (
     <section className="movies">
       <SearchForm />
-      <MoviesCardList />
-      <button className="movies__more-button">Ещё</button>
-
+      <MoviesCardList movies={movies}/>
     </section>
     
   )
