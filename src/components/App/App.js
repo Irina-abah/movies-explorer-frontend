@@ -42,13 +42,13 @@ function App() {
           <Profile />
           <Footer />
         </Route>
-        {/* <Route path="/signin">
+        <Route path="/signin">
           <Login />
         </Route>
         <Route path="/signup">
           <Register />
         </Route>
-        <Route path="*">
+        {/* <Route path="*">
           <PageNotFound />
         </Route> */}
       </Switch>

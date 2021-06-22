@@ -23,7 +23,10 @@ function Profile(props) {
 
   return (
     <section className="profile">
-      <form className="profile__info" name="profile" onSubmit={props.onSubmit}>
+      <form 
+      className="profile__info" 
+      name="profile" 
+      onSubmit={props.onSubmit}>
         {/* <h2 className="profile__title">{`Привет, ${name}`}</h2> */}
         <h2 className="profile__title">Привет, Ирина!</h2>
         <div className="profile__container">
