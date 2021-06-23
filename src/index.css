@@ -21,4 +21,9 @@
 @import url('./components/Profile/Profile.css');
 @import url('./components/Register/Register.css');
 @import url('./components/SavedMovies/SavedMovies.css');
+@import url('./components/PageNotFound/PageNotFound.css');
+@import url('./components/UserEntry/UserEntry.css');
 
+#root {
+  max-width: 1280px;
+}

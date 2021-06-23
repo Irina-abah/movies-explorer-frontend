@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <section className="footer">
+    <footer className="footer">
       <h2 className="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</h2>
       <div className="footer__content">
         <p className="copyright">&#169; {new Date().getFullYear()}</p>
@@ -10,7 +10,7 @@ function Footer() {
           <a className="menu__link" href="http://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
         </nav>
       </div>
-    </section>
+    </footer>
   )
 };
 
