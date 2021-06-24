@@ -15,7 +15,7 @@
 @import url('./components/Movies/MoviesCard/MoviesCard.css');
 @import url('./components/Movies/FilterCheckbox/FilterCheckbox.css');
 @import url('./components/Movies/MoviesCardList/MoviesCardList.css');
-@import url('./components/Movies/Preloader/Preloader.css');
+@import url('./components/Preloader/Preloader.css');
 @import url('./components/Movies/SearchForm/SearchForm.css');
 @import url('./components/Header/Navigation/Navigation.css');
 @import url('./components/Profile/Profile.css');
@@ -26,4 +26,5 @@
 
 #root {
   max-width: 1280px;
+  background-color: #FAFAFA;
 }

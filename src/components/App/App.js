@@ -22,23 +22,28 @@ function App() {
     <div className="App">
         <Switch>
         <Route exact path="/">
-          <Header />
+          <Header 
+          loggedIn={loggedIn}
+          />
           {!loggedIn ? <Main /> : <Redirect to="/movies" />}
           <Footer />
         </Route>
         <Route path="/movies">
-          <Header />
+          <Header
+          loggedIn={!loggedIn} />
           <Movies />
           <Footer />
         </Route>
         <Route path="/saved-movies">
-          <Header />
+          <Header 
+          loggedIn={!loggedIn} />
           <SavedMovies 
           isSaved={isSaved}/>
           <Footer />
         </Route>
         <Route path="/profile">
-          <Header />
+          <Header 
+          loggedIn={!loggedIn} />
           <Profile />
           <Footer />
         </Route>

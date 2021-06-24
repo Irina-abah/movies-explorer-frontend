@@ -1,0 +1,25 @@
+.promo__container {
+  height: 524px;
+  background-color: #DDDEE3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-position: center;
+  position: relative;
+}
+
+.promo__image {
+  width: 320px;
+  height: 320px;
+  position: absolute;
+}
+
+.promo__title {
+  font-size: 50px;
+  line-height: 1.16em;
+  max-width: 730px;
+  font-weight: 400;
+  border: 1px red solid;
+}

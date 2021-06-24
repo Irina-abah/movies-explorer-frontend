@@ -1,0 +1,28 @@
+.navtab {
+  height: 66px;
+  border: 1px red solid;
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navtab__list {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+.navtav__item {
+  color: #000;
+  font-size: 13px;
+  line-height: 1.23em;
+  font-weight: 500;
+  padding: 0;
+  margin-right: 40px;
+}
+
+.navtav__item:nth-last-of-type() {
+  margin-right: 0;
+}
