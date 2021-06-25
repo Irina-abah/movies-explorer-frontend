@@ -14,11 +14,11 @@ function AboutProject() {
       </ul>
       <ul className="timeframe">
         <li className="timeframe__item">
-          <h3 className="timeframe__title">1 неделя</h3>
+          <h3 className="timeframe__title timeframe__title_type_back">1 неделя</h3>
           <p className="timeframe__info">Back-end</p>
         </li>
-        <li className="timeframe">
-          <h3 className="timeframe__title">4 недели</h3>
+        <li className="timeframe__item">
+          <h3 className="timeframe__title timeframe__title_type_front">4 недели</h3>
           <p className="timeframe__info">Front-end</p>
         </li>
       </ul>

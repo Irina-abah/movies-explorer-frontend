@@ -1,6 +1,6 @@
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
+// import Preloader from '../Preloader/Preloader';
 import movies from '../../utils/constants';
 
 function Movies() {
@@ -8,7 +8,7 @@ function Movies() {
     <main className="main movies">
       <SearchForm />
       <MoviesCardList movies={movies}/>
-      <Preloader />
+      {/* <Preloader /> */}
     </main>
     
   )

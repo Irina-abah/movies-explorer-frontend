@@ -8,6 +8,7 @@
   margin: 0 auto;
   border: 1px red solid;
   box-sizing: border-box;
+  padding: 0 70px;
 }
 
 .header__main {
