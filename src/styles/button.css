@@ -1,0 +1,6 @@
+.button_type_save {
+  background: url(../images/save-icon.svg) center no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+}

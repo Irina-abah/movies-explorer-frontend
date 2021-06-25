@@ -23,8 +23,28 @@
 @import url('./components/SavedMovies/SavedMovies.css');
 @import url('./components/PageNotFound/PageNotFound.css');
 @import url('./components/UserEntry/UserEntry.css');
+@import url('./styles/button.css');
+@import url('./styles/section.css');
 
 #root {
+  
+  box-sizing: border-box;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%; 
   max-width: 1280px;
+  min-width: 320px;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+body {
   background-color: #FAFAFA;
+  color: #000;
 }
