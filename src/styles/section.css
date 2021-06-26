@@ -9,5 +9,7 @@
   line-height: 1.21;
   font-weight: 400;
   padding-bottom: 23px;
+  letter-spacing: -0.04em;
   border-bottom: 1px solid #000;
+  text-align: left;
 }

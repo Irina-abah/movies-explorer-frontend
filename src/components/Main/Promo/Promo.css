@@ -21,5 +21,7 @@
   line-height: 1.16em;
   max-width: 730px;
   font-weight: 400;
+  margin: 0;
   border: 1px red solid;
+  letter-spacing: -0.04em;
 }
