@@ -8,7 +8,7 @@
 
 .section__title {
   font-size: 22px;
-  line-height: 1.21em;
+  line-height: 1.21;
   font-weight: 400;
   border-bottom: black;
   border: 1px red solid;
