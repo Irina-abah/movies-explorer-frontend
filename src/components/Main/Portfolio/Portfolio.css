@@ -1,0 +1,32 @@
+.portfolio {
+  text-align: left;
+}
+
+.portfolio__title {
+  font-size: 18px;
+  line-height: 1.11;
+  font-weight: 400;
+  margin: 0 0 50px;
+  color: #A0A0A0;
+}
+
+.portfolio__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.portfolio__item-name {
+  font-size: 30px;
+  line-height: 1.67;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  color: #000;
+  /* margin: 19px 100% 19px 0; */
+}
