@@ -30,9 +30,26 @@
   font-weight: 500;
 }
 
+.header__link_active {
+  font-weight: 500;
+}
+
 .header__link_type_signin {
   background-color: #3456F3;
   color: #fff;
   padding: 8px 20px;
   border-radius: 3px;
+}
+
+.header__navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header__navigation-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
 }

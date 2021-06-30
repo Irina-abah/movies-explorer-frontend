@@ -8,6 +8,7 @@ function Movies() {
     <main className="main movies">
       <SearchForm />
       <MoviesCardList movies={movies}/>
+      <button className="button button_type_more" type="button" aria-label="more button">Еще</button>
       {/* <Preloader /> */}
     </main>
     

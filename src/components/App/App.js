@@ -16,8 +16,6 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
 
-
-
   return (
     <div className="App">
         <Switch>

@@ -1,6 +1,47 @@
+.button {
+cursor: pointer;
+border: none;
+padding: 0;
+border-radius: 3px;
+}
+
+.button:hover {
+opacity: 0.6;
+background-color: #e8e8e8;
+transition: all 0.7s ease;
+}
+
+.button:focus {
+outline: 0;
+box-shadow: none;
+}
+
 .button_type_save {
-  background: url(../images/save-icon.svg) center no-repeat;
-    width: 30px;
-    height: 30px;
-    border: none;
+  background: url(../images/save-icon-disabled.svg) center no-repeat;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.button_type_save-active {
+  background: url(../images/save-icon-active.svg) center no-repeat;
+}
+
+.button_type_more {
+  width: 320px;
+  height: 36px;
+  border: 1px solid #E8E8E8;
+  background-color: #FAFAFA;
+  margin: 50px auto 80px;
+  font-size: 12px;
+  line-height: 1.21;
+}
+
+.button_type_search {
+  background: url(../images/search-icon-white.svg) center no-repeat;
+  width: 80px;
+  height: 34px;
+  border-radius: 25px;
+  background-color: #3456F3;
 }

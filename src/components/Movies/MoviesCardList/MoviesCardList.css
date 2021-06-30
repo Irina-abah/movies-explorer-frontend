@@ -1,3 +1,9 @@
+.movie-list {
+  padding: 81px 0 30px;
+  border-top: 1px solid #E8E8E8;
+
+}
+
 .movie-list__container {
   display: grid;
   row-gap: 30px;

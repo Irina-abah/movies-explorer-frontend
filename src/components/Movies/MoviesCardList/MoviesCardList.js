@@ -13,7 +13,6 @@ function MoviesCardList(props) {
           ))
         }
       </ul>
-      <button className="button button_type_more" type="button" aria-label="more button">Еще</button>
     </section>
   )
 };
