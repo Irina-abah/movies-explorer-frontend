@@ -6,9 +6,9 @@ function NavTab() {
   return (
     <nav className="navtab">
       <ul className="navtab__list">
-        <li><Link to="#about-project" className="navtav__item">О проекте</Link></li>
-        <li><Link to="#techs" className="navtav__item">Технологии</Link></li>
-        <li><Link to="#about-me" className="navtav__item">Студент</Link></li>
+        <li><Link to="#about-project" className="link navtav__item">О проекте</Link></li>
+        <li><Link to="#techs" className="link navtav__item">Технологии</Link></li>
+        <li><Link to="#about-me" className="link navtav__item">Студент</Link></li>
       </ul>
     </nav>
   );

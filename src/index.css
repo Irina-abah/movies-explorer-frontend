@@ -25,6 +25,7 @@
 @import url('./components/UserEntry/UserEntry.css');
 @import url('./styles/button.css');
 @import url('./styles/section.css');
+@import url('./styles/link.css');
 
 #root {
   
@@ -47,4 +48,8 @@
 body {
   background-color: #FAFAFA;
   color: #000;
+}
+
+html {
+  scroll-behavior: smooth;
 }

@@ -46,6 +46,7 @@
   font-weight: 400;
   text-decoration: none;
   margin-right: 20px;
+  color: #000;
 }
 
 .menu__link:last-child {

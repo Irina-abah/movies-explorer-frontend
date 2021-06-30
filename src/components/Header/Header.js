@@ -6,12 +6,12 @@ function Header(props) {
   return (
     <header className={props.loggedIn ? "header" : "header header__main"}>
       <Link to="/" className="header__path">
-          <img className="header__logo" src={logoPath} alt="Movies portal logo" />
+          <img className="link header__logo" src={logoPath} alt="Movies portal logo" />
       </Link>
       <Route exact path="/">
         <nav className="header__auth">
-            <Link className="header__link header__link_type_signup" to='/signup'>Регистрация</Link>
-            <Link className="header__link header__link_type_signin" to='/signin'>Войти</Link>
+            <Link className="link header__link header__link_type_signup" to='/signup'>Регистрация</Link>
+            <Link className="link header__link header__link_type_signin" to='/signin'>Войти</Link>
         </nav>
       </Route>
       <Route path="/movies">
