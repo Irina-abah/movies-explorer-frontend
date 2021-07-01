@@ -7,8 +7,7 @@ border-radius: 3px;
 
 .button:hover {
 opacity: 0.6;
-background-color: #e8e8e8;
-transition: all 0.7s ease;
+transition: all 0.8s ease;
 }
 
 .button:focus {
@@ -38,10 +37,21 @@ box-shadow: none;
   line-height: 1.21;
 }
 
+.button_type_more:hover {
+  background-color: #e8e8e8;
+  }
+
 .button_type_search {
   background: url(../images/search-icon-white.svg) center no-repeat;
   width: 80px;
   height: 34px;
   border-radius: 25px;
   background-color: #3456F3;
+}
+
+.button_type_account {
+  font-size: 13px;
+  line-height: 0.92;
+  font-weight: 500;
+  background-color: #fff;
 }

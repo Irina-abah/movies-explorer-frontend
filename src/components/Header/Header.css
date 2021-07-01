@@ -4,8 +4,7 @@
   height: 74px;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
+  justify-content: stretch;
   border: 1px red solid;
   box-sizing: border-box;
   padding: 0 70px;
@@ -13,6 +12,7 @@
 
 .header__main {
   background-color: #DDDEE3;
+  justify-content: space-between;
 }
 
 .header__logo {
@@ -31,7 +31,7 @@
 }
 
 .header__link_active {
-  font-weight: 500;
+  font-weight: 550;
 }
 
 .header__link_type_signin {
@@ -52,4 +52,21 @@
   margin: 0 auto;
   padding: 0;
   display: flex;
+}
+
+.header__profile {
+  width: 100px;
+  height: 32px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 25px;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+
+.header__profile-icon {
+  padding: 7px;
+  background-color: #F4F4F4;
+  border-radius: 50%;
 }

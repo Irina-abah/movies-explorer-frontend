@@ -14,13 +14,13 @@ function Navigation() {
     <section className="navigation">
     <nav className="header__navigation">
       <ul className="header__navigation-list">
-        <li><NavLink className="header__link" activeClassName ="header__link_active" to="/">Главная</NavLink></li>
-        <li><NavLink className="header__link" activeClassName ="header__link_active" to="/movies">Фильмы</NavLink></li>
-        <li><NavLink className="header__link" activeClassName ="header__link_active" to="/saved-movies">Сохраненные фильмы</NavLink></li>
+        {/* <li><NavLink className="link header__link" activeClassName="header__link_active" to="/">Главная</NavLink></li> */}
+        <li><NavLink className="link header__link" activeClassName="header__link_active" to="/movies">Фильмы</NavLink></li>
+        <li><NavLink className="link header__link" activeClassName="header__link_active" to="/saved-movies">Сохраненные фильмы</NavLink></li>
       </ul>
     </nav>
       <div className="header__profile">
-        <button className="buttonheader__button" onClick={handleProfile}>Аккаунт</button>
+        <button className="button button_type_account" onClick={handleProfile}>Аккаунт</button>
         <img className="header__profile-icon" src={profileIcon} alt="Profile icon"/>
       </div>
     </section>

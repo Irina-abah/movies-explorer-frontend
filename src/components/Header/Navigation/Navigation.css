@@ -1,5 +1,6 @@
 .navigation {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
+  /* margin: 0 auto; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: space-between;
 }
