@@ -74,3 +74,11 @@ box-shadow: none;
   height: 45px;
   margin: 69px 0 16px;
 }
+
+.button_type_back {
+  background-color: #FAFAFA;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #3456F3;
+}

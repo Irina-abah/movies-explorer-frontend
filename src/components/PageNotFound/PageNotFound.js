@@ -6,10 +6,8 @@ function PageNotFound() {
 
   return (
     <section className="not-found">
-      <h2 className="not-found__title">
-        <span className="not-found__code">404 </span>
-        Страница не найдена
-        </h2>
+      <h2 className="not-found__code">404</h2>
+      <p className="not-found__title">Страница не найдена</p>
       <button className="button button_type_back" onClick={() => history.goBack()}>Назад</button>
     </section>
   )
