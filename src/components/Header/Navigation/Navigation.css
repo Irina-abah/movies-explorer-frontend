@@ -1,6 +1,7 @@
 .navigation {
-  /* margin: 0 auto; */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }

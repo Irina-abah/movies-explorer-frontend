@@ -4,10 +4,10 @@
 }
 
 .search-form__input_type_movie {
-  border: none;
   font-size: 18px;
   line-height: 1.11;
   font-weight: 400;
+  margin-left: 10px;
   /* max-width: 750px;
   width: 100%; */
 }
@@ -16,10 +16,6 @@
   color: #A0A0A0;
 }
 
-.search-form__input_type_movie:focus {
-    outline: 0;
-    box-shadow: none;
-}
 
 .search-form__container {
   display: flex;
@@ -30,6 +26,7 @@
   background-color: #fff;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
   border-radius: 9px;
+  padding: 0 30px 0 19px;
 }
 
 .search-form__icon {
@@ -41,5 +38,4 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }

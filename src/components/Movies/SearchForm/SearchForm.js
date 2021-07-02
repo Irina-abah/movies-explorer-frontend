@@ -1,5 +1,5 @@
 import Magnifier from '../../../images/search-icon-grey.svg';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
   return (
@@ -11,7 +11,7 @@ function SearchForm(props) {
           <div className="search-form__info">
             <img className="search-form__icon" src={Magnifier} alt="Иконка поиска" />
             <input 
-            className="search-form__input_type_movie"
+            className="form-input search-form__input_type_movie"
             type="text"
             id="search"
             name="movie-search"
