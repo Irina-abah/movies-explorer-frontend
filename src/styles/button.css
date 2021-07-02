@@ -62,5 +62,15 @@ box-shadow: none;
   line-height: 1.21;
   font-weight: 400;
   background-color: #FAFAFA;
-  margin-bottom: 16px;
+  margin: 69px 0 16px;
+}
+
+.button_type_sign {
+  background-color: #3456F3;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: #fff;
+  height: 45px;
+  margin: 69px 0 16px;
 }

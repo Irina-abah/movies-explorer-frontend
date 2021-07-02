@@ -34,7 +34,7 @@ function Profile(props) {
             <label className="profile__lable" htmlFor="profile-name">Имя</label>
             <input 
               type="text" 
-              className="form-input profile__input_type_profile" 
+              className="form-input form__input_type_profile" 
               id="profile-name"
               name="name"
               value={name || ""} 
@@ -53,7 +53,7 @@ function Profile(props) {
             <label className="profile__lable" htmlFor="profile-email">E-mail</label>
             <input 
               type="email" 
-              className="form-input profile__input_type_profile" 
+              className="form-input form__input_type_profile" 
               id="profile-email"
               name="email" 
               value={email || ""} 

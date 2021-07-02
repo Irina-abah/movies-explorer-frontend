@@ -12,7 +12,9 @@ function UserEntry(props) {
       name="user-entry" 
       onSubmit={props.onSubmit}>
         <h2 className="user-entry__title">{props.title}</h2>
-        {props.children}
+        <div className="profile__container">
+          {props.children}
+        </div>
         <button 
         type="submit" 
         className="button button_type_sign">
@@ -20,7 +22,7 @@ function UserEntry(props) {
         </button>
         <p className="user-entry__message">
           {props.message} 
-        <Link to={props.link} className="user-entry__link">
+        <Link to={props.link} className="link user-entry__link">
           {props.linkName}
         </Link>
         </p>

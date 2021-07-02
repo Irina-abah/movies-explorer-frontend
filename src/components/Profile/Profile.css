@@ -21,7 +21,7 @@
 .profile__container-item {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  padding: 17px 0 16px;
+  padding: 17px 0 0;
   border-bottom: 1px solid #E8E8E8;
 }
 
@@ -35,7 +35,8 @@
 }
 
 .profile__container {
-  margin-bottom: 220px;
+  /* margin-bottom: 220px; */
+  height: 266px;
 }
 
 .profile__signout-link {
@@ -46,7 +47,7 @@
   color: #EE3465;
 }
 
-.profile__input_type_profile {
+.form__input_type_profile {
   text-align: right;
   background-color: #FAFAFA;
   font-size: 11px;
