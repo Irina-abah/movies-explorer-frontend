@@ -43,7 +43,6 @@ function App() {
           <Header 
           loggedIn={!loggedIn} />
           <Profile />
-          <Footer />
         </Route>
         <Route path="/signin">
           <Login />

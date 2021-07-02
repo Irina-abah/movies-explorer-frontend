@@ -56,3 +56,11 @@ box-shadow: none;
   font-weight: 500;
   background-color: #fff;
 }
+
+.button_type_edit {
+  font-size: 13px;
+  line-height: 1.21;
+  font-weight: 400;
+  background-color: #FAFAFA;
+  margin-bottom: 16px;
+}
