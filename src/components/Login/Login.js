@@ -23,7 +23,7 @@ function Login(props) {
       </div>
       <span 
         className="input-error" 
-        id="email-error">fbdsdfhjshfj
+        id="email-error">error example
         </span>
       <div className="user-entry__container">
         <label className="user-entry__lable" htmlFor="password">Пароль</label>

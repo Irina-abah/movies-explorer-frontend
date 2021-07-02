@@ -35,8 +35,8 @@
 }
 
 .profile__container {
-  /* margin-bottom: 220px; */
-  height: 266px;
+  /* margin-bottom: 208px; */
+  min-height: 266px;
 }
 
 .profile__signout-link {
@@ -60,4 +60,15 @@
   font-size: 11px;
   line-height: 1.21;
   font-weight: 500;
+}
+
+.profile__input-error {
+  font-size: 10px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #EE3465;
+  height: 12px;
+  grid-row: 2;
+  grid-column: -1/2;
+  text-align: right;
 }

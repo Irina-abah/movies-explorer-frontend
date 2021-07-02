@@ -55,7 +55,7 @@ function Register(props) {
       </div>
       <span 
         className="input-error" 
-        id="password-error">hhhhh
+        id="password-error">error example
       </span>
     </UserEntry>
     </section>

@@ -45,8 +45,8 @@ function Profile(props) {
               required 
             />
             <span 
-                className="input-error" 
-                id="profile-name-error">
+                className="profile__input-error" 
+                id="profile-name-error">error example
             </span>
           </div>
           <div className="profile__container-item">
@@ -64,7 +64,7 @@ function Profile(props) {
               required 
             />
             <span 
-                className="input-error" 
+                className="profile__input-error" 
                 id="profile-email-error">
             </span>
           </div> 

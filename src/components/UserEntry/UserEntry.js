@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function UserEntry(props) {
   return (
-    <section className="user-entry">
+    <div className="user-entry">
       <Link to="/" className="header__link">
         <img className="header__logo" src={logoPath} alt="Movies portal logo" />
       </Link>
@@ -13,7 +13,7 @@ function UserEntry(props) {
       onSubmit={props.onSubmit}>
         <h2 className="user-entry__title">{props.title}</h2>
         <div className="profile__container">
-          {props.children}
+         {props.children}
         </div>
         <button 
         type="submit" 
@@ -27,7 +27,7 @@ function UserEntry(props) {
         </Link>
         </p>
       </form>
-    </section>
+    </div>
   )
 };
 
