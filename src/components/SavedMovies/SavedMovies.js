@@ -4,7 +4,7 @@ import movies from '../../utils/constants';
 
 function SavedMovies() {
   return (
-    <section className="section movies-saved">
+    <section className="main movies">
       <SearchForm />
       <MoviesCardList movies={movies}/>
     </section> 
