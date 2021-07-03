@@ -29,14 +29,14 @@ function App() {
         <Route path="/movies">
           <Header
           loggedIn={!loggedIn} />
-          <Movies />
+          <Movies 
+          />
           <Footer />
         </Route>
         <Route path="/saved-movies">
           <Header 
           loggedIn={!loggedIn} />
-          <SavedMovies 
-          isSaved={isSaved}/>
+          <SavedMovies />
           <Footer />
         </Route>
         <Route path="/profile">

@@ -82,3 +82,11 @@ box-shadow: none;
   font-weight: 400;
   color: #3456F3;
 }
+
+.button_type_delete {
+  background: url(../images/remove-movie-icon.svg) center no-repeat;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
