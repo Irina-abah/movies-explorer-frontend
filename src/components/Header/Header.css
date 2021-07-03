@@ -63,8 +63,6 @@
   justify-content: space-around;
   border-radius: 25px;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
-  /* margin: 5px 0;
-  padding: 0; */
 }
 
 .header__profile-icon {
@@ -75,4 +73,12 @@
 
 .header__link-mobile {
   visibility: hidden;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+
+  .header {
+    padding: 0 30px;
+  }
+
 }
