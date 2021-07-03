@@ -43,3 +43,15 @@
 .portfolio__item:first-child {
   padding-top: 0;
 }
+
+@media (min-width: 768px) and (max-width: 1279px) {
+
+  .portfolio {
+    padding-bottom: 90px;
+  }
+
+  .portfolio__item-name {
+    font-size: 28px;
+    line-height: 1.79;
+  }
+}
