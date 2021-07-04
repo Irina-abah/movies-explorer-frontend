@@ -76,3 +76,27 @@
     grid-auto-rows: 57px;
   }
 }
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__title {
+    margin: 60px 0 24px;
+    font-size: 30px;
+    line-height: 1.21;
+  }
+
+  .techs__subtitle {
+    font-size: 12px;
+    line-height: 1.45;
+    margin: 0 0 50px;
+  }
+
+  .techs__list {
+    grid-template-columns: repeat(1fr, 84px);
+  }
+
+}

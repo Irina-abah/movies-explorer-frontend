@@ -26,10 +26,18 @@
   letter-spacing: -0.04em;
 }
 
-/* @media (max-width: 1279px) {
+@media (min-width: 320px) and (max-width: 767px) {
 
-  .promo__container {
-    width: calc(100% - 48px*2);
+  .promo__image {
+    width: 248px;
+    height: 248px;
+    position: absolute;
   }
 
-} */
+  .promo__title {
+    font-size: 31px;
+    line-height: 1.16;
+    width: calc(100% - 14px*2);
+  }
+
+}

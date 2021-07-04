@@ -16,15 +16,30 @@
   padding: 0;
 }
 
+.navtav__list-item {
+  margin-right: 40px;
+}
+
+.navtav__list-item:last-child {
+  margin-right: 0;
+}
+
 .navtav__item {
   color: #000;
   font-size: 13px;
   line-height: 1.23;
   font-weight: 500;
-  padding: 0;
-  margin-right: 40px;
 }
 
-.navtav__item:nth-last-of-type() {
-  margin-right: 0;
+@media (min-width: 320px) and (max-width: 767px) {
+
+  .navtav__item {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .navtav__list-item {
+    margin-right: 24px;
+  }
+
 }

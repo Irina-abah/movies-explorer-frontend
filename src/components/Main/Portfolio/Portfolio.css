@@ -55,3 +55,26 @@
     line-height: 1.79;
   }
 }
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+  .section.portfolio {
+    width: calc(100% - 14px*2);
+  }
+
+  .portfolio {
+    padding-bottom: 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 1.43;
+    margin-bottom: 40px;
+  }
+
+  .portfolio__item-name {
+    font-size: 18px;
+    line-height: 1.57;
+  }
+
+}

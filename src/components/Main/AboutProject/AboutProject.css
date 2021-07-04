@@ -103,3 +103,46 @@
   }
   
 }
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+  .about-project {
+    padding: 70px 0;
+  }
+
+  .keys__title {
+    margin-bottom: 18px;
+  }
+
+  .keys {
+    padding: 60px 0;
+    grid-template-columns: minmax(min-content, max-content);
+    row-gap: 56px;
+  }
+
+  .keys__title {
+    margin: 0 0 16px;
+    font-size: 18px;
+  }
+
+  .keys__info {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .timeframe{
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .timeframe__title {
+    font-size: 11px;
+    padding: 11px 0;
+  }
+
+  .timeframe__info {
+    font-size: 11px;
+    padding: 10px 0;
+  }
+
+}

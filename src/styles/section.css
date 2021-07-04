@@ -19,4 +19,17 @@
   .section {
     width: calc(100% - 50px*2);
   }
+
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+  .section {
+      width: calc(100% - 18px*2);
+    }
+
+  .section__title {
+    padding-bottom: 28px;
+  }
+
 }
