@@ -1,0 +1,11 @@
+.burger-menu__icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .burger-menu__icon {
+    display: block;
+  }
+
+}

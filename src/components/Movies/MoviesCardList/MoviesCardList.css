@@ -14,7 +14,7 @@
   padding: 0;
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (max-width: 1023px) {
 
   .movie-list__container {
     grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
@@ -22,4 +22,13 @@
     column-gap: 30px;
   } 
    
+}
+
+@media (max-width: 425px) {
+
+  .movie-list__container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    row-gap: 16px;
+  } 
+
 }

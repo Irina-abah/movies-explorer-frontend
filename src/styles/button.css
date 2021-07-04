@@ -47,7 +47,6 @@ box-shadow: none;
   height: 34px;
   border-radius: 25px;
   background-color: #3456F3;
-  margin-right: 19px;
 }
 
 .button_type_account {
@@ -89,4 +88,8 @@ box-shadow: none;
   width: 30px;
   height: 30px;
   border-radius: 50%;
+}
+
+@media (max-width: 767px) {
+
 }
