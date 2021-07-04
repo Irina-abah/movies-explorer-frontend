@@ -35,7 +35,6 @@
 }
 
 .profile__container {
-  /* margin-bottom: 208px; */
   min-height: 266px;
 }
 
@@ -71,4 +70,12 @@
   grid-row: 2;
   grid-column: -1/2;
   text-align: right;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+
+  .profile__title {
+    margin-bottom: 96px;
+  }
+
 }
