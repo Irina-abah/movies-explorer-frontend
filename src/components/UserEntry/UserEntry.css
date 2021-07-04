@@ -3,6 +3,10 @@
   max-width: 396px;
   width: 100%;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: scroll;
 }
 
 .user-entry__title {
@@ -54,8 +58,6 @@
 
 .user__container {
   min-height: 266px;
-  /* height: 100%;
-  box-sizing: content-box; */
 }
 
 .user-entry__lable {
@@ -64,4 +66,10 @@
   font-weight: 400;
   color: #A0A0A0;
   margin-bottom: 5px;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+
+ 
+
 }

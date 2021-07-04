@@ -1,5 +1,9 @@
 .profile {
   padding: 74px 0 70px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
 }
 
 .profile__info {
@@ -74,6 +78,10 @@
 
 @media (min-width: 768px) and (max-width: 1279px) {
 
+  .profile {
+    padding: 236px 0 70px;
+  }
+  
   .profile__title {
     margin-bottom: 96px;
   }

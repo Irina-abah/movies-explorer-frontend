@@ -1,3 +1,18 @@
 .login {
-  padding: 70px 0;
+  padding: 70px 0; 
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+
+/* .login {
+  padding: 0;
+} */
+
 }
