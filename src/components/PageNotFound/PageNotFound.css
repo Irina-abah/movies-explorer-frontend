@@ -28,12 +28,18 @@
 
 @media (max-width: 425px) {
 
-  /* .not-found {
-    padding-bottom: 30px;
-  } */
+  .not-found {
+    padding-top: 239px;
+  }
 
   .not-found__title {
     margin-bottom: 284px;
+    font-size: 12px;
+  }
+
+  .not-found__code {
+    font-size: 80px;
+
   }
 
 }
