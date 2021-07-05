@@ -26,6 +26,10 @@
 
 @media (max-width: 425px) {
 
+  .movie-list {
+    padding-top: 50px;
+  }
+
   .movie-list__container {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     row-gap: 16px;

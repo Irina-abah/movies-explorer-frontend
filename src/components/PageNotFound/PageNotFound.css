@@ -25,3 +25,15 @@
   font-weight: 400;
   margin: 0 0 184px;
 }
+
+@media (max-width: 425px) {
+
+  /* .not-found {
+    padding-bottom: 30px;
+  } */
+
+  .not-found__title {
+    margin-bottom: 284px;
+  }
+
+}

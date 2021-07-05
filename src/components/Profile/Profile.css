@@ -1,9 +1,5 @@
 .profile {
   padding: 74px 0 70px;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
 }
 
 .profile__info {
@@ -40,6 +36,7 @@
 
 .profile__container {
   min-height: 266px;
+  text-align: left;
 }
 
 .profile__signout-link {
@@ -76,7 +73,7 @@
   text-align: right;
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (max-width: 1023px) {
 
   .profile {
     padding: 236px 0 70px;
@@ -84,6 +81,28 @@
   
   .profile__title {
     margin-bottom: 96px;
+  }
+
+}
+
+@media (max-width: 767px) {
+
+  .profile {
+    padding: 150px 0 50px;
+  }
+
+}
+
+@media (max-width: 425px) {
+
+  .profile {
+    padding: 70px 0 40px;
+    width: calc(100% - 30px*2);
+    margin: 0 auto;
+  }
+
+  .profile__title {
+    margin-bottom: 80px;
   }
 
 }

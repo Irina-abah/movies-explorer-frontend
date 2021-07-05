@@ -92,4 +92,20 @@ box-shadow: none;
 
 @media (max-width: 767px) {
 
+  .button_type_more {
+    width: 240px;
+  }
+
+}
+
+@media (max-width: 425px) {
+
+  .button_type_sign {
+    margin: 157px 0 14px;
+  }
+
+  .button_type_back {
+    margin-bottom: 30px;
+  }
+
 }

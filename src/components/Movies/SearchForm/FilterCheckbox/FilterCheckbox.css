@@ -35,8 +35,6 @@
   background: #EBEBEB;
   border: 1px solid #bbc1e1;
   border-radius: 30px;
-  /* margin-left: 29px;
-  border-left: 1px solid #CBCBCB; */
   outline: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
@@ -70,5 +68,13 @@
 
 @media (max-width: 767px) {
   
+  .search-form__filter {
+    margin: 0 auto;
+    background-color: #FAFAFA;
+  }
+
+  .search-form__filter-elements {
+    border-left: none;
+  }
 
 }

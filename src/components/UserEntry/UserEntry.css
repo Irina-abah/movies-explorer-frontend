@@ -3,9 +3,6 @@
   max-width: 396px;
   width: 100%;
   text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   overflow-y: scroll;
 }
 
@@ -19,7 +16,6 @@
 .user-entry__info {
   display: flex;
   flex-direction: column;
-  /* min-height: 482px; */
 }
 
 .form__input_type_sign {
@@ -68,8 +64,18 @@
   margin-bottom: 5px;
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (max-width: 425px) {
 
- 
+  .user-entry {
+    text-align: center;
+  }
 
-}
+  .user-entry__message {
+    font-size: 12px;
+  }
+
+  .user-entry__link {
+    font-size: 12px;
+  }
+
+} 

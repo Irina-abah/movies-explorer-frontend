@@ -21,10 +21,6 @@ function SearchForm(props) {
                 maxLength="30"
                 required />
           </div>
-              {/* <span 
-                className="input-error" 
-                id="search-error">
-              </span> */}
           <button 
           type="submit" 
           className="button button_type_search"
