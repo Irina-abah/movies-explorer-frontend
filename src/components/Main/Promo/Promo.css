@@ -22,11 +22,10 @@
   max-width: 730px;
   font-weight: 400;
   margin: 0;
-  border: 1px red solid;
   letter-spacing: -0.04em;
 }
 
-@media (min-width: 320px) and (max-width: 767px) {
+@media (max-width: 767px) {
 
   .promo__image {
     width: 248px;

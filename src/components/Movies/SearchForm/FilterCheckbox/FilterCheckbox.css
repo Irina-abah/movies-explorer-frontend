@@ -56,14 +56,20 @@
 
 .seach-form__input_type_toggle:checked::after {
   transform: translateX(calc(100%));
-  /* background-color: #fff; */
-  background-image: radial-gradient(#2BE080 0px 7px, #fff 7px 8px);
-  ;
-  ;  
+  background-image: radial-gradient(#2BE080 0px 7px, #fff 7px 8px); 
 }
+
 .seach-form__input_type_toggle:checked {
   background-color: #EBEBEB;
   ;
+}
+
+@media (max-width: 1023px) {
+
+  .search-form__filter-elements {
+    padding-left: 19px;
+  }
+
 }
 
 @media (max-width: 767px) {

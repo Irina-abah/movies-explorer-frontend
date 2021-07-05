@@ -44,7 +44,7 @@
   padding-top: 0;
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (max-width: 1023px) {
 
   .portfolio {
     padding-bottom: 90px;
@@ -56,7 +56,7 @@
   }
 }
 
-@media (min-width: 320px) and (max-width: 767px) {
+@media (max-width: 767px) {
 
   .section.portfolio {
     width: calc(100% - 14px*2);

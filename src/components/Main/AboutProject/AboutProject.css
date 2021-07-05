@@ -3,7 +3,6 @@
   flex-direction: column;
   text-align: left;
   padding: 110px 0;
-  border: 1px red solid;
 }
 
 .section__title {
@@ -11,7 +10,6 @@
   line-height: 1.21;
   font-weight: 400;
   border-bottom: black;
-  border: 1px red solid;
 }
 
 .keys {
@@ -21,10 +19,6 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 40px;
-}
-
-.keys__item {
-  border: 1px red solid;
 }
 
 .keys__title {
@@ -51,7 +45,6 @@
 }
 
 .timeframe__item {
-  border: 1px red solid;
   text-align: center;
 }
 
@@ -82,7 +75,7 @@
   background-color: #F2F2F2;
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (max-width: 1023px) {
 
   .about-project {
     padding: 90px 0;
@@ -104,7 +97,7 @@
   
 }
 
-@media (min-width: 320px) and (max-width: 767px) {
+@media (max-width: 767px) {
 
   .about-project {
     padding: 70px 0;
