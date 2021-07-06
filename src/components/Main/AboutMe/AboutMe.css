@@ -65,7 +65,7 @@
   margin-right: 0;
 }
 
-@media (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
 
   .about-me {
     padding: 90px 0;
@@ -93,14 +93,12 @@
   }
 
   .about-me__avatar {
-    /* max-width: 255px;
-    height: 307px; */
     justify-self: right;
   }
 
 }
 
-@media (max-width: 680px) {
+@media screen and (max-width: 680px) {
 
   .section.about-me {
     width: calc(100% - 14px*2);

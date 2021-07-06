@@ -7,7 +7,6 @@ function FilterCheckbox() {
           type="checkbox" 
           id="short-movie"
           name="short-movie" />
-          {/* <span className="search-form__slider"></span> */}
           <label className="search-form__filter-name" htmlFor="short-movie">Короткометражки</label>
       </div>
       </div>

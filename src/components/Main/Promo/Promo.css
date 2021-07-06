@@ -25,7 +25,7 @@
   letter-spacing: -0.04em;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
 
   .promo__image {
     width: 248px;

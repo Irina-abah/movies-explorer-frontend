@@ -94,7 +94,7 @@ box-shadow: none;
   display: none;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
 
   .button_type_more {
     width: 240px;
@@ -102,7 +102,7 @@ box-shadow: none;
 
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
   .button_type_burger {
     display: block;
@@ -124,7 +124,7 @@ box-shadow: none;
 
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
 
   .button_type_sign {
     margin: 157px 0 14px;

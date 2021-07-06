@@ -73,7 +73,7 @@
   text-align: right;
 }
 
-@media (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
 
   .profile {
     padding: 236px 0 70px;
@@ -85,7 +85,7 @@
 
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
 
   .profile {
     padding: 150px 0 50px;
@@ -93,7 +93,7 @@
 
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
 
   .profile {
     padding: 70px 0 40px;

@@ -1,7 +1,6 @@
 .movie-list {
   padding: 81px 0 30px;
   border-top: 1px solid #E8E8E8;
-
 }
 
 .movie-list__container {
@@ -14,7 +13,7 @@
   padding: 0;
 }
 
-@media (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
 
   .movie-list__container {
     grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
@@ -24,7 +23,7 @@
    
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
 
   .movie-list {
     padding-top: 50px;

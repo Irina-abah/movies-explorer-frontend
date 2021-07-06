@@ -9,7 +9,7 @@
   justify-content: center;
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
 
   .login {
     padding: 56px 0 30px; 

@@ -61,10 +61,9 @@
 
 .seach-form__input_type_toggle:checked {
   background-color: #EBEBEB;
-  ;
 }
 
-@media (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
 
   .search-form__filter-elements {
     padding-left: 19px;
@@ -72,7 +71,7 @@
 
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   
   .search-form__filter {
     margin: 0 auto;

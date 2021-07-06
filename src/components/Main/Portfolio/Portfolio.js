@@ -22,7 +22,6 @@ function Portfolio() {
           <a className="link" href="https://github.com/Irina-abah/react-mesto-api-full" target="_blank" rel="noreferrer">
             <img className="portfolio__icon" src={Arrow} alt="Arrow icon" />
           </a>
-          
         </div>
       </div>
     </section>

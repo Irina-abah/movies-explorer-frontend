@@ -116,7 +116,7 @@
   display: none;
 }
 
-@media (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
 
   .header {
     padding: 0 30px;
@@ -124,7 +124,7 @@
 
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
   .header {
     padding: 0 14px;
@@ -153,7 +153,7 @@
   
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
   .list-item {
     margin-bottom: 24px;

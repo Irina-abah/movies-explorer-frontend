@@ -14,7 +14,7 @@
   text-align: left;
 }
 
-@media (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
   
   .section {
     width: calc(100% - 50px*2);
@@ -22,7 +22,7 @@
 
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
 
   .section {
     width: calc(100% - 30px*2);
@@ -30,7 +30,7 @@
 
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
 
   .section {
       width: calc(100% - 18px*2);

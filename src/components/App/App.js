@@ -14,7 +14,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [isSaved, setIsSaved] = React.useState(false);
+  // const [isSaved, setIsSaved] = React.useState(false);
 
   return (
     <div className="App">
