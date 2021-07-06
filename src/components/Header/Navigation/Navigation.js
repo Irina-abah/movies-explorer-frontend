@@ -1,34 +1,44 @@
 import React from 'react';
-import { Link, NavLink, useHistory } from 'react-router-dom';
-import profileIcon from '../../../images/account-icon.svg';
-import logoPath from '../../../images/logo.svg';
-import burgerPath from '../../../images/hamburger-icon.svg'
+import { Link, NavLink } from 'react-router-dom';
 
-function Navigation() {
-
-  const history = useHistory();
-
-  function handleProfile() {
-    history.push('/profile');
-  }
+function Navigation(props) {
 
   return (
     <section className="navigation">
-      <Link to="/" className="header__path">
-          <img className="link header__logo" src={logoPath} alt="Movies portal logo" />
-      </Link>
-      <nav className="header__navigation">
-        <ul className="header__navigation-list">
-          <li><NavLink className="link header__link header__link-mobile" activeClassName="header__link_active" to="/">Главная</NavLink></li>
-          <li><NavLink className="link header__link" activeClassName="header__link_active" to="/movies">Фильмы</NavLink></li>
-          <li><NavLink className="link header__link" activeClassName="header__link_active" to="/saved-movies">Сохраненные фильмы</NavLink></li>
-        </ul>
-      </nav>
-      <div className="header__profile">
-        <button className="button button_type_account" onClick={handleProfile}>Аккаунт</button>
-        <img className="header__profile-icon" src={profileIcon} alt="Profile icon"/>
-      </div>
-      <img className="link burger-menu__icon" src={burgerPath} alt="Mobile menu icon"/>
+      {props.loggedIn ? 
+        (
+          <nav className={props.isMenuOpen ? "header__navigation-mobile" : "header__navigation"}>
+            <ul className={props.isMenuOpen ? "header__navigation-list-mobile" : "header__navigation-list"}>
+              <li className="list-item">
+                <NavLink 
+              className={`link ${props.isMenuOpen ? "header__link-mobile" : "header__link-hide"}`} 
+              activeClassName={props.isMenuOpen ? "header__link_active-mobile" : "header__link_active"} 
+              exact to="/">Главная
+              </NavLink>
+              </li>
+              <li className="list-item">
+                <NavLink 
+                className={`link ${props.isMenuOpen ? "header__link-mobile" : "header__link"}`} 
+                activeClassName={props.isMenuOpen ? "header__link_active-mobile" : "header__link_active"} 
+                to="/movies">Фильмы
+                </NavLink>
+                </li>
+                <li className="list-item">
+                <NavLink 
+                className={`link ${props.isMenuOpen ? "header__link-mobile" : "header__link"}`} 
+                activeClassName={props.isMenuOpen ? "header__link_active-mobile" : "header__link_active"} 
+                to="/saved-movies">Сохраненные фильмы
+                </NavLink>
+                </li>
+            </ul>
+          </nav> 
+      )
+      : (
+        <nav className="header__auth">
+          <Link className="link header__link header__link_type_signup" to='/signup'>Регистрация</Link>
+          <Link className="link header__link header__link_type_signin" to='/signin'>Войти</Link>
+        </nav>
+      )}
     </section>
     )
 };

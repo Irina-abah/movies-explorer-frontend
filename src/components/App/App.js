@@ -29,8 +29,7 @@ function App() {
         <Route path="/movies">
           <Header
           loggedIn={!loggedIn} />
-          <Movies 
-          />
+          <Movies />
           <Footer />
         </Route>
         <Route path="/saved-movies">
