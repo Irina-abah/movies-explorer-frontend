@@ -9,7 +9,7 @@ function MoviesCard(props) {
     setIsSaved(!isSaved);
   }
 
-  const movieCardClassName = `button button_type_save ${props.isSaved ? 'button_type_save-active' : ''}`; 
+  const movieCardClassName = `button button_type_save ${isSaved ? 'button_type_save-active' : ''}`; 
 
   return (
     <li className="movie">
