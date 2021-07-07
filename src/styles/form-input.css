@@ -3,8 +3,10 @@
 }
 
 .form-input:focus {
-  outline: 0;
+  outline: none;
   box-shadow: none;
+  border: 1px solid #EBEBEB;
+  border-radius: 9px;
 }
 
 .input-error {
