@@ -1,0 +1,140 @@
+.about-project {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 110px 0;
+}
+
+.section__title {
+  font-size: 22px;
+  line-height: 1.21;
+  font-weight: 400;
+  border-bottom: black;
+}
+
+.keys {
+  list-style: none;
+  margin: 0;
+  padding: 70px 0 110px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 40px;
+}
+
+.keys__title {
+  margin: 0 0 26px;
+  font-size: 20px;
+  line-height: 1.21;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.keys__info {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.43;
+  font-weight: 400;
+}
+
+.timeframe{
+  list-style: none;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: 1fr 4fr;
+}
+
+.timeframe__item {
+  text-align: center;
+}
+
+.timeframe__title {
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  padding: 9px 0;
+  margin: 0 auto;
+  background-color: #3456F3;
+}
+
+.timeframe__info {
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: #A0A0A0;
+  padding: 9px 0;
+  margin: 0 auto;
+}
+
+.timeframe__title_type_back {
+  color: #fff;
+}
+
+.timeframe__title_type_front {
+  background-color: #F2F2F2;
+}
+
+@media screen and (max-width: 1023px) {
+
+  .about-project {
+    padding: 90px 0;
+  }
+
+  .keys {
+    padding-bottom: 93px;
+    column-gap: 30px;
+  }
+
+  .keys__title {
+    margin-bottom: 22px;
+  }
+
+  .keys__info {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  
+}
+
+@media screen and (max-width: 767px) {
+
+  .about-project {
+    padding: 70px 0;
+  }
+
+  .keys__title {
+    margin-bottom: 18px;
+  }
+
+  .keys {
+    padding: 60px 0;
+    grid-template-columns: minmax(min-content, max-content);
+    row-gap: 56px;
+  }
+
+  .keys__title {
+    margin: 0 0 16px;
+    font-size: 18px;
+  }
+
+  .keys__info {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .timeframe{
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .timeframe__title {
+    font-size: 11px;
+    padding: 11px 0;
+  }
+
+  .timeframe__info {
+    font-size: 11px;
+    padding: 10px 0;
+  }
+
+}

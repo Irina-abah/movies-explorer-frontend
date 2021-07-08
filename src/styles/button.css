@@ -1,0 +1,142 @@
+.button {
+cursor: pointer;
+border: none;
+padding: 0;
+border-radius: 3px;
+}
+
+.button:hover {
+opacity: 0.6;
+transition: all 0.8s ease;
+}
+
+.button:focus {
+outline: 0;
+box-shadow: none;
+}
+
+.button_type_save {
+  background: url(../images/save-icon-disabled.svg) center no-repeat;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.button_type_save-active {
+  background: url(../images/save-icon-active.svg) center no-repeat;
+}
+
+.button_type_more {
+  width: 320px;
+  height: 36px;
+  border: 1px solid #E8E8E8;
+  background-color: #FAFAFA;
+  margin: 50px auto 80px;
+  font-size: 12px;
+  line-height: 1.21;
+}
+
+.button_type_more:hover {
+  background-color: #e8e8e8;
+  }
+
+.button_type_search {
+  background: url(../images/search-icon-white.svg) center no-repeat;
+  width: 80px;
+  height: 34px;
+  border-radius: 25px;
+  background-color: #3456F3;
+}
+
+.button_type_account {
+  font-size: 13px;
+  line-height: 0.92;
+  font-weight: 500;
+  background-color: #fff;
+}
+
+.button_type_edit {
+  font-size: 13px;
+  line-height: 1.21;
+  font-weight: 400;
+  background-color: #FAFAFA;
+  margin: 29px 0 16px;
+}
+
+.button_type_sign {
+  background-color: #3456F3;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: #fff;
+  height: 45px;
+  margin: 69px 0 16px;
+}
+
+.button_type_back {
+  background-color: #FAFAFA;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #3456F3;
+}
+
+.button_type_delete {
+  background: url(../images/remove-movie-icon.svg) center no-repeat;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.button_type_burger {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+
+  .button_type_more {
+    width: 240px;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .button_type_burger {
+    display: block;
+    background: url(../images/hamburger-icon.svg) center no-repeat;
+    width: 44px;
+    height: 44px;
+  }
+
+  .button_type_close {
+    background: url(../images/close-icon.svg) center no-repeat;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    padding: 0;
+    margin: 0;
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+
+  .button_type_sign {
+    margin: 157px 0 14px;
+  }
+
+  .button_type_back {
+    margin-bottom: 30px;
+  }
+
+  .button_type_burger {
+    width: 40px;
+    height: 43px;
+  }
+
+}

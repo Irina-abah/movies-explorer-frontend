@@ -1,0 +1,28 @@
+.movies {
+  width: calc(100% - 70px*2);
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1023px) {
+  
+  .movies {
+    width: calc(100% - 30px*2);
+  }
+  
+}
+
+@media screen and (max-width: 767px) {
+
+  .movies {
+    width: calc(100% - 20px*2);
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+
+  .movies {
+    width: calc(100% - 10px*2);
+  }
+
+}
