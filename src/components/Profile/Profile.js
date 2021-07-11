@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link, useHistory } from "react-router-dom";
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Profile(props) {
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -28,7 +31,7 @@ function Profile(props) {
       name="profile" 
       onSubmit={props.onSubmit}>
         {/* <h2 className="profile__title">{`Привет, ${name}`}</h2> */}
-        <h2 className="profile__title">Привет, Ирина!</h2>
+        <h2 className="profile__title">{`Привет, ${currentUser.name} !`}</h2>
         <div className="profile__container">
           <div className="profile__container-item">
             <label className="profile__lable" htmlFor="profile-name">Имя</label>

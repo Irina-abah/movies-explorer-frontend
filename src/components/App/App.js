@@ -10,50 +10,57 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({
+    name: '',
+    email: '',
+  });
   // const [isSaved, setIsSaved] = React.useState(false);
 
   return (
-    <div className="App">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="App">
         <Switch>
-        <Route exact path="/">
-          <Header 
-          loggedIn={loggedIn}
-          />
-          {!loggedIn ? <Main /> : <Redirect to="/movies" />}
-          <Footer />
-        </Route>
-        <Route path="/movies">
-          <Header
-          loggedIn={!loggedIn} />
-          <Movies />
-          <Footer />
-        </Route>
-        <Route path="/saved-movies">
-          <Header 
-          loggedIn={!loggedIn} />
-          <SavedMovies />
-          <Footer />
-        </Route>
-        <Route path="/profile">
-          <Header 
-          loggedIn={!loggedIn} />
-          <Profile />
-        </Route>
-        <Route path="/signin">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <Register />
-        </Route>
-        <Route path="*">
-          <PageNotFound />
-        </Route>
-      </Switch>
-    </div>
+          <Route exact path="/">
+            <Header 
+            loggedIn={loggedIn}
+            />
+            {!loggedIn ? <Main /> : <Redirect to="/movies" />}
+            <Footer />
+          </Route>
+          <Route path="/movies">
+            <Header
+            loggedIn={!loggedIn} />
+            <Movies />
+            <Footer />
+          </Route>
+          <Route path="/saved-movies">
+            <Header 
+            loggedIn={!loggedIn} />
+            <SavedMovies />
+            <Footer />
+          </Route>
+          <Route path="/profile">
+            <Header 
+            loggedIn={!loggedIn} />
+            <Profile />
+          </Route>
+          <Route path="/signin">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Register />
+          </Route>
+          <Route path="*">
+            <PageNotFound />
+          </Route>
+        </Switch>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
