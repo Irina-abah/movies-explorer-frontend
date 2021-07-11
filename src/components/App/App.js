@@ -10,6 +10,7 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
@@ -32,23 +33,23 @@ function App() {
             {!loggedIn ? <Main /> : <Redirect to="/movies" />}
             <Footer />
           </Route>
-          <Route path="/movies">
+          <ProtectedRoute path="/movies">
             <Header
             loggedIn={!loggedIn} />
             <Movies />
             <Footer />
-          </Route>
-          <Route path="/saved-movies">
+          </ProtectedRoute>
+          <ProtectedRoute path="/saved-movies">
             <Header 
             loggedIn={!loggedIn} />
             <SavedMovies />
             <Footer />
-          </Route>
-          <Route path="/profile">
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile">
             <Header 
             loggedIn={!loggedIn} />
             <Profile />
-          </Route>
+          </ProtectedRoute>
           <Route path="/signin">
             <Login />
           </Route>
