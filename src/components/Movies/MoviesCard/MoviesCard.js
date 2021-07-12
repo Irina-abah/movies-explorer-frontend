@@ -21,7 +21,7 @@ function MoviesCard(props) {
           </div>
           <button className={movieCardClassName} type="button" aria-label="delete button" onClick={handleSaveClick}/>
         </div>
-        <img className="movie__image" src={props.movie.thumbnail} alt={props.movie.nameRU}/>
+        <img className="movie__image" src={'https://api.nomoreparties.co' + props.movie.image.formats.thumbnail.url} alt={props.movie.nameRU}/>
       </Route>
       <Route path="/saved-movies">
         <div className="movie__info">
@@ -31,7 +31,7 @@ function MoviesCard(props) {
           </div>
           <button className="button button_type_delete" type="button" aria-label="delete button"/>
         </div>
-        <img className="movie__image" src={props.movie.thumbnail} alt={props.movie.nameRU}/>
+        <img className="movie__image" src={props.movie.image} alt={props.movie.nameRU}/>
       </Route>
     </li>
   )

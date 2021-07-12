@@ -23,12 +23,11 @@ export class MoviesApi {
 
 }
 
-const AllMoviesApi = new MoviesApi({
-  // address: "https://api.express-mesto.nomoredomains.club",
-  address: "http://localhost:3005",
+const allMoviesApi = new MoviesApi({
+  address: "https://api.nomoreparties.co/beatfilm-movies",
   headers: {
     "Content-Type": "application/json"
   }
 });
 
-export default AllMoviesApi;
+export default allMoviesApi;
