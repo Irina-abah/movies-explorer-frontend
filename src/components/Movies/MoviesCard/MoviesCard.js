@@ -9,6 +9,8 @@ function MoviesCard(props) {
     setIsSaved(!isSaved);
   }
 
+  const duration = `${Math.floor(props.movie.duration / 60)}ч ${props.movie.duration % 60}м`;
+
   const movieCardClassName = `button button_type_save ${isSaved ? 'button_type_save-active' : ''}`; 
 
   return (
@@ -17,7 +19,7 @@ function MoviesCard(props) {
         <div className="movie__info">
           <div className="movie__description">
             <h2 className="movie__title">{props.movie.nameRU}</h2>
-            <p className="movie__duration">{props.movie.duration}</p>
+            <p className="movie__duration">{duration}</p>
           </div>
           <button className={movieCardClassName} type="button" aria-label="delete button" onClick={handleSaveClick}/>
         </div>

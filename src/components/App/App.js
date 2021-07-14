@@ -21,11 +21,12 @@ function App() {
     email: '',
   });
   const [movies, setMovies] = React.useState([]);
+  const [input, setInput] = React.useState('');
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const history = useHistory();
 
-  // загрузка всех фильмов
+  // загрузка всех фильмов в localstorage
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -41,6 +42,8 @@ function App() {
         });
     }
   }, [loggedIn]);
+
+  
 
   // проверка токена, авторизация и регистрация
 

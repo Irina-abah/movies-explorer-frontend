@@ -1,13 +1,30 @@
+import React from 'react';
 import Magnifier from '../../../images/search-icon-grey.svg';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
+
+  const [keyword, setKeyword] = React.useState('');
+
+  function handleChange(e) {
+    setKeyword(e.target.value);
+  }
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    props.onSubmit(keyword)
+  }
+
+  function handleChangeCheckbox() {
+    props.onChangeCheckbox();
+  }
+
   return (
     <section className="search-form">
         <form 
         className="search-form__container" 
         name="search" 
-        onSubmit={props.onSubmit}>
+        onSubmit={handleSubmit}>
           <img className="search-form__icon" src={Magnifier} alt="Иконка поиска" />
           <div className="form-wrapper">
             <input 
@@ -15,6 +32,7 @@ function SearchForm(props) {
               type="text"
               id="search"
               name="movie-search"
+              onChange={handleChange}
               placeholder="Фильм"
               title="Нужно ввести ключевое слово"
               minLength="2"
@@ -32,7 +50,7 @@ function SearchForm(props) {
         </button>
               
         </form>
-        <FilterCheckbox />
+        <FilterCheckbox handleCheckbox={handleChangeCheckbox}/>
     </section>
   )
 };
