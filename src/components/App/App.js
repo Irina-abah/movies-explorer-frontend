@@ -22,6 +22,7 @@ function App() {
   });
   const [movies, setMovies] = React.useState([]);
   const [isRegistered, setIsRegistered] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const history = useHistory();
 
   // загрузка всех фильмов

@@ -1,112 +1,86 @@
 export class MainApi {
   constructor({address, headers}) {
-      this._address = address;
-      this._headers = headers;
+    this._address = address;
+    this._headers = headers;
   }
 
   _checkResponse(res) {
-      if (res.ok) {
-          return res.json()
-      }
+    if (res.ok) {
+      return res.json()
+    }
 
-      return Promise.reject(`Error ${res.status}`)
+    return Promise.reject(`Error ${res.status}`)
   }
 
-  getInitialCards(token) {
-      return fetch(`${this._address}/cards`, {
-          // method: 'GET',
-          headers: this._headers
-      })
-      .then((res) => {
-          return this._checkResponse(res)
-      })
+  getSavedMovies() {
+    return fetch(`${this._address}/movies`, {
+      headers: this._headers
+    })
+    .then((res) => {
+      return this._checkResponse(res)
+    })
   }
 
-  getUserData(token) {
-      return fetch(`${this._address}/users/me`, {
-          // method: 'GET',
-          headers: this._headers
-      })
-      .then(res => {
-          return this._checkResponse(res)
-      })
+  getUserData() {
+    return fetch(`${this._address}/users/me`, {
+      headers: this._headers
+    })
+    .then(res => {
+      return this._checkResponse(res)
+    })
   }
 
   changeUserData(data) {
-      return fetch(`${this._address}/users/me`, {
-          method: 'PATCH',
-          headers: this._headers,
-          body: JSON.stringify({
-              name: data.name,
-              about: data.about
-          })
+    return fetch(`${this._address}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email
       })
-      .then((res) => {
-          return this._checkResponse(res)
-      })
+    })
+    .then((res) => {
+      return this._checkResponse(res)
+    })
   }
 
-  addCard(data) {
-      return fetch(`${this._address}/cards`, {
-          method: 'POST',
-          headers: this._headers,
-          body: JSON.stringify({
-              name: data.name,
-              link: data.link
-          })
+  addMovie(data) {
+    return fetch(`${this._address}/movies`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        country: data.country,  
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: data.image,
+        trailer: data.trailer,
+        thumbnail: data.thumbnail,
+        movieId: data.movieId,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
       })
-      .then((res) => {
-          return this._checkResponse(res)
-      })
+    })
+    .then((res) => {
+      return this._checkResponse(res)
+    })
   }
 
-  addLikeCard(card) {
-      return fetch(`${this._address}/cards/${card}/likes`, {
-          method: 'PUT',
-          headers: this._headers
-      })
-      .then((res) => {
-          return this._checkResponse(res)
-      })
-  }
-
-  removeLikeCard(card) {
-      return fetch(`${this._address}/cards/${card}/likes`, {
-          method: 'DELETE',
-          headers: this._headers
-      })
-      .then((res) => {
-          return this._checkResponse(res)
-      })
-  }
-
-  deleteCard(card) {
-      return fetch(`${this._address}/cards/${card}`, {
-          method: 'DELETE',
-          headers: this._headers
-      })
-      .then((res) => {
-          return this._checkResponse(res)
-      })
-  }
-
-  editAvatar(data) {
-      return fetch(`${this._address}/users/me/avatar`, {
-          method: 'PATCH',
-          headers: this._headers,
-          body: JSON.stringify({
-              avatar: data.avatar
-          })
-      })
-      .then((res) => {
-          return this._checkResponse(res)
-      })
+  deleteMovie(movie) {
+    return fetch(`${this._address}/cards/${movie}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((res) => {
+      return this._checkResponse(res)
+    })
   }
 
 }
 
 const mainApi = new MainApi({
-  address: "http://localhost:3005",
+  address: "https://api.nomoreparties.co/beatfilm-movie",
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json"
