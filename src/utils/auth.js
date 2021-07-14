@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3005';
+export const BASE_URL = 'https://api.movie-portal.nomoredomains.monster';
 
 export const register = ({name, email, password}) => {
     return fetch(`${BASE_URL}/signup`, {
@@ -25,7 +25,7 @@ export const authorize = ({email, password}) => {
 }; 
 
 export const checkToken = (token) => {
-    return fetch(`${BASE_URL}/profile`, {
+    return fetch(`${BASE_URL}/users/me`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',

@@ -11,7 +11,8 @@
 }
 
 .movie__info {
-  min-height: 68px;
+  max-height: 68px;
+  height: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: row;
@@ -19,10 +20,12 @@
   align-items: center;
   padding: 14px;
   box-sizing: border-box;
+  
 }
 
 .movie__description {
   text-align: left;
+  max-width: 85%;
 }
 
 .movie__title {
@@ -31,6 +34,9 @@
   font-weight: 500;
   line-height: 1.21;
   margin-bottom: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movie__duration {

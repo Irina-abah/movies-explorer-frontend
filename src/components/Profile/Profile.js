@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useHistory } from "react-router-dom";
+import Header from '../Header/Header';
+import { Link } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Profile(props) {
@@ -17,21 +18,14 @@ function Profile(props) {
     setEmail(evt.target.value)
   }
 
-  const history = useHistory();
-
-    function signOut() {
-        localStorage.removeItem('jwt');
-        history.push('/');
-    }
-
   return (
     <section className="profile">
+      <Header loggedIn={props.loggedIn}/>
       <form 
       className="profile__info" 
       name="profile" 
       onSubmit={props.onSubmit}>
-        {/* <h2 className="profile__title">{`Привет, ${name}`}</h2> */}
-        <h2 className="profile__title">{`Привет, ${currentUser.name} !`}</h2>
+        <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
         <div className="profile__container">
           <div className="profile__container-item">
             <label className="profile__lable" htmlFor="profile-name">Имя</label>
@@ -40,7 +34,7 @@ function Profile(props) {
               className="form-input form__input_type_profile" 
               id="profile-name"
               name="name"
-              value={name || ""} 
+              value={currentUser.name || ""} 
               onChange={handleNameChange}
               placeholder="Ваше имя"
               minLength="2" 
@@ -59,7 +53,7 @@ function Profile(props) {
               className="form-input form__input_type_profile" 
               id="profile-email"
               name="email" 
-              value={email || ""} 
+              value={currentUser.email || ""} 
               onChange={handleDescriptionChange}
               placeholder="Ваш e-mail"
               minLength="2" 
@@ -77,7 +71,7 @@ function Profile(props) {
             className="button button_type_edit">
             Редактировать
         </button>
-        <Link className="link profile__signout-link" to='/' onClick={signOut}>Выйти из аккаунта</Link>
+        <Link className="link profile__signout-link" to='/' onClick={props.onSignOut}>Выйти из аккаунта</Link>
       </form>
     </section> 
   )

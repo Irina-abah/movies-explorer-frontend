@@ -40,7 +40,6 @@ function Register(props) {
         name="name"
         value={userData.name}
         onChange={handleChange}
-        placeholder="Ваше имя"
         minLength="2" 
         maxLength="40" 
         required />
@@ -58,7 +57,6 @@ function Register(props) {
           name="email" 
           value={userData.email}
           onChange={handleChange}
-          placeholder="Email" 
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           title="Введите Ваш email" 
           required />
@@ -76,7 +74,6 @@ function Register(props) {
           name="password"
           value={userData.password}
           onChange={handleChange}
-          placeholder="Пароль" 
           minLength="10"
           title="Введите Ваш пароль" 
           required />

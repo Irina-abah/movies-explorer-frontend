@@ -7,10 +7,11 @@
   justify-content: space-between;
   box-sizing: border-box;
   padding: 0 70px;
+  background-color: #DDDEE3;
 }
 
-.header__main {
-  background-color: #DDDEE3;
+.header__authorized {
+  background-color: #FAFAFA;
 }
 
 .header__logo {

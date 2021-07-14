@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch, useHistory, Redirect } from "react-router-dom";
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -10,7 +8,7 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
-// import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import allMoviesApi from '../../utils/MoviesApi';
 import * as auth from '../../utils/auth'; 
@@ -29,18 +27,19 @@ function App() {
   // загрузка всех фильмов
 
   React.useEffect(() => {
-    // if (loggedIn) {
+    if (loggedIn) {
 
       allMoviesApi.getAllMovies()
         .then((movieData) => {
           console.log(movieData)
-            setMovies(movieData);
+          // setMovies(movieData);
+          localStorage.setItem('movies',  JSON.stringify(movieData));
         })
         .catch((err) => {
           console.log(err);
         });
-    // }
-  }, []);
+    }
+  }, [loggedIn]);
 
   // проверка токена, авторизация и регистрация
 
@@ -60,6 +59,7 @@ const handleLogin = ({email, password}) => {
   const handleRegister = ({name, email, password}) => {
       return auth.register({name, email, password})
       .then((res) => {
+        console.log(res)
           if (res) {
               setIsRegistered(true)
               setCurrentUser(true)
@@ -82,7 +82,8 @@ const handleLogin = ({email, password}) => {
       .then((res) => {
           if (res) {
               setLoggedIn(true)
-              history.push('/movies')
+              setCurrentUser(res)
+              history.push('/')
               return res
           }
       })
@@ -90,49 +91,35 @@ const handleLogin = ({email, password}) => {
   }
   }, [history, loggedIn]);
 
-  React.useEffect(() => {
-    if (loggedIn) {
-      history.push('/movies')
-    }
-  }, [history, loggedIn])
+function handleSignOut() {
+    localStorage.removeItem('jwt');
+    history.push('/');
+    setLoggedIn(false);
+    setMovies([]);
+    setCurrentUser({});
+}
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <Header 
-            loggedIn={loggedIn}
-            />
             {!loggedIn ? <Main /> : <Redirect to="/movies" />}
-            <Footer />
           </Route>
-          {/* <ProtectedRoute path="/movies" */}
-          <Route path="/movies"
-          >
-            <Header
-            loggedIn={!loggedIn} />
-            <Movies 
-              movies={movies}
-            />
-            <Footer />
-            </Route>
-          {/* </ProtectedRoute> */}
-          {/* <ProtectedRoute path="/saved-movies"> */}
-          <Route path="/saved-movies">
-            <Header 
-            loggedIn={!loggedIn} />
-            <SavedMovies />
-            <Footer />
-            </Route>
-          {/* </ProtectedRoute> */}
-          {/* <ProtectedRoute path="/profile"> */}
-          <Route path="/profile">
-            <Header 
-            loggedIn={!loggedIn} />
-            <Profile />
-            </Route>
-          {/* </ProtectedRoute> */}
+          <ProtectedRoute path="/movies"
+            component={Movies}
+            loggedIn={loggedIn}
+            movies={movies}>
+          </ProtectedRoute>
+          <ProtectedRoute path="/saved-movies"
+            component={SavedMovies}
+            loggedIn={loggedIn}>
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile"
+            component={Profile}
+            loggedIn={loggedIn}
+            onSignOut={handleSignOut}>
+          </ProtectedRoute>
           <Route path="/signin">
             <Login 
             onLogin={handleLogin}/>

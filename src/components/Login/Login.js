@@ -39,8 +39,7 @@ function Login(props) {
         id="email"
         name="email" 
         value={userData.email}
-        onChange={handleChange}
-        placeholder="Email" 
+        onChange={handleChange} 
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
         title="Введите Ваш email" 
         required />
@@ -57,8 +56,7 @@ function Login(props) {
           id="password"
           name="password"
           value={userData.password}
-          onChange={handleChange}
-          placeholder="Пароль" 
+          onChange={handleChange} 
           minLength="10"
           title="Введите Ваш пароль" 
           required 

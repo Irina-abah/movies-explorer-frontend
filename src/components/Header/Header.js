@@ -8,7 +8,6 @@ import Account from '../Profile/Acount/Account';
 function Header(props) {
 
   const [isMenuOpen, setMenuOpen] = React.useState(false);
-  const [loggedIn, setLoggedIn] = React.useState(false);
 
   function toggleMenu() {
     setMenuOpen(!isMenuOpen);
@@ -17,23 +16,23 @@ function Header(props) {
   
 
   return (
-    <header className={props.loggedIn ? "header" : "header header__main"}>
+    <header className={`header ${props.loggedIn ? "header__authorized" : ""}`}>
       <Link to="/" className="header__path">
           <img className="link header__logo" src={logoPath} alt="Movies portal logo" />
       </Link>
       <Route exact path="/">
         <Navigation
-          loggedIn={loggedIn} />
+         />
       </Route>
       <Route path={ ["/movies", "/saved-movies", "/profile"] } >
       <Navigation
-          loggedIn={!loggedIn}/>
+          loggedIn={props.loggedIn}/>
           <Account />
           <button className="button button_type_burger" type='button' aria-label='меню' onClick={toggleMenu} alt="Mobile menu icon">
           </button>
       </Route>
       <Menu
-        loggedIn={!loggedIn}
+        loggedIn={props.loggedIn}
         isOpen={isMenuOpen}
         onClose={toggleMenu}
       />
