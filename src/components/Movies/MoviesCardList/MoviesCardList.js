@@ -24,7 +24,7 @@ function MoviesCardList(props) {
           }
         </ul>
         <button 
-        className="button button_type_more" 
+        className={`button button_type_more ${visibleMovies >= props.movies.length && 'button_type_more_disabled'}`}
         type="button" 
         aria-label="more button"
         onClick={handleShowMoreMovies}>Еще</button>

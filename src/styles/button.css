@@ -41,6 +41,10 @@ box-shadow: none;
   background-color: #e8e8e8;
   }
 
+.button_type_more_disabled {
+  display: none;
+}
+
 .button_type_search {
   background: url(../images/search-icon-white.svg) center no-repeat;
   width: 80px;
