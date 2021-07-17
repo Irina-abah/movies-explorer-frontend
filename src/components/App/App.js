@@ -13,6 +13,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import allMoviesApi from '../../utils/MoviesApi';
 import * as auth from '../../utils/auth'; 
 
+
 function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -25,6 +26,7 @@ function App() {
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const history = useHistory();
+
 
   // загрузка всех фильмов в localstorage
 
@@ -95,13 +97,14 @@ const handleLogin = ({email, password}) => {
   }
   }, [history, loggedIn]);
 
-function handleSignOut() {
+  function handleSignOut() {
     localStorage.removeItem('jwt');
     history.push('/');
     setLoggedIn(false);
-    setMovies([]);
+    // setMovies([]);
     setCurrentUser({});
-}
+  }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -113,7 +116,7 @@ function handleSignOut() {
           <ProtectedRoute path="/movies"
             component={Movies}
             loggedIn={loggedIn}
-            movies={movies}>
+            movies={movies} >
           </ProtectedRoute>
           <ProtectedRoute path="/saved-movies"
             component={SavedMovies}

@@ -6,8 +6,8 @@ function SearchForm(props) {
 
   const [keyword, setKeyword] = React.useState('');
 
-  function handleChange(e) {
-    setKeyword(e.target.value);
+  function handleChange(evt) {
+    setKeyword(evt.target.value);
   }
 
   const handleSubmit = (evt) => {
@@ -50,7 +50,7 @@ function SearchForm(props) {
         </button>
               
         </form>
-        <FilterCheckbox handleCheckbox={handleChangeCheckbox}/>
+        <FilterCheckbox onToggleCheckbox={handleChangeCheckbox}/>
     </section>
   )
 };
