@@ -12,6 +12,7 @@
 
 .header__authorized {
   background-color: #FAFAFA;
+  padding: 0;
 }
 
 .header__logo {

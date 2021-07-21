@@ -1,8 +1,11 @@
 .profile {
-  padding: 74px 0 70px;
+  padding: 0 0 70px;
+  width: calc(100% - 70px*2);
+  margin: 0 auto;
 }
 
 .profile__info {
+  padding-top: 74px;
   margin: 0 auto;
   max-width: 410px;
   width: 100%;
@@ -75,8 +78,8 @@
 
 @media screen and (max-width: 1023px) {
 
-  .profile {
-    padding: 236px 0 70px;
+  .profile__info {
+    padding-top: 236px;
   }
   
   .profile__title {
@@ -88,7 +91,11 @@
 @media screen and (max-width: 767px) {
 
   .profile {
-    padding: 150px 0 50px;
+    padding-bottom: 50px;
+  }
+
+  .profile__info {
+    padding-top: 150px;
   }
 
 }
@@ -96,9 +103,13 @@
 @media screen and (max-width: 425px) {
 
   .profile {
-    padding: 70px 0 40px;
+    padding-bottom: 40px;
     width: calc(100% - 30px*2);
     margin: 0 auto;
+  }
+
+  .profile__info {
+    padding-top: 50px;
   }
 
   .profile__title {
