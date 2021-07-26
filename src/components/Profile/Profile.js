@@ -7,6 +7,11 @@ function Profile(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
+
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
 
@@ -18,13 +23,22 @@ function Profile(props) {
     setEmail(evt.target.value)
   }
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    props.onUpdateUser({
+        name: name,
+        email: email,
+      });
+}
+
   return (
     <section className="profile">
       <Header loggedIn={props.loggedIn}/>
       <form 
       className="profile__info" 
       name="profile" 
-      onSubmit={props.onSubmit}>
+      onSubmit={handleSubmit}>
         <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
         <div className="profile__container">
           <div className="profile__container-item">
@@ -34,7 +48,7 @@ function Profile(props) {
               className="form-input form__input_type_profile" 
               id="profile-name"
               name="name"
-              value={currentUser.name || ""} 
+              value={name || ""} 
               onChange={handleNameChange}
               placeholder="Ваше имя"
               minLength="2" 
@@ -53,7 +67,7 @@ function Profile(props) {
               className="form-input form__input_type_profile" 
               id="profile-email"
               name="email" 
-              value={currentUser.email || ""} 
+              value={email || ""} 
               onChange={handleDescriptionChange}
               placeholder="Ваш e-mail"
               minLength="2" 

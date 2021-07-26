@@ -12,7 +12,6 @@ function Movies(props) {
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [isChecked, setIsChecked] = React.useState('');
   const [filteredMovies, setFilteredMovies] = React.useState([]);
-  const [movies, setMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
   // поиск по ключевому слову
@@ -23,10 +22,11 @@ function Movies(props) {
     const searchedMovies = movies.filter(movie => {
       return movie.nameRU.toLowerCase().includes(input.toLowerCase())
      }) 
+     
      setInput(input);
     //  setIsLoading(true);
      setSearchedMovies(searchedMovies);
-     localStorage.setItem('filteredMovies',  JSON.stringify(searchedMovies));;
+     localStorage.setItem('filteredMovies',  JSON.stringify(searchedMovies));
   }
 
   // чекбокс
@@ -47,7 +47,8 @@ function Movies(props) {
       onChangeCheckbox={handleCheckbox} />
       { isLoading ? (<Preloader />) :
       <MoviesCardList 
-      movies={searchedMovies}/>}
+      movies={searchedMovies}
+      onSaveClick={props.onSaveClick}/>}
       {/* <Preloader isLoading={!isLoading}/> */}
       <Footer/>
     </main>

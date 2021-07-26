@@ -11,6 +11,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import allMoviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 import * as auth from '../../utils/auth'; 
 
 
@@ -22,21 +23,24 @@ function App() {
     email: '',
   });
   const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [input, setInput] = React.useState('');
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const history = useHistory();
 
 
-  // загрузка всех фильмов в localstorage
+  // загрузка всех фильмов и данных пользователя
 
   React.useEffect(() => {
     if (loggedIn) {
 
-      allMoviesApi.getAllMovies()
-        .then((movieData) => {
-          console.log(movieData)
-          // setMovies(movieData);
+      Promise.all([mainApi.getUserData(), allMoviesApi.getAllMovies()])
+        .then(([myData, movieData]) => {
+          // console.log(movieData)
+          setMovies(movieData)
+          setCurrentUser(myData)
+          console.log(myData)
           localStorage.setItem('movies',  JSON.stringify(movieData));
         })
         .catch((err) => {
@@ -44,6 +48,26 @@ function App() {
         });
     }
   }, [loggedIn]);
+
+  // загрузка сохраненных фильмов
+
+  function getSaveMovies() {
+    return mainApi.getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+        return movies
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }
+
+  React.useEffect(() => {
+    let jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      getSaveMovies()
+    }
+  }, [history]);
 
   
 
@@ -65,7 +89,6 @@ const handleLogin = ({email, password}) => {
   const handleRegister = ({name, email, password}) => {
       return auth.register({name, email, password})
       .then((res) => {
-        console.log(res)
           if (res) {
               setIsRegistered(true)
               setCurrentUser(true)
@@ -88,7 +111,7 @@ const handleLogin = ({email, password}) => {
       .then((res) => {
           if (res) {
               setLoggedIn(true)
-              setCurrentUser(res)
+              // setCurrentUser(res)
               history.push('/')
               return res
           }
@@ -105,6 +128,52 @@ const handleLogin = ({email, password}) => {
     setCurrentUser({});
   }
 
+// function handleSaveMovieClick(movie) {
+
+//   const isSaved = movie.owner === currentUser._id;
+  
+//   if (isSaved) {
+//     mainApi.deleteMovie(movie._id)
+//     console.log(movie)
+//     .then(() => {
+//       getSaveMovies();
+//     })
+//     .catch((err) => console.log(err));
+//   } else {
+//     mainApi.addMovie(movie)
+//     // console.log(movie)
+//     .then((newMovie) => {
+//       setSavedMovies([...savedMovies, newMovie]);
+//     })
+//     .catch((err) => console.log(err));
+//   }
+// } 
+
+function handleSaveMovieClick(movie) {
+
+  if (movie.owner !== currentUser._id) {
+     mainApi.addMovie(movie)
+    .then((newMovie) => {
+      setSavedMovies([...savedMovies, newMovie]);
+    })
+    .catch((err) => console.log(err));
+  }
+  } 
+
+// редактирование профиля пользователя
+
+function handleUpdateUser(user) {
+
+  mainApi.changeUserData(user)
+  .then((data) => {
+    setCurrentUser(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -116,16 +185,18 @@ const handleLogin = ({email, password}) => {
           <ProtectedRoute path="/movies"
             component={Movies}
             loggedIn={loggedIn}
-            movies={movies} >
+            onSaveClick={handleSaveMovieClick}>
           </ProtectedRoute>
           <ProtectedRoute path="/saved-movies"
             component={SavedMovies}
-            loggedIn={loggedIn}>
+            loggedIn={loggedIn}
+            movies={savedMovies}>
           </ProtectedRoute>
           <ProtectedRoute path="/profile"
             component={Profile}
             loggedIn={loggedIn}
-            onSignOut={handleSignOut}>
+            onSignOut={handleSignOut}
+            onUpdateUser={handleUpdateUser}>
           </ProtectedRoute>
           <Route path="/signin">
             <Login 

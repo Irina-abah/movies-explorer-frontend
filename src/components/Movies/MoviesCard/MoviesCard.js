@@ -6,8 +6,8 @@ function MoviesCard(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  const isLiked = props.movie.owner === currentUser._id;
-  const movieCardClassName = `button button_type_save ${isLiked ? 'button_type_save-active' : ''}`;
+  const isSaved = props.movie.owner === currentUser._id;
+  const movieCardClassName = `button button_type_save ${isSaved ? 'button_type_save-active' : ''}`;
 
   function handleSaveClick() {
     props.onSaveClick(props.movie);

@@ -68,7 +68,7 @@ export class MainApi {
   }
 
   deleteMovie(movie) {
-    return fetch(`${this._address}/cards/${movie}`, {
+    return fetch(`${this._address}/movies/${movie}`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -80,7 +80,8 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  address: "https://api.nomoreparties.co/beatfilm-movie",
+  // address: "https://api.movie-portal.nomoredomains.monster",
+  address: "http://localhost:3005",
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json"

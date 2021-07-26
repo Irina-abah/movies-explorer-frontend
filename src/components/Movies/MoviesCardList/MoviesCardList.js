@@ -19,6 +19,7 @@ function MoviesCardList(props) {
                 <MoviesCard
                 key={movie.id}
                 movie={movie}
+                onSaveClick={props.onSaveClick}
                 />
             ))
           }
@@ -36,6 +37,7 @@ function MoviesCardList(props) {
                   <MoviesCard
                   key={movie.id}
                   movie={movie}
+                  onCardDelete={props.onCardDelete}
                   />
               ))
             }

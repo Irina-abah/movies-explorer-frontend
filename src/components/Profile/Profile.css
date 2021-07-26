@@ -78,6 +78,10 @@
 
 @media screen and (max-width: 1023px) {
 
+  .profile {
+    width: calc(100% - 30px*2);
+  }
+
   .profile__info {
     padding-top: 236px;
   }
