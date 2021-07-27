@@ -40,7 +40,7 @@ function App() {
           // console.log(movieData)
           setMovies(movieData)
           setCurrentUser(myData)
-          console.log(myData)
+          // console.log(myData)
           localStorage.setItem('movies',  JSON.stringify(movieData));
         })
         .catch((err) => {
@@ -54,6 +54,7 @@ function App() {
   function getSaveMovies() {
     return mainApi.getSavedMovies()
       .then((movies) => {
+        console.log(movies)
         setSavedMovies(movies);
         return movies
       })
@@ -128,37 +129,38 @@ const handleLogin = ({email, password}) => {
     setCurrentUser({});
   }
 
-// function handleSaveMovieClick(movie) {
-
-//   const isSaved = movie.owner === currentUser._id;
-  
-//   if (isSaved) {
-//     mainApi.deleteMovie(movie._id)
-//     console.log(movie)
-//     .then(() => {
-//       getSaveMovies();
-//     })
-//     .catch((err) => console.log(err));
-//   } else {
-//     mainApi.addMovie(movie)
-//     // console.log(movie)
-//     .then((newMovie) => {
-//       setSavedMovies([...savedMovies, newMovie]);
-//     })
-//     .catch((err) => console.log(err));
-//   }
-// } 
+// сохранение фильма в коллекцию 
 
 function handleSaveMovieClick(movie) {
 
-  if (movie.owner !== currentUser._id) {
+  // if (movie.owner !== currentUser._id) {
      mainApi.addMovie(movie)
+     
     .then((newMovie) => {
       setSavedMovies([...savedMovies, newMovie]);
     })
     .catch((err) => console.log(err));
-  }
+  // }
   } 
+
+// удаление фильма из коллекции
+
+function handleDeleteMovieClick(movie) {
+  mainApi.deleteMovie(movie._id)
+  .then(() => {
+    getSaveMovies()
+    .then((res) => {
+      let userMovies = []
+          res.forEach(movie => {
+            if(movie.owner === currentUser._id) {
+              userMovies.push(movie);
+            }
+          })
+          setSavedMovies(userMovies) 
+    })
+  })
+  .catch((err) => console.log(err));
+}
 
 // редактирование профиля пользователя
 
@@ -190,7 +192,8 @@ function handleUpdateUser(user) {
           <ProtectedRoute path="/saved-movies"
             component={SavedMovies}
             loggedIn={loggedIn}
-            movies={savedMovies}>
+            movies={savedMovies}
+            onCardDelete={handleDeleteMovieClick}>
           </ProtectedRoute>
           <ProtectedRoute path="/profile"
             component={Profile}

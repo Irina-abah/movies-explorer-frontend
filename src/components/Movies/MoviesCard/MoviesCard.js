@@ -14,7 +14,7 @@ function MoviesCard(props) {
   }
 
   function handleOpenTrailerClick() {
-    window.open(props.movie.trailerLink);
+    window.open(props.movie.trailerLink || props.movie.trailer);
   }
 
   function handleDeleteClick() {
@@ -22,8 +22,7 @@ function MoviesCard(props) {
   }
 
   const duration = `${Math.floor(props.movie.duration / 60)}ч ${props.movie.duration % 60}м`;
-  
-  
+  const movieImage = props.movie.image.url ? 'https://api.nomoreparties.co' + props.movie.image.url : props.movie.image;
 
   return (
     <li className="movie">
@@ -35,7 +34,7 @@ function MoviesCard(props) {
           </div>
           <button className={movieCardClassName} type="button" aria-label="delete button" onClick={handleSaveClick}/>
         </div>
-        <img className="movie__image" src={'https://api.nomoreparties.co' + props.movie.image.formats.thumbnail.url} alt={props.movie.nameRU} onClick={handleOpenTrailerClick}/>
+        <img className="movie__image" src={movieImage} alt={props.movie.nameRU} onClick={handleOpenTrailerClick}/>
       </Route>
       <Route path="/saved-movies">
         <div className="movie__info">
@@ -45,7 +44,7 @@ function MoviesCard(props) {
           </div>
           <button className="button button_type_delete" type="button" aria-label="delete button" onClick={handleDeleteClick}/>
         </div>
-        <img className="movie__image" src={'https://api.nomoreparties.co' + props.movie.image.formats.thumbnail.url} alt={props.movie.nameRU} onClick={handleOpenTrailerClick}/>
+        <img className="movie__image" src={movieImage} alt={props.movie.nameRU} onClick={handleOpenTrailerClick}/>
       </Route>
     </li>
   )

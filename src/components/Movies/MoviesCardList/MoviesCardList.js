@@ -35,7 +35,7 @@ function MoviesCardList(props) {
             {
               props.movies.map((movie, i) => (
                   <MoviesCard
-                  key={movie.id}
+                  key={movie._id}
                   movie={movie}
                   onCardDelete={props.onCardDelete}
                   />
