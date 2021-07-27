@@ -23,11 +23,13 @@ function App() {
     email: '',
   });
   const [movies, setMovies] = React.useState([]);
+  const [isSaved, setIsSaved] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [input, setInput] = React.useState('');
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const history = useHistory();
+  const [searchedMovies, setSearchedMovies] = React.useState([]);
 
 
   // загрузка всех фильмов и данных пользователя
@@ -40,8 +42,12 @@ function App() {
           // console.log(movieData)
           setMovies(movieData)
           setCurrentUser(myData)
-          // console.log(myData)
           localStorage.setItem('movies',  JSON.stringify(movieData));
+        
+          const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+          if (searchedMovies) {
+            setSearchedMovies(searchedMovies)
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -59,7 +65,7 @@ function App() {
         return movies
       })
       .catch((err) => {
-        console.log('error', err)
+        console.log(err)
       })
   }
 
@@ -70,7 +76,20 @@ function App() {
     }
   }, [history]);
 
-  
+  // поиск фильмов
+
+  function handleMovieSearchSubmit(input) {
+    const movies = JSON.parse(localStorage.getItem('movies'));
+
+    const searchedMovies = movies.filter(movie => {
+      return movie.nameRU.toLowerCase().includes(input.toLowerCase())
+     }) 
+     
+     setInput(input);
+    //  setIsLoading(true);
+     setSearchedMovies(searchedMovies);
+     localStorage.setItem('searchedMovies',  JSON.stringify(searchedMovies));
+  }
 
   // проверка токена, авторизация и регистрация
 
@@ -122,10 +141,10 @@ const handleLogin = ({email, password}) => {
   }, [history, loggedIn]);
 
   function handleSignOut() {
-    localStorage.removeItem('jwt');
+    localStorage.clear();
     history.push('/');
     setLoggedIn(false);
-    // setMovies([]);
+    setMovies([]);
     setCurrentUser({});
   }
 
@@ -137,6 +156,7 @@ function handleSaveMovieClick(movie) {
      mainApi.addMovie(movie)
      
     .then((newMovie) => {
+      // setIsSaved(newMovie)
       setSavedMovies([...savedMovies, newMovie]);
     })
     .catch((err) => console.log(err));
@@ -152,9 +172,9 @@ function handleDeleteMovieClick(movie) {
     .then((res) => {
       let userMovies = []
           res.forEach(movie => {
-            if(movie.owner === currentUser._id) {
+            // if(movie.owner === currentUser._id) {
               userMovies.push(movie);
-            }
+            // }
           })
           setSavedMovies(userMovies) 
     })
@@ -187,7 +207,10 @@ function handleUpdateUser(user) {
           <ProtectedRoute path="/movies"
             component={Movies}
             loggedIn={loggedIn}
-            onSaveClick={handleSaveMovieClick}>
+            onSaveClick={handleSaveMovieClick}
+            movies={searchedMovies}
+            onHandleSubmit={handleMovieSearchSubmit}
+            isSaved={isSaved}>
           </ProtectedRoute>
           <ProtectedRoute path="/saved-movies"
             component={SavedMovies}

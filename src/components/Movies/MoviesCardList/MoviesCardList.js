@@ -20,6 +20,7 @@ function MoviesCardList(props) {
                 key={movie.id}
                 movie={movie}
                 onSaveClick={props.onSaveClick}
+                isSaved={props.isSaved}
                 />
             ))
           }

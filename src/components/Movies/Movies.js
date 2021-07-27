@@ -8,47 +8,44 @@ import Preloader from '../Preloader/Preloader';
 
 function Movies(props) {
 
-  const [input, setInput] = React.useState('');
-  const [searchedMovies, setSearchedMovies] = React.useState([]);
-  const [isChecked, setIsChecked] = React.useState('');
+  // const [input, setInput] = React.useState('');
+  // const [searchedMovies, setSearchedMovies] = React.useState([]);
+  // const [isChecked, setIsChecked] = React.useState('');
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
   // поиск по ключевому слову
 
-  function handleSubmit(input) {
-    const movies = JSON.parse(localStorage.getItem('movies'));
+  // function handleSubmit(input) {
+  //   const movies = JSON.parse(localStorage.getItem('movies'));
 
-    const searchedMovies = movies.filter(movie => {
-      return movie.nameRU.toLowerCase().includes(input.toLowerCase())
-     }) 
+  //   const searchedMovies = movies.filter(movie => {
+  //     return movie.nameRU.toLowerCase().includes(input.toLowerCase())
+  //    }) 
      
-     setInput(input);
-    //  setIsLoading(true);
-     setSearchedMovies(searchedMovies);
-     localStorage.setItem('filteredMovies',  JSON.stringify(searchedMovies));
-  }
+  //    setInput(input);
+  //   //  setIsLoading(true);
+  //    setSearchedMovies(searchedMovies);
+  //    localStorage.setItem('filteredMovies',  JSON.stringify(searchedMovies));
+  // }
 
   // чекбокс
  function handleCheckbox() {
 
   const shortMovie = props.movie.duration <= 40;
- }
-
- // More button
-
-  
+ }  
 
   return (
     <main className="main movies">
       <Header loggedIn={props.loggedIn}/>
       <SearchForm 
-      onSubmit={handleSubmit} 
+      onSubmit={props.onHandleSubmit} 
       onChangeCheckbox={handleCheckbox} />
       { isLoading ? (<Preloader />) :
       <MoviesCardList 
-      movies={searchedMovies}
-      onSaveClick={props.onSaveClick}/>}
+      movies={props.movies}
+      onSaveClick={props.onSaveClick}
+      isSaved={props.isSaved}/>}
       {/* <Preloader isLoading={!isLoading}/> */}
       <Footer/>
     </main>
