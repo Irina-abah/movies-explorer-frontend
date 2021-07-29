@@ -10,7 +10,8 @@ function SavedMovies(props) {
       <SearchForm />
       <MoviesCardList 
       movies={props.movies}
-      onCardDelete={props.onCardDelete}/>
+      onMovieDelete={props.onMovieDelete}
+      savedMovies={props.savedMovies}/>
       <Footer/>
     </section> 
    

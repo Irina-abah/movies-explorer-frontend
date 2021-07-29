@@ -1,16 +1,18 @@
 import React from 'react';
 import { Route } from 'react-router';
-// import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
 function MoviesCard(props) {
 
-  // const currentUser = React.useContext(CurrentUserContext);
+  let isSaved = props.savedMovies.some(item => item.movieId === props.movie.id)
 
-  // const isSaved = props.movie.owner === currentUser._id;
-  const movieCardClassName = `button button_type_save ${props.isSaved ? 'button_type_save-active' : ''}`;
+  const movieCardClassName = `button button_type_save ${isSaved ? 'button_type_save-active' : ''}`;
 
   function handleSaveClick() {
-    props.onSaveClick(props.movie);
+    if (!isSaved) {
+      props.onSaveClick(props.movie);
+    } else {
+      handleDeleteClick();
+    }
   }
 
   function handleOpenTrailerClick() {
@@ -18,7 +20,7 @@ function MoviesCard(props) {
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props.movie);
+    props.onMovieDelete(props.movie);
   }
 
   const duration = `${Math.floor(props.movie.duration / 60)}ч ${props.movie.duration % 60}м`;

@@ -23,7 +23,7 @@ function App() {
     email: '',
   });
   const [movies, setMovies] = React.useState([]);
-  const [isSaved, setIsSaved] = React.useState(false);
+  const [savedMovie, setSavedMovie] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [input, setInput] = React.useState('');
   const [isRegistered, setIsRegistered] = React.useState(false);
@@ -154,10 +154,11 @@ function handleSaveMovieClick(movie) {
 
   // if (movie.owner !== currentUser._id) {
      mainApi.addMovie(movie)
-     
     .then((newMovie) => {
-      // setIsSaved(newMovie)
-      setSavedMovies([...savedMovies, newMovie]);
+        setSavedMovies([...savedMovies, newMovie]);
+        setSavedMovie(newMovie)
+        // console.log(newMovie.movieId)
+      
     })
     .catch((err) => console.log(err));
   // }
@@ -166,19 +167,17 @@ function handleSaveMovieClick(movie) {
 // удаление фильма из коллекции
 
 function handleDeleteMovieClick(movie) {
-  mainApi.deleteMovie(movie._id)
-  .then(() => {
-    getSaveMovies()
-    .then((res) => {
-      let userMovies = []
-          res.forEach(movie => {
-            // if(movie.owner === currentUser._id) {
-              userMovies.push(movie);
-            // }
-          })
-          setSavedMovies(userMovies) 
+    mainApi.deleteMovie(movie._id || savedMovie._id)
+    .then(() => {
+      getSaveMovies()
+      .then((res) => {
+        let userMovies = []
+            res.forEach(movie => {
+                userMovies.push(movie);
+            })
+            setSavedMovies(userMovies) 
+      })
     })
-  })
   .catch((err) => console.log(err));
 }
 
@@ -209,14 +208,19 @@ function handleUpdateUser(user) {
             loggedIn={loggedIn}
             onSaveClick={handleSaveMovieClick}
             movies={searchedMovies}
+            savedMovies={savedMovies}
             onHandleSubmit={handleMovieSearchSubmit}
-            isSaved={isSaved}>
+            onMovieDelete={handleDeleteMovieClick}
+            // savedMovie={savedMovie}
+            >
           </ProtectedRoute>
           <ProtectedRoute path="/saved-movies"
             component={SavedMovies}
             loggedIn={loggedIn}
             movies={savedMovies}
-            onCardDelete={handleDeleteMovieClick}>
+            savedMovies={savedMovies}
+            onMovieDelete={handleDeleteMovieClick}
+            >
           </ProtectedRoute>
           <ProtectedRoute path="/profile"
             component={Profile}
