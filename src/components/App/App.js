@@ -151,18 +151,14 @@ const handleLogin = ({email, password}) => {
 // сохранение фильма в коллекцию 
 
 function handleSaveMovieClick(movie) {
-
-  // if (movie.owner !== currentUser._id) {
-     mainApi.addMovie(movie)
-    .then((newMovie) => {
-        setSavedMovies([...savedMovies, newMovie]);
-        setSavedMovie(newMovie)
-        // console.log(newMovie.movieId)
-      
-    })
-    .catch((err) => console.log(err));
-  // }
-  } 
+  console.log(movie)
+  mainApi.addMovie(movie)
+  .then((newMovie) => {
+    setSavedMovies([...savedMovies, newMovie]);
+    setSavedMovie(newMovie)
+  })
+  .catch((err) => console.log(err));
+} 
 
 // удаление фильма из коллекции
 

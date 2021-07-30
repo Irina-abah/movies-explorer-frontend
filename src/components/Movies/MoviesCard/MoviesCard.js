@@ -3,7 +3,7 @@ import { Route } from 'react-router';
 
 function MoviesCard(props) {
 
-  let isSaved = props.savedMovies.some(item => item.movieId === props.movie.id)
+  const isSaved = props.savedMovies.some(item => item.movieId === props.movie.id)
 
   const movieCardClassName = `button button_type_save ${isSaved ? 'button_type_save-active' : ''}`;
 
