@@ -7,7 +7,9 @@ function SavedMovies(props) {
   return (
     <section className="main movies">
       <Header loggedIn={props.loggedIn}/>
-      <SearchForm />
+      <SearchForm 
+      onSubmit={props.onHandleSubmit} 
+      onChangeCheckbox={props.onChangeCheckbox}/>
       <MoviesCardList 
       movies={props.movies}
       onMovieDelete={props.onMovieDelete}

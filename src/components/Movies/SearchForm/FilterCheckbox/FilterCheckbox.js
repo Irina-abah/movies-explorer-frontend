@@ -11,8 +11,7 @@ function FilterCheckbox(props) {
           className="form-input seach-form__input_type_toggle"
           type="checkbox" 
           id="short-movie"
-          name="short-movie" 
-          checked={props.toggle}
+          name="short-movie"
           onChange={handleCheck}/>
           <label className="search-form__filter-name" htmlFor="short-movie">Короткометражки</label>
       </div>

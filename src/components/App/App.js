@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, useHistory, Redirect } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect, useLocation } from "react-router-dom";
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -29,10 +29,10 @@ function App() {
   const [input, setInput] = React.useState('');
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const history = useHistory();
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [toggle, setToggle] = React.useState(false);
-
+  const history = useHistory();
+  const location = useLocation();
 
   // загрузка всех фильмов и данных пользователя
 
@@ -81,19 +81,32 @@ function App() {
   // поиск фильмов и фильтрация
 
   function handleMovieSearchSubmit(input) {
-    const allMovies = JSON.parse(localStorage.getItem('movies'));
-    const searchedMovies = searchMovieByKeyword(allMovies, input)
-     
-    setInput(input);
-    //  setIsLoading(true);
-     setSearchedMovies(searchedMovies);
-     localStorage.setItem('searchedMovies',  JSON.stringify(searchedMovies));
+    if (location.pathname === '/movies') {
+      const allMovies = JSON.parse(localStorage.getItem('movies'));
+      const searchedMovies = searchMovieByKeyword(allMovies, input)
+
+      setInput(input);
+      //  setIsLoading(true);
+      setSearchedMovies(searchedMovies);
+      localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
+    } else if (location.pathname === '/saved-movies') {
+      const moviesToSearch = savedMovies;
+      const searchedSavedMovies = searchMovieByKeyword(moviesToSearch, input)
+
+      setInput(input);
+      setSavedMovies(searchedSavedMovies)
+    }
+    
   }
   
   function handleChangeCheckbox(evt) {
     setToggle(!toggle);
     const shortMovies = searchShortMovie(searchedMovies)
     setSearchedMovies(shortMovies)
+    if (location.pathname === '/saved-movies') {
+      const shortMovies = searchShortMovie(savedMovies)
+      setSavedMovies(shortMovies)
+    }
   }
 
   // проверка токена, авторизация и регистрация
@@ -223,6 +236,8 @@ function handleUpdateUser(user) {
             movies={savedMovies}
             savedMovies={savedMovies}
             onMovieDelete={handleDeleteMovieClick}
+            onHandleSubmit={handleMovieSearchSubmit}
+            onChangeCheckbox={handleChangeCheckbox}
             >
           </ProtectedRoute>
           <ProtectedRoute path="/profile"
