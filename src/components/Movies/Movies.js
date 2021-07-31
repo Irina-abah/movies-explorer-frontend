@@ -6,20 +6,14 @@ import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
 
 
-function Movies(props) {
-
-  // чекбокс
- function handleCheckbox() {
-
-  const shortMovie = props.movie.duration <= 40;
- }  
+function Movies(props) {  
 
   return (
     <main className="main movies">
       <Header loggedIn={props.loggedIn}/>
       <SearchForm 
       onSubmit={props.onHandleSubmit} 
-      onChangeCheckbox={handleCheckbox} />
+      onChangeCheckbox={props.onChangeCheckbox} />
       { props.isLoading ? (<Preloader />) :
       <MoviesCardList 
       movies={props.movies}

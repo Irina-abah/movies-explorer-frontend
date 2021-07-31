@@ -12,6 +12,7 @@ function FilterCheckbox(props) {
           type="checkbox" 
           id="short-movie"
           name="short-movie" 
+          checked={props.toggle}
           onChange={handleCheck}/>
           <label className="search-form__filter-name" htmlFor="short-movie">Короткометражки</label>
       </div>

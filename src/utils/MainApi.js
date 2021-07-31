@@ -1,3 +1,5 @@
+import {BASE_URL} from '../utils/constants';
+
 export class MainApi {
   constructor({address, headers}) {
     this._address = address;
@@ -54,9 +56,9 @@ export class MainApi {
         duration: data.duration,
         year: data.year,
         description: data.description,
-        image: `${'https://api.nomoreparties.co'}${data.image.url}`,
+        image: `${BASE_URL}${data.image.url}`,
         trailer: data.trailerLink,
-        thumbnail: `${'https://api.nomoreparties.co'}${data.image.formats.thumbnail.url}`,
+        thumbnail: `${BASE_URL}${data.image.formats.thumbnail.url}`,
         movieId: data.id.toString(),
         nameRU: data.nameRU,
         nameEN: data.nameEN,

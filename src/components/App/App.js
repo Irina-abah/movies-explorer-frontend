@@ -13,6 +13,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import allMoviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import * as auth from '../../utils/auth'; 
+import {searchMovieByKeyword, searchShortMovie} from '../../utils/FilterMovies';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const history = useHistory();
   const [searchedMovies, setSearchedMovies] = React.useState([]);
+  const [toggle, setToggle] = React.useState(false);
 
 
   // загрузка всех фильмов и данных пользователя
@@ -76,19 +78,22 @@ function App() {
     }
   }, [history]);
 
-  // поиск фильмов
+  // поиск фильмов и фильтрация
 
   function handleMovieSearchSubmit(input) {
-    const movies = JSON.parse(localStorage.getItem('movies'));
-
-    const searchedMovies = movies.filter(movie => {
-      return movie.nameRU.toLowerCase().includes(input.toLowerCase())
-     }) 
+    const allMovies = JSON.parse(localStorage.getItem('movies'));
+    const searchedMovies = searchMovieByKeyword(allMovies, input)
      
-     setInput(input);
+    setInput(input);
     //  setIsLoading(true);
      setSearchedMovies(searchedMovies);
      localStorage.setItem('searchedMovies',  JSON.stringify(searchedMovies));
+  }
+  
+  function handleChangeCheckbox(evt) {
+    setToggle(!toggle);
+    const shortMovies = searchShortMovie(searchedMovies)
+    setSearchedMovies(shortMovies)
   }
 
   // проверка токена, авторизация и регистрация
@@ -171,11 +176,13 @@ function handleDeleteMovieClick(movie) {
             res.forEach(movie => {
                 userMovies.push(movie);
             })
-            setSavedMovies(userMovies) 
+            setSavedMovies(userMovies)
+            // setSearchedMovies(userMovies) 
       })
     })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err)); 
 }
+
 
 // редактирование профиля пользователя
 
@@ -189,7 +196,6 @@ function handleUpdateUser(user) {
     console.log(err);
   });
 }
-
 
 
   return (
@@ -207,6 +213,7 @@ function handleUpdateUser(user) {
             savedMovies={savedMovies}
             onHandleSubmit={handleMovieSearchSubmit}
             onMovieDelete={handleDeleteMovieClick}
+            onChangeCheckbox={handleChangeCheckbox}
             // savedMovie={savedMovie}
             >
           </ProtectedRoute>
