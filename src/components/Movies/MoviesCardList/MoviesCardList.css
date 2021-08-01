@@ -13,6 +13,10 @@
   padding: 0;
 }
 
+.movie-list__not-found {
+  color: #EE3465;
+}
+
 @media screen and (max-width: 1023px) {
 
   .movie-list__container {

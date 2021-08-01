@@ -6,7 +6,6 @@ function FilterCheckbox(props) {
     } else {
       props.onShowSearchedMovies()
     }
-
   }
 
   return (

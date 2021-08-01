@@ -30,6 +30,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [checked, setChecked] = React.useState(false);
+  const [notFound, setNotFound] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
 
@@ -77,18 +78,22 @@ function App() {
     }
   }, [history]);
 
-  // поиск фильмов и фильтрация
+  // поиск фильмов и фильтрация по чекбоксу
 
   function handleMovieSearchSubmit(input) {
     if (location.pathname === '/movies') {
+      setIsLoading(true)
       const allMovies = JSON.parse(localStorage.getItem('movies'));
       const searchedMovies = searchMovieByKeyword(allMovies, input)
-      setSearchedMovies(searchedMovies);
       localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
+      setSearchedMovies(searchedMovies);
+      setNotFoundMessage(searchedMovies)
+      setIsLoading(false)
     } else if (location.pathname === '/saved-movies') {
       const moviesToSearch = savedMovies;
       const searchedSavedMovies = searchMovieByKeyword(moviesToSearch, input)
       setSavedMovies(searchedSavedMovies)
+      setNotFoundMessage(searchedSavedMovies)
     }
   }
   
@@ -97,9 +102,11 @@ function App() {
     
     const shortMovies = searchShortMovie(searchedMovies)
     setSearchedMovies(shortMovies)
+    setNotFoundMessage(shortMovies)
     if (location.pathname === '/saved-movies') {
       const shortMovies = searchShortMovie(savedMovies)
       setSavedMovies(shortMovies)
+      setNotFoundMessage(shortMovies)
     }
   }
 
@@ -107,8 +114,18 @@ function App() {
     setChecked(!checked);
     const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
     setSearchedMovies(searchedMovies);
+    setNotFoundMessage(searchedMovies);
     if (location.pathname === '/saved-movies') {
       getSaveMovies()
+      setNotFoundMessage();
+    }
+  }
+
+  function setNotFoundMessage(movies) {
+    if (movies.length === 0) {
+      setNotFound(true)
+    } else {
+      setNotFound(false)
     }
   }
 
@@ -169,6 +186,19 @@ const handleLogin = ({email, password}) => {
     setCurrentUser({});
   }
 
+  // редактирование профиля пользователя
+
+function handleUpdateUser(user) {
+
+  mainApi.changeUserData(user)
+  .then((data) => {
+    setCurrentUser(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
 // сохранение фильма в коллекцию 
 
 function handleSaveMovieClick(movie) {
@@ -200,20 +230,6 @@ function handleDeleteMovieClick(movie) {
 }
 
 
-// редактирование профиля пользователя
-
-function handleUpdateUser(user) {
-
-  mainApi.changeUserData(user)
-  .then((data) => {
-    setCurrentUser(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-}
-
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -232,6 +248,8 @@ function handleUpdateUser(user) {
             onChangeCheckbox={handleChangeCheckbox}
             onChecked={checked}
             onShowSearchedMovies={handleShowSearchedMovies}
+            isLoading={isLoading}
+            onNotFound={notFound}
             // savedMovie={savedMovie}
             >
           </ProtectedRoute>

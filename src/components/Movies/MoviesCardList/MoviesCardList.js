@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList(props) {
@@ -11,8 +11,9 @@ function MoviesCardList(props) {
 }
 
   return (
+    props.notFound ? <p className="movie-list__not-found">Ничего не найдено</p> :
     <section className="movie-list">
-      <Route path="/movies">
+      <Route exact path="/movies">
         <ul className="movie-list__container">
           {
             props.movies.slice(0, visibleMovies).map((movie, i) => (
@@ -46,6 +47,7 @@ function MoviesCardList(props) {
             }
           </ul>
       </Route>
+      
       
     </section>
   )

@@ -14,7 +14,8 @@ function SavedMovies(props) {
       <MoviesCardList 
       movies={props.movies}
       onMovieDelete={props.onMovieDelete}
-      savedMovies={props.savedMovies}/>
+      savedMovies={props.savedMovies}
+      notFound={props.onNotFound}/>
       <Footer/>
     </section> 
    
