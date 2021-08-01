@@ -47,8 +47,6 @@ function MoviesCardList(props) {
             }
           </ul>
       </Route>
-      
-      
     </section>
   )
 };

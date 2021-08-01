@@ -64,6 +64,8 @@ function App() {
       .then((movies) => {
         console.log(movies)
         setSavedMovies(movies);
+        localStorage.setItem('savedMovies', JSON.stringify(movies));
+        // setNotFoundMessage(movies);
         return movies
       })
       .catch((err) => {
@@ -82,16 +84,17 @@ function App() {
 
   function handleMovieSearchSubmit(input) {
     if (location.pathname === '/movies') {
-      setIsLoading(true)
+      // setIsLoading(true)
       const allMovies = JSON.parse(localStorage.getItem('movies'));
       const searchedMovies = searchMovieByKeyword(allMovies, input)
       localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
-      setSearchedMovies(searchedMovies);
+      setSearchedMovies(searchedMovies)
       setNotFoundMessage(searchedMovies)
-      setIsLoading(false)
+      // setIsLoading(false)
     } else if (location.pathname === '/saved-movies') {
-      const moviesToSearch = savedMovies;
-      const searchedSavedMovies = searchMovieByKeyword(moviesToSearch, input)
+      const savedMoviesList = JSON.parse(localStorage.getItem('savedMovies'));
+      const searchedSavedMovies = searchMovieByKeyword(savedMoviesList, input)
+      console.log(input)
       setSavedMovies(searchedSavedMovies)
       setNotFoundMessage(searchedSavedMovies)
     }
@@ -117,7 +120,6 @@ function App() {
     setNotFoundMessage(searchedMovies);
     if (location.pathname === '/saved-movies') {
       getSaveMovies()
-      setNotFoundMessage();
     }
   }
 
@@ -206,6 +208,7 @@ function handleSaveMovieClick(movie) {
   mainApi.addMovie(movie)
   .then((newMovie) => {
     setSavedMovies([...savedMovies, newMovie]);
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
     setSavedMovie(newMovie)
   })
   .catch((err) => console.log(err));
@@ -223,7 +226,6 @@ function handleDeleteMovieClick(movie) {
                 userMovies.push(movie);
             })
             setSavedMovies(userMovies)
-            // setSearchedMovies(userMovies) 
       })
     })
   .catch((err) => console.log(err)); 
@@ -257,11 +259,13 @@ function handleDeleteMovieClick(movie) {
             component={SavedMovies}
             loggedIn={loggedIn}
             movies={savedMovies}
+            onChecked={checked}
             savedMovies={savedMovies}
             onMovieDelete={handleDeleteMovieClick}
             onHandleSubmit={handleMovieSearchSubmit}
             onChangeCheckbox={handleChangeCheckbox}
             onShowSearchedMovies={handleShowSearchedMovies}
+            onNotFound={notFound}
             >
           </ProtectedRoute>
           <ProtectedRoute path="/profile"
