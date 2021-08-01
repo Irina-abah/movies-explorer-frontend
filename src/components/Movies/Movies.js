@@ -13,7 +13,9 @@ function Movies(props) {
       <Header loggedIn={props.loggedIn}/>
       <SearchForm 
       onSubmit={props.onHandleSubmit} 
-      onChangeCheckbox={props.onChangeCheckbox} />
+      onChangeCheckbox={props.onChangeCheckbox} 
+      onChecked={props.onChecked}
+      onShowSearchedMovies={props.onShowSearchedMovies}/>
       { props.isLoading ? (<Preloader />) :
       <MoviesCardList 
       movies={props.movies}

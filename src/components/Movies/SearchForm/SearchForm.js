@@ -50,7 +50,10 @@ function SearchForm(props) {
         </button>
               
         </form>
-        <FilterCheckbox onToggleCheckbox={handleChangeCheckbox}/>
+        <FilterCheckbox 
+          onToggleCheckbox={handleChangeCheckbox} 
+          onChecked={props.onChecked}
+          onShowSearchedMovies={props.onShowSearchedMovies}/>
     </section>
   )
 };

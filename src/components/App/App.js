@@ -26,11 +26,10 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovie, setSavedMovie] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [input, setInput] = React.useState('');
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
-  const [toggle, setToggle] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
 
@@ -84,28 +83,32 @@ function App() {
     if (location.pathname === '/movies') {
       const allMovies = JSON.parse(localStorage.getItem('movies'));
       const searchedMovies = searchMovieByKeyword(allMovies, input)
-
-      setInput(input);
-      //  setIsLoading(true);
       setSearchedMovies(searchedMovies);
       localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
     } else if (location.pathname === '/saved-movies') {
       const moviesToSearch = savedMovies;
       const searchedSavedMovies = searchMovieByKeyword(moviesToSearch, input)
-
-      setInput(input);
       setSavedMovies(searchedSavedMovies)
     }
-    
   }
   
   function handleChangeCheckbox(evt) {
-    setToggle(!toggle);
+    setChecked(!checked);
+    
     const shortMovies = searchShortMovie(searchedMovies)
     setSearchedMovies(shortMovies)
     if (location.pathname === '/saved-movies') {
       const shortMovies = searchShortMovie(savedMovies)
       setSavedMovies(shortMovies)
+    }
+  }
+
+  function handleShowSearchedMovies() {
+    setChecked(!checked);
+    const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+    setSearchedMovies(searchedMovies);
+    if (location.pathname === '/saved-movies') {
+      getSaveMovies()
     }
   }
 
@@ -227,6 +230,8 @@ function handleUpdateUser(user) {
             onHandleSubmit={handleMovieSearchSubmit}
             onMovieDelete={handleDeleteMovieClick}
             onChangeCheckbox={handleChangeCheckbox}
+            onChecked={checked}
+            onShowSearchedMovies={handleShowSearchedMovies}
             // savedMovie={savedMovie}
             >
           </ProtectedRoute>
@@ -238,6 +243,7 @@ function handleUpdateUser(user) {
             onMovieDelete={handleDeleteMovieClick}
             onHandleSubmit={handleMovieSearchSubmit}
             onChangeCheckbox={handleChangeCheckbox}
+            onShowSearchedMovies={handleShowSearchedMovies}
             >
           </ProtectedRoute>
           <ProtectedRoute path="/profile"
