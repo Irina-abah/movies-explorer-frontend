@@ -7,11 +7,12 @@ function DisplayMovieCards() {
   React.useEffect(() => {
    function handleWindowResize() {
     setWindowWidth(window.innerWidth);
-   }
-   window.addEventListener("resize", handleWindowResize);
+   };
 
+   window.addEventListener("resize", handleWindowResize)
+   setTimeout(handleWindowResize, 2000)
     
-   return () => window.removeEventListener("resize", handleWindowResize);
+   return () => window.removeEventListener("resize", handleWindowResize)
   },[]);
 
   return { windowWidth };
