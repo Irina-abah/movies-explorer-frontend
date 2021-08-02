@@ -1,15 +1,38 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import {MOVIE_NOT_FOUND_MESSAGE} from '../../../utils/constants';
 import {SEARCH_ERROR_MESSAGE} from '../../../utils/constants';
+import DisplayMovieCards from '../../../utils/MoviesToDisplay';
 
 function MoviesCardList(props) {
 
-  const [visibleMovies, setVisibleMovies] = React.useState(3);
+  const [visibleMovies, setVisibleMovies] = React.useState(0);
+  const [moviesToLoad, setMoviesToLoad] = React.useState(0);
+  const { windowWidth } = DisplayMovieCards();
+  const location = useLocation();
+
+
+  React.useState(() => {
+    if (location.pathname === '/movies') {
+      if (windowWidth <= 480) {
+        setVisibleMovies(5);
+        setMoviesToLoad(2);
+      } else if (windowWidth <= 768) {
+        setVisibleMovies(8);
+        setMoviesToLoad(2);
+      } else if (windowWidth <= 1280) {
+        setVisibleMovies(12);
+        console.log(visibleMovies)
+        setMoviesToLoad(3);
+      } else {
+        setVisibleMovies(props.movies.length)
+      }
+    }
+  }, [windowWidth, location]);
 
   const handleShowMoreMovies = () => {
-    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 3)
+    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + moviesToLoad)
 }
 
   return (
