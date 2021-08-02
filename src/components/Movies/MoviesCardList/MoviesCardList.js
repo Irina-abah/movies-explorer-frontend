@@ -23,7 +23,6 @@ function MoviesCardList(props) {
         setMoviesToLoad(2);
       } else if (windowWidth <= 1280) {
         setVisibleMovies(12);
-        console.log(visibleMovies)
         setMoviesToLoad(3);
       } else {
         setVisibleMovies(props.movies.length)

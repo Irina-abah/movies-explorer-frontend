@@ -5,14 +5,22 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 function SearchForm(props) {
 
   const [keyword, setKeyword] = React.useState('');
+  const [error, setError] = React.useState('');
+  const [isFormValid, setIsFormValid] = React.useState(false);
 
   function handleChange(evt) {
     setKeyword(evt.target.value);
+    setError('Введите ключевое слово');
+    setIsFormValid(evt.target.closest('form').checkValidity());
   }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.onSubmit(keyword)
+    if (isFormValid) {
+      props.onSubmit(keyword)
+    } else {
+      setError('Введите ключевое слово');
+    }
   }
 
   function handleChangeCheckbox() {
@@ -38,14 +46,15 @@ function SearchForm(props) {
               minLength="2"
               maxLength="30"
               required />
-            {/* <span
-            className="input-error" 
-            id="search-error">Нужно ввести ключевое слово
-            </span> */}
+            <span
+            className={`input-error ${!isFormValid && "input-error_active"}`} 
+            // className="input-error"
+            id="search-error">{error}
+            </span>
           </div>
           <button 
           type="submit" 
-          className="button button_type_search"
+          className={`button button_type_search ${!isFormValid ? "button_type_search_disabled" : ""}`} 
           aria-label="search a movie">
         </button>
               

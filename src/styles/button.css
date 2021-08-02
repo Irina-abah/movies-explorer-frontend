@@ -53,6 +53,11 @@ box-shadow: none;
   background-color: #3456F3;
 }
 
+.button_type_search_disabled {
+  background-color: #EBEBEB;
+  pointer-events: none;
+}
+
 .button_type_account {
   font-size: 13px;
   line-height: 0.92;
