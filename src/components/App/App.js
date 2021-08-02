@@ -28,6 +28,7 @@ function App() {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isFailed, setIsFailed] = React.useState(false);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [checked, setChecked] = React.useState(false);
   const [notFound, setNotFound] = React.useState(false);
@@ -38,10 +39,12 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
+      setIsLoading(true)
 
       Promise.all([mainApi.getUserData(), allMoviesApi.getAllMovies()])
         .then(([myData, movieData]) => {
           // console.log(movieData)
+          setIsFailed(false)
           setMovies(movieData)
           setCurrentUser(myData)
           localStorage.setItem('movies',  JSON.stringify(movieData));
@@ -50,8 +53,10 @@ function App() {
           if (searchedMovies) {
             setSearchedMovies(searchedMovies)
           }
+          setIsLoading(false)
         })
         .catch((err) => {
+          setIsFailed(true)
           console.log(err);
         });
     }
@@ -60,15 +65,18 @@ function App() {
   // загрузка сохраненных фильмов
 
   function getSaveMovies() {
+    setIsLoading(true)
     return mainApi.getSavedMovies()
       .then((movies) => {
         console.log(movies)
+        setIsFailed(false)
         setSavedMovies(movies);
         localStorage.setItem('savedMovies', JSON.stringify(movies));
-        // setNotFoundMessage(movies);
+        setIsLoading(false)
         return movies
       })
       .catch((err) => {
+        setIsFailed(true)
         console.log(err)
       })
   }
@@ -84,19 +92,18 @@ function App() {
 
   function handleMovieSearchSubmit(input) {
     if (location.pathname === '/movies') {
-      // setIsLoading(true)
       const allMovies = JSON.parse(localStorage.getItem('movies'));
       const searchedMovies = searchMovieByKeyword(allMovies, input)
       localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
       setSearchedMovies(searchedMovies)
       setNotFoundMessage(searchedMovies)
-      // setIsLoading(false)
     } else if (location.pathname === '/saved-movies') {
+      setIsLoading(true)
       const savedMoviesList = JSON.parse(localStorage.getItem('savedMovies'));
       const searchedSavedMovies = searchMovieByKeyword(savedMoviesList, input)
-      console.log(input)
       setSavedMovies(searchedSavedMovies)
       setNotFoundMessage(searchedSavedMovies)
+      setIsLoading(false)
     }
   }
   
@@ -251,6 +258,7 @@ function handleDeleteMovieClick(movie) {
             onChecked={checked}
             onShowSearchedMovies={handleShowSearchedMovies}
             isLoading={isLoading}
+            isFailed={isFailed}
             onNotFound={notFound}
             // savedMovie={savedMovie}
             >
@@ -261,6 +269,8 @@ function handleDeleteMovieClick(movie) {
             movies={savedMovies}
             onChecked={checked}
             savedMovies={savedMovies}
+            isLoading={isLoading}
+            isFailed={isFailed}
             onMovieDelete={handleDeleteMovieClick}
             onHandleSubmit={handleMovieSearchSubmit}
             onChangeCheckbox={handleChangeCheckbox}
