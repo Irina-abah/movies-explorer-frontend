@@ -24,10 +24,8 @@ function App() {
     name: '',
     email: '',
   });
-  const [movies, setMovies] = React.useState([]);
   const [savedMovie, setSavedMovie] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [isRegistered, setIsRegistered] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFailed, setIsFailed] = React.useState(false);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
@@ -45,9 +43,7 @@ function App() {
 
       Promise.all([mainApi.getUserData(), allMoviesApi.getAllMovies()])
         .then(([myData, movieData]) => {
-          // console.log(movieData)
           setIsFailed(false)
-          setMovies(movieData)
           setCurrentUser(myData)
           localStorage.setItem('movies',  JSON.stringify(movieData));
         
@@ -60,8 +56,8 @@ function App() {
           setIsFailed(true)
           console.log(err);
         });
-    }
-  }, [loggedIn]);
+      }
+    }, [loggedIn]);
 
   // загрузка сохраненных фильмов
 
@@ -80,14 +76,14 @@ function App() {
         setIsFailed(true)
         console.log(err)
       })
-  }
+    };
 
   React.useEffect(() => {
     let jwt = localStorage.getItem('jwt');
-    if (jwt) {
+      if (jwt) {
       getSaveMovies()
-    }
-  }, [history]);
+      }
+    }, [history]);
 
   // поиск фильмов и фильтрация по чекбоксу
 
@@ -141,47 +137,45 @@ function App() {
 
   // проверка токена, авторизация и регистрация
 
-const handleLogin = ({email, password}) => {
-  return auth.authorize({email, password})
-  .then((data) => {
-      if (!data) throw new Error('Неверные имя пользователя или пароль')
-      if (data.token) {
-        setLoggedIn(true)
-        localStorage.setItem('jwt', data.token)
-        history.push('/movies')
-        setIsSuccess(true)
+  const handleLogin = ({email, password}) => {
+    return auth.authorize({email, password})
+      .then((data) => {
+        if (!data) throw new Error('Неверные имя пользователя или пароль')
+        if (data.token) {
+          setLoggedIn(true)
+          localStorage.setItem('jwt', data.token)
+          history.push('/movies')
+          setIsSuccess(true)
+          setInfoTooltipActive(true)
+          return data
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoggedIn(false)
+        setIsSuccess(false)
         setInfoTooltipActive(true)
-        return data
-      }
-  })
-  .catch((err) => {
-    console.log(err);
-    setLoggedIn(false)
-    setIsSuccess(false)
-    setInfoTooltipActive(true)
-  })
-};
+      })
+    };
 
   const handleRegister = ({name, email, password}) => {
       return auth.register({name, email, password})
       .then((res) => {
           if (res) {
               setIsSuccess(true)
-              setIsRegistered(true)
               handleLogin({email, password})
               setCurrentUser(true)
               setInfoTooltipActive(true)
               history.push('/movies')
               return res
           }
-      })
+        })
       .catch((err) => {
         console.log(err);
-        setIsRegistered(false)
         setIsSuccess(false)
         setInfoTooltipActive(true)
       });  
-  };
+    };
 
   React.useEffect(() => {
     if (localStorage.getItem('jwt')) {
@@ -189,12 +183,11 @@ const handleLogin = ({email, password}) => {
       auth.checkToken(jwt)
       .then((res) => {
           if (res) {
-              setLoggedIn(true)
-              // setCurrentUser(res)
-              history.push('/')
-              return res
+            setLoggedIn(true)
+            history.push('/')
+            return res
           }
-      })
+        })
       .catch((err) => console.log(err));
   }
   }, [history, loggedIn]);
@@ -203,77 +196,74 @@ const handleLogin = ({email, password}) => {
     localStorage.clear();
     history.push('/');
     setLoggedIn(false);
-    setMovies([]);
     setCurrentUser({});
   }
 
   // редактирование профиля пользователя
 
-function handleUpdateUser(user) {
-
-  mainApi.changeUserData(user)
-  .then((data) => {
-    setCurrentUser(data);
-    setInfoTooltipActive(true)
-    setIsSuccess(true)
-    
-  })
-  .catch((err) => {
-    console.log(err);
-    setIsSuccess(false)
-    setInfoTooltipActive(true)
-  });
-}
+  function handleUpdateUser(user) {
+    mainApi.changeUserData(user)
+    .then((data) => {
+      setCurrentUser(data);
+      setInfoTooltipActive(true)
+      setIsSuccess(true)
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsSuccess(false)
+      setInfoTooltipActive(true)
+    });
+  }
 
 // сохранение фильма в коллекцию 
 
-function handleSaveMovieClick(movie) {
-  console.log(movie)
-  mainApi.addMovie(movie)
-  .then((newMovie) => {
-    setSavedMovies([...savedMovies, newMovie]);
-    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-    setSavedMovie(newMovie)
-  })
-  .catch((err) => console.log(err));
-} 
+  function handleSaveMovieClick(movie) {
+    console.log(movie)
+    mainApi.addMovie(movie)
+    .then((newMovie) => {
+      setSavedMovies([...savedMovies, newMovie]);
+      localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+      setSavedMovie(newMovie)
+    })
+    .catch((err) => console.log(err));
+  } 
 
 // удаление фильма из коллекции
 
-function handleDeleteMovieClick(movie) {
-    mainApi.deleteMovie(movie._id || savedMovie._id)
-    .then(() => {
-      getSaveMovies()
-      .then((res) => {
-        let userMovies = []
-            res.forEach(movie => {
+  function handleDeleteMovieClick(movie) {
+      mainApi.deleteMovie(movie._id || savedMovie._id)
+      .then(() => {
+        getSaveMovies()
+        .then((res) => {
+          let userMovies = []
+              res.forEach(movie => {
                 userMovies.push(movie);
-            })
+              })
             setSavedMovies(userMovies)
-      })
-    })
-  .catch((err) => console.log(err)); 
-}
+          })
+        })
+      .catch((err) => console.log(err)); 
+    }
 
 // закрытие попапа со статусом события
 
-function closePopup() {
-  setInfoTooltipActive(false)
-}
+  function closePopup() {
+    setInfoTooltipActive(false)
+  }
 
-React.useEffect(() => {
-  function handleEscClose(evt) {
-    if (evt.key === 'Escape') {
-      closePopup();
+  React.useEffect(() => {
+    function handleEscClose(evt) {
+      if (evt.key === 'Escape') {
+        closePopup();
+      }
     }
-  }
 
-  document.addEventListener('keydown', handleEscClose);
+    document.addEventListener('keydown', handleEscClose);
 
-  return () => {
-    document.removeEventListener('keydown', handleEscClose);
-  }
-}, []);
+    return () => {
+      document.removeEventListener('keydown', handleEscClose);
+    }
+  }, []);
 
 
   return (

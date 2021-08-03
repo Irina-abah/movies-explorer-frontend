@@ -27,11 +27,9 @@ function Profile(props) {
     <section className="profile">
       <Header loggedIn={props.loggedIn}/>
       <form 
-      className="profile__info" 
-      name="profile" 
-      onSubmit={handleSubmit}
-      
-      >
+        className="profile__info" 
+        name="profile" 
+        onSubmit={handleSubmit}>
         <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
         <div className="profile__container">
           <div className="profile__container-item">
@@ -46,8 +44,7 @@ function Profile(props) {
               placeholder="Ваше имя"
               minLength="2" 
               maxLength="40" 
-              required 
-            />
+              required />
             <span 
                 className="profile__input-error" 
                 id="profile-name-error">{validation.errors.name}
@@ -74,9 +71,9 @@ function Profile(props) {
           </div> 
         </div> 
         <button 
-            type="submit" 
-            className={`button button_type_edit ${!validation.isFormValid ? "button_type_edit_disabled" : ""}`}>
-            Редактировать
+          type="submit" 
+          className={`button button_type_edit ${!validation.isFormValid ? "button_type_edit_disabled" : ""}`}>
+          Редактировать
         </button>
         <Link className="link profile__signout-link" to='/' onClick={props.onSignOut}>Выйти из аккаунта</Link>
       </form>

@@ -11,19 +11,19 @@ function Movies(props) {
     <main className="main movies">
       <Header loggedIn={props.loggedIn}/>
       <SearchForm 
-      onSubmit={props.onHandleSubmit} 
-      onChangeCheckbox={props.onChangeCheckbox} 
-      onChecked={props.onChecked}
-      onShowSearchedMovies={props.onShowSearchedMovies}/>
-      { props.isLoading ? <Preloader/> :
+        onSubmit={props.onHandleSubmit} 
+        onChangeCheckbox={props.onChangeCheckbox} 
+        onChecked={props.onChecked}
+        onShowSearchedMovies={props.onShowSearchedMovies}/>
+        { props.isLoading ? <Preloader/> :
       <MoviesCardList 
-      movies={props.movies}
-      onSaveClick={props.onSaveClick}
-      onMovieDelete={props.onMovieDelete}
-      savedMovies={props.savedMovies}
-      notFound={props.onNotFound}
-      isLoading={props.isLoading}
-      isFailed={props.isFailed}/> }
+        movies={props.movies}
+        onSaveClick={props.onSaveClick}
+        onMovieDelete={props.onMovieDelete}
+        savedMovies={props.savedMovies}
+        notFound={props.onNotFound}
+        isLoading={props.isLoading}
+        isFailed={props.isFailed}/> }
       <Footer/> 
     </main>
     

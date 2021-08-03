@@ -35,30 +35,30 @@ function SearchForm(props) {
         name="search" 
         onSubmit={handleSubmit}>
           <div className="search-form__block">
-          <img className="search-form__icon" src={Magnifier} alt="Иконка поиска" />
-          <div className="form-wrapper">
-            <input 
-              className="form-input search-form__input_type_movie"
-              type="text"
-              id="search"
-              name="movie-search"
-              onChange={handleChange}
-              placeholder="Фильм"
-              title="Нужно ввести ключевое слово"
-              minLength="2"
-              maxLength="30"
-              required />
-            <span
-            className={`input-error input-error_type_movie ${!isFormValid && "input-error_active"}`} 
-            id="search-error">{error}
-            </span>
-          </div>
+            <img className="search-form__icon" src={Magnifier} alt="Иконка поиска" />
+            <div className="form-wrapper">
+              <input 
+                className="form-input search-form__input_type_movie"
+                type="text"
+                id="search"
+                name="movie-search"
+                onChange={handleChange}
+                placeholder="Фильм"
+                title="Нужно ввести ключевое слово"
+                minLength="2"
+                maxLength="30"
+                required />
+              <span
+              className={`input-error input-error_type_movie ${!isFormValid && "input-error_active"}`} 
+              id="search-error">{error}
+              </span>
+            </div>
           </div>
           <button 
-          type="submit" 
-          className={`button button_type_search ${!isFormValid ? "button_type_search_disabled" : ""}`} 
-          aria-label="search a movie">
-        </button>
+            type="submit" 
+            className={`button button_type_search ${!isFormValid ? "button_type_search_disabled" : ""}`} 
+            aria-label="search a movie">
+          </button>
               
         </form>
         <FilterCheckbox 

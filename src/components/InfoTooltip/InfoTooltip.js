@@ -1,6 +1,7 @@
 import React from 'react';
 import successLogo from '../../images/success-icon.svg';
 import errorLogo from '../../images/error-icon.svg';
+import {SUCCESS_MESSAGE, FAILED_MESSAGE} from '../../utils/constants';
 
 function InfoTooltip(props) {
 
@@ -17,7 +18,7 @@ function InfoTooltip(props) {
           </button>
           <div className="popup__info">
             <img className="popup__info-status" src={props.isSuccess ? successLogo : errorLogo} alt="Статус события" />
-            <h2 className="popup__title">{props.isSuccess ? 'Успешно!' : 'Что-то пошло не так! Попробуйте еще раз.'}</h2>
+            <h2 className="popup__title">{props.isSuccess ? SUCCESS_MESSAGE : FAILED_MESSAGE}</h2>
           </div>
       </div>
   </div> 

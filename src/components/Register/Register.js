@@ -15,13 +15,13 @@ function Register(props) {
   return (
     <section className="login">
     <UserEntry
-    title="Добро пожаловать!"
-    buttonName="Зарегистрироваться"
-    message="Уже зарегистрированы?"
-    link="/signin"
-    linkName="Войти"
-    onSubmit={handleSubmit}
-    isFormValid={validation.isFormValid}>
+      title="Добро пожаловать!"
+      buttonName="Зарегистрироваться"
+      message="Уже зарегистрированы?"
+      link="/signin"
+      linkName="Войти"
+      onSubmit={handleSubmit}
+      isFormValid={validation.isFormValid}>
       <div className="user-entry__container">
         <label className="user-entry__lable" htmlFor="profile-name">Имя</label>
         <input 

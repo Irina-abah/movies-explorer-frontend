@@ -9,24 +9,23 @@ function UserEntry(props) {
         <img className="header__logo" src={logoPath} alt="Movies portal logo" />
       </Link>
       <form 
-      className="user-entry__info" 
-      name="user-entry" 
-      onSubmit={props.onSubmit}
-      >
-        <h2 className="user-entry__title">{props.title}</h2>
-        <div className="profile__container">
-         {props.children}
-        </div>
-        <button 
-        type="submit" 
-        className={`button button_type_sign ${!props.isFormValid ? "button_type_sign_disabled" : ""}`}>
-        {props.buttonName}
-        </button>
-        <p className="user-entry__message">
+        className="user-entry__info" 
+        name="user-entry" 
+        onSubmit={props.onSubmit}>
+          <h2 className="user-entry__title">{props.title}</h2>
+          <div className="profile__container">
+            {props.children}
+          </div>
+          <button 
+            type="submit" 
+            className={`button button_type_sign ${!props.isFormValid ? "button_type_sign_disabled" : ""}`}>
+            {props.buttonName}
+          </button>
+          <p className="user-entry__message">
           {props.message} 
-        <Link to={props.link} className="link user-entry__link">
-          {props.linkName}
-        </Link>
+          <Link to={props.link} className="link user-entry__link">
+            {props.linkName}
+          </Link>
         </p>
       </form>
     </div>

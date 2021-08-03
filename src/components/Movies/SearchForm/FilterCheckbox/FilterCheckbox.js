@@ -18,7 +18,7 @@ function FilterCheckbox(props) {
           name="short-movie"
           checked={props.onChecked}
           onChange={handleCheck}/>
-          <label className="search-form__filter-name" htmlFor="short-movie">Короткометражки</label>
+        <label className="search-form__filter-name" htmlFor="short-movie">Короткометражки</label>
       </div>
       </div>
   )

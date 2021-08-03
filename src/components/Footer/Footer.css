@@ -6,7 +6,7 @@
   justify-content: space-between;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 79px 0 20px;
+  padding: 79px 70px 20px;
   background-color: #F8F8F8;
 }
 
@@ -52,9 +52,8 @@
 @media screen and (max-width: 1023px) {
 
   .footer {
-    padding: 79px 0 20px;
+    padding: 79px 50px 20px;
     background-color: #FAFAFA;
-    ;
   } 
    
 }
