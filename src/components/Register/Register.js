@@ -1,25 +1,15 @@
 import React from 'react';
 import UserEntry from '../UserEntry/UserEntry';
+import {useFormValidation} from '../../utils/ValidateForm';
 
 function Register(props) {
 
-  const [userData, setUserData] = React.useState({
-    name: '',
-    email: '',
-    password: ''
-  });
-
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setUserData({
-      ...userData,
-      [name]: value
-    })
-  }
+  const validation = useFormValidation();
+  const {name, email, password} = validation.values;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.onRegister(userData)
+    props.onRegister({name, email, password})
   }
 
   return (
@@ -30,7 +20,8 @@ function Register(props) {
     message="Уже зарегистрированы?"
     link="/signin"
     linkName="Войти"
-    onSubmit={handleSubmit}>
+    onSubmit={handleSubmit}
+    isFormValid={validation.isFormValid}>
       <div className="user-entry__container">
         <label className="user-entry__lable" htmlFor="profile-name">Имя</label>
         <input 
@@ -38,15 +29,15 @@ function Register(props) {
         className="form-input form__input_type_sign" 
         id="profile-name"
         name="name"
-        value={userData.name}
-        onChange={handleChange}
+        value={validation.values.name || ''}
+        onChange={validation.handleChange}
         minLength="2" 
         maxLength="40" 
         required />
       </div>
       <span 
-        className="input-error" 
-        id="profile-name-error">
+        className={`input-error ${!validation.isFormValid && "input-error_active"}`} 
+        id="profile-name-error">{validation.errors.name}
       </span>
       <div className="user-entry__container">
         <label className="user-entry__lable" htmlFor="email">E-mail</label>
@@ -55,15 +46,15 @@ function Register(props) {
           className="form-input form__input_type_sign" 
           id="email"
           name="email" 
-          value={userData.email}
-          onChange={handleChange}
+          value={validation.values.email || ''}
+          onChange={validation.handleChange}
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           title="Введите Ваш email" 
           required />
       </div>
       <span 
-      className="input-error" 
-      id="email-error">
+      className={`input-error ${!validation.isFormValid && "input-error_active"}`} 
+      id="email-error">{validation.errors.email}
       </span>
       <div className="user-entry__container">
         <label className="user-entry__lable" htmlFor="password">Пароль</label>
@@ -72,15 +63,15 @@ function Register(props) {
           className="form-input form__input_type_sign" 
           id="password"
           name="password"
-          value={userData.password}
-          onChange={handleChange}
+          value={validation.values.password || ''}
+          onChange={validation.handleChange}
           minLength="10"
           title="Введите Ваш пароль" 
           required />
       </div>
       <span 
-        className="input-error" 
-        id="password-error">error example
+        className={`input-error ${!validation.isFormValid && "input-error_active"}`}
+        id="password-error">{validation.errors.password}
       </span>
     </UserEntry>
     </section>

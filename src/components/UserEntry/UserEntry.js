@@ -2,6 +2,7 @@ import logoPath from '../../images/logo.svg';
 import { Link } from "react-router-dom";
 
 function UserEntry(props) {
+
   return (
     <div className="user-entry">
       <Link to="/" className="header__link">
@@ -10,14 +11,15 @@ function UserEntry(props) {
       <form 
       className="user-entry__info" 
       name="user-entry" 
-      onSubmit={props.onSubmit}>
+      onSubmit={props.onSubmit}
+      >
         <h2 className="user-entry__title">{props.title}</h2>
         <div className="profile__container">
          {props.children}
         </div>
         <button 
         type="submit" 
-        className="button button_type_sign">
+        className={`button button_type_sign ${!props.isFormValid ? "button_type_sign_disabled" : ""}`}>
         {props.buttonName}
         </button>
         <p className="user-entry__message">

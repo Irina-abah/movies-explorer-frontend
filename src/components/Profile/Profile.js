@@ -2,34 +2,25 @@ import React from 'react';
 import Header from '../Header/Header';
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import {useFormValidation} from '../../utils/ValidateForm';
 
 function Profile(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
+  const validation = useFormValidation();
+
+  const {name, email} = validation.values;
 
   React.useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
+      validation.setValues({
+        name: currentUser.name, 
+        email: currentUser.email})
   }, [currentUser]);
-
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-
-  function handleNameChange(evt) {
-    setName(evt.target.value)
-  }
-
-  function handleDescriptionChange(evt) {
-    setEmail(evt.target.value)
-  }
+  
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
-    props.onUpdateUser({
-        name: name,
-        email: email,
-      });
+    props.onUpdateUser({ name, email});
 }
 
   return (
@@ -38,7 +29,9 @@ function Profile(props) {
       <form 
       className="profile__info" 
       name="profile" 
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+      
+      >
         <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
         <div className="profile__container">
           <div className="profile__container-item">
@@ -48,8 +41,8 @@ function Profile(props) {
               className="form-input form__input_type_profile" 
               id="profile-name"
               name="name"
-              value={name || ""} 
-              onChange={handleNameChange}
+              value={validation.values.name || ""} 
+              onChange={validation.handleChange}
               placeholder="Ваше имя"
               minLength="2" 
               maxLength="40" 
@@ -57,7 +50,7 @@ function Profile(props) {
             />
             <span 
                 className="profile__input-error" 
-                id="profile-name-error">error example
+                id="profile-name-error">{validation.errors.name}
             </span>
           </div>
           <div className="profile__container-item">
@@ -67,8 +60,8 @@ function Profile(props) {
               className="form-input form__input_type_profile" 
               id="profile-email"
               name="email" 
-              value={email || ""} 
-              onChange={handleDescriptionChange}
+              value={validation.values.email || ""} 
+              onChange={validation.handleChange}
               placeholder="Ваш e-mail"
               minLength="2" 
               maxLength="40" 
@@ -76,13 +69,13 @@ function Profile(props) {
             />
             <span 
                 className="profile__input-error" 
-                id="profile-email-error">
+                id="profile-email-error">{validation.errors.email}
             </span>
           </div> 
         </div> 
         <button 
             type="submit" 
-            className="button button_type_edit">
+            className={`button button_type_edit ${!validation.isFormValid ? "button_type_edit_disabled" : ""}`}>
             Редактировать
         </button>
         <Link className="link profile__signout-link" to='/' onClick={props.onSignOut}>Выйти из аккаунта</Link>

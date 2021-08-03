@@ -1,6 +1,7 @@
 import React from 'react';
 import Magnifier from '../../../images/search-icon-grey.svg';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
+import {SEARCH_VALIDATE_MESSAGE} from '../../../utils/constants';
 
 function SearchForm(props) {
 
@@ -10,7 +11,7 @@ function SearchForm(props) {
 
   function handleChange(evt) {
     setKeyword(evt.target.value);
-    setError('Введите ключевое слово');
+    setError(SEARCH_VALIDATE_MESSAGE);
     setIsFormValid(evt.target.closest('form').checkValidity());
   }
 
@@ -19,7 +20,7 @@ function SearchForm(props) {
     if (isFormValid) {
       props.onSubmit(keyword)
     } else {
-      setError('Введите ключевое слово');
+      setError(SEARCH_VALIDATE_MESSAGE);
     }
   }
 
@@ -48,7 +49,6 @@ function SearchForm(props) {
               required />
             <span
             className={`input-error ${!isFormValid && "input-error_active"}`} 
-            // className="input-error"
             id="search-error">{error}
             </span>
           </div>
