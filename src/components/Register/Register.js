@@ -26,7 +26,7 @@ function Register(props) {
         <label className="user-entry__lable" htmlFor="profile-name">Имя</label>
         <input 
         type="text" 
-        className="form-input form__input_type_sign" 
+        className={`form-input form__input_type_sign ${!validation.validity.name && "form-input-error"}`}
         id="profile-name"
         name="name"
         value={validation.values.name || ''}
@@ -43,7 +43,7 @@ function Register(props) {
         <label className="user-entry__lable" htmlFor="email">E-mail</label>
         <input 
           type="email" 
-          className="form-input form__input_type_sign" 
+          className={`form-input form__input_type_sign ${!validation.validity.email && "form-input-error"}`} 
           id="email"
           name="email" 
           value={validation.values.email || ''}
@@ -60,7 +60,7 @@ function Register(props) {
         <label className="user-entry__lable" htmlFor="password">Пароль</label>
         <input 
           type="password" 
-          className="form-input form__input_type_sign" 
+          className={`form-input form__input_type_sign ${!validation.validity.password && "form-input-error"}`} 
           id="password"
           name="password"
           value={validation.values.password || ''}

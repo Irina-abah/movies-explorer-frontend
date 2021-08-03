@@ -38,7 +38,7 @@ function Profile(props) {
             <label className="profile__lable" htmlFor="profile-name">Имя</label>
             <input 
               type="text" 
-              className="form-input form__input_type_profile" 
+              className={`form-input form__input_type_profile ${!validation.validity.name && "form-input-error"}`} 
               id="profile-name"
               name="name"
               value={validation.values.name || ""} 
@@ -57,7 +57,7 @@ function Profile(props) {
             <label className="profile__lable" htmlFor="profile-email">E-mail</label>
             <input 
               type="email" 
-              className="form-input form__input_type_profile" 
+              className={`form-input form__input_type_profile ${!validation.validity.email && "form-input-error"}`} 
               id="profile-email"
               name="email" 
               value={validation.values.email || ""} 

@@ -9,6 +9,10 @@
   border-radius: 2px;
 }
 
+.form-input-error {
+  color: #EE3465;
+}
+
 .input-error {
   font-size: 10px;
   line-height: 1.21;
@@ -17,6 +21,10 @@
   margin: 6px 0 6px;
   height: 12px;
   display: none;
+}
+
+.input-error_type_movie {
+  margin: 0;
 }
 
 .input-error_active {

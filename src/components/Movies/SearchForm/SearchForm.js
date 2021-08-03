@@ -34,6 +34,7 @@ function SearchForm(props) {
         className="search-form__container" 
         name="search" 
         onSubmit={handleSubmit}>
+          <div className="search-form__block">
           <img className="search-form__icon" src={Magnifier} alt="Иконка поиска" />
           <div className="form-wrapper">
             <input 
@@ -48,9 +49,10 @@ function SearchForm(props) {
               maxLength="30"
               required />
             <span
-            className={`input-error ${!isFormValid && "input-error_active"}`} 
+            className={`input-error input-error_type_movie ${!isFormValid && "input-error_active"}`} 
             id="search-error">{error}
             </span>
+          </div>
           </div>
           <button 
           type="submit" 
