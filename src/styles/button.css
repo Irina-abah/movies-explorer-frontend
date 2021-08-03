@@ -113,6 +113,17 @@ box-shadow: none;
   display: none;
 }
 
+.button_type_close-popup {
+  background: url(../images/close-icon.svg) center no-repeat;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  padding: 0;
+  margin: 0;
+}
+
 @media screen and (max-width: 767px) {
 
   .button_type_more {

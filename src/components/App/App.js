@@ -7,6 +7,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -32,6 +33,8 @@ function App() {
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [checked, setChecked] = React.useState(false);
   const [notFound, setNotFound] = React.useState(false);
+  const [isInfoTooltipActive, setInfoTooltipActive] = React.useState(false);
+  const [isSuccess, setIsSuccess] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
 
@@ -148,8 +151,16 @@ const handleLogin = ({email, password}) => {
         setLoggedIn(true)
         localStorage.setItem('jwt', data.token)
         history.push('/movies')
+        setIsSuccess(true)
+        setInfoTooltipActive(true)
         return data
       }
+  })
+  .catch((err) => {
+    console.log(err);
+    setLoggedIn(false)
+    setIsSuccess(false)
+    setInfoTooltipActive(true)
   })
 };
 
@@ -157,9 +168,10 @@ const handleLogin = ({email, password}) => {
       return auth.register({name, email, password})
       .then((res) => {
           if (res) {
+              setIsSuccess(true)
               setIsRegistered(true)
               setCurrentUser(true)
-              // setInfoTooltipActive(true)
+              setInfoTooltipActive(true)
               history.push('/movies')
               return res
           }
@@ -167,7 +179,8 @@ const handleLogin = ({email, password}) => {
       .catch((err) => {
         console.log(err);
         setIsRegistered(false)
-        // setInfoTooltipActive(true)
+        setIsSuccess(false)
+        setInfoTooltipActive(true)
       });  
   };
 
@@ -202,9 +215,14 @@ function handleUpdateUser(user) {
   mainApi.changeUserData(user)
   .then((data) => {
     setCurrentUser(data);
+    setInfoTooltipActive(true)
+    setIsSuccess(true)
+    
   })
   .catch((err) => {
     console.log(err);
+    setIsSuccess(false)
+    setInfoTooltipActive(true)
   });
 }
 
@@ -237,6 +255,26 @@ function handleDeleteMovieClick(movie) {
     })
   .catch((err) => console.log(err)); 
 }
+
+// закрытие попапа со статусом события
+
+function closePopup() {
+  setInfoTooltipActive(false)
+}
+
+React.useEffect(() => {
+  function handleEscClose(evt) {
+    if (evt.key === 'Escape') {
+      closePopup();
+    }
+  }
+
+  document.addEventListener('keydown', handleEscClose);
+
+  return () => {
+    document.removeEventListener('keydown', handleEscClose);
+  }
+}, []);
 
 
   return (
@@ -296,6 +334,11 @@ function handleDeleteMovieClick(movie) {
             <PageNotFound />
           </Route>
         </Switch>
+        <InfoTooltip 
+          isOpen={isInfoTooltipActive} 
+          onClose={closePopup} 
+          isSuccess={isSuccess} 
+        />
       </div>
     </CurrentUserContext.Provider>
   );
