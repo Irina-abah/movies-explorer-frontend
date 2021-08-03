@@ -42,7 +42,6 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      setIsLoading(true)
 
       Promise.all([mainApi.getUserData(), allMoviesApi.getAllMovies()])
         .then(([myData, movieData]) => {
@@ -56,7 +55,6 @@ function App() {
           if (searchedMovies) {
             setSearchedMovies(searchedMovies)
           }
-          setIsLoading(false)
         })
         .catch((err) => {
           setIsFailed(true)
@@ -170,6 +168,7 @@ const handleLogin = ({email, password}) => {
           if (res) {
               setIsSuccess(true)
               setIsRegistered(true)
+              handleLogin({email, password})
               setCurrentUser(true)
               setInfoTooltipActive(true)
               history.push('/movies')

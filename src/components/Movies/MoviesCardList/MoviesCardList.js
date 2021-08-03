@@ -28,7 +28,7 @@ function MoviesCardList(props) {
         setVisibleMovies(props.movies.length)
       }
     }
-  }, [windowWidth, location]);
+  }, [windowWidth, location, props.movies.length]);
 
   const handleShowMoreMovies = () => {
     setVisibleMovies(prevVisibleMovies => prevVisibleMovies + moviesToLoad)
