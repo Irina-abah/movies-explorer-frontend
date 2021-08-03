@@ -73,6 +73,7 @@
 
   .user-entry {
     text-align: center;
+    margin: 0 auto;
   }
 
   .user-entry__message {
