@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, useHistory, Redirect, useLocation } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -166,7 +166,7 @@ function App() {
               handleLogin({email, password})
               setCurrentUser(true)
               setInfoTooltipActive(true)
-              history.push('/movies')
+              // history.push('/signin')
               return res
           }
         })
@@ -184,7 +184,7 @@ function App() {
       .then((res) => {
           if (res) {
             setLoggedIn(true)
-            history.push('/')
+            history.push('/movies')
             return res
           }
         })
@@ -271,7 +271,8 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/">
-            {!loggedIn ? <Main /> : <Redirect to="/movies" />}
+            <Main 
+            loggedIn={loggedIn}/>
           </Route>
           <ProtectedRoute path="/movies"
             component={Movies}
