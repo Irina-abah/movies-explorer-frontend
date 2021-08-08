@@ -1,4 +1,9 @@
 .navigation {
   width: 100%;
-  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navigation__logged {
+  display: block;
 }

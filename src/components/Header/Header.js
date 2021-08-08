@@ -3,11 +3,13 @@ import logoPath from '../../images/logo.svg';
 import { Link, Route, useLocation } from "react-router-dom";
 import Navigation from '../Header/Navigation/Navigation';
 import Menu from '../Header/Menu/Menu';
+import DisplayMovieCards from '../../utils/MoviesToDisplay';
 // import Account from '../Profile/Acount/Account';
 
 function Header(props) {
 
   const location = useLocation();
+  const { windowWidth } = DisplayMovieCards();
 
   const [isMenuOpen, setMenuOpen] = React.useState(false);
 
@@ -25,8 +27,17 @@ function Header(props) {
       </Link>
       <Route exact path="/">
         <Navigation loggedIn={props.loggedIn}/>
-        <button className="button button_type_burger" type='button' aria-label='меню' onClick={toggleMenu} alt="Mobile menu icon">
-        </button>
+          {(windowWidth < 769) && props.loggedIn &&
+            <>
+              <button 
+                className="button button_type_burger" 
+                type='button' 
+                aria-label='меню' 
+                onClick={toggleMenu} 
+                alt="Mobile menu icon">
+              </button>
+            </>
+          }
       </Route>
       <Route path={ ["/movies", "/saved-movies", "/profile"] } >
       <Navigation

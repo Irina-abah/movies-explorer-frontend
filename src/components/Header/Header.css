@@ -12,7 +12,12 @@
 
 .header__main {
   background-color: #DDDEE3;
-  padding: 0;
+  padding: 0 70px;
+}
+
+.header_auth {
+  display: flex;
+  justify-content: space-between;
 }
 
 .header__logo {
@@ -126,9 +131,9 @@
     padding: 0 50px;
   }
 
-  .header__authorized {
+  /* .header__authorized {
     padding: 0;
-  }
+  } */
 
 }
 
@@ -138,9 +143,9 @@
     padding: 0 30px;
   }
 
-  .header__authorized {
+  /* .header__authorized {
     padding: 0;
-  }
+  } */
 
   .header__link {
     font-size: 10px;
