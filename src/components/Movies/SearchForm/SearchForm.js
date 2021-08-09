@@ -45,7 +45,7 @@ function SearchForm(props) {
                 onChange={handleChange}
                 placeholder="Фильм"
                 title="Нужно ввести ключевое слово"
-                minLength="2"
+                minLength="1"
                 maxLength="30"
                 required />
               <span

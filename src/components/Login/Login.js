@@ -48,7 +48,7 @@ function Login(props) {
           name="password"
           value={validation.values.password || ''}
           onChange={validation.handleChange} 
-          minLength="10"
+          minLength="8"
           title="Введите Ваш пароль" 
           required 
         />

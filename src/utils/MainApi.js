@@ -25,7 +25,10 @@ export class MainApi {
 
   getUserData() {
     return fetch(`${this._address}/users/me`, {
-      headers: this._headers
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      }
     })
     .then(res => {
       return this._checkResponse(res)
@@ -82,8 +85,8 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  address: "https://api.movie-portal.nomoredomains.monster",
-  // address: "http://localhost:3005",
+  // address: "https://api.movie-portal.nomoredomains.monster",
+  address: "http://localhost:3005",
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json"

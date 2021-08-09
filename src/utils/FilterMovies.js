@@ -1,3 +1,5 @@
+import {SHORT_MOVIE_DURATION} from '../utils/constants';
+
 function searchMovieByKeyword(movies, input) {
   const searchedMovies = movies.filter(movie => {
     return movie.nameRU.toLowerCase().includes(input.toLowerCase())
@@ -8,7 +10,7 @@ function searchMovieByKeyword(movies, input) {
 
   function searchShortMovie(movies) {
     const shortMovies = movies.filter((item) => {
-        return item.duration < 40;
+        return item.duration < SHORT_MOVIE_DURATION;
     });
 
     return shortMovies

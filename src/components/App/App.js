@@ -40,11 +40,12 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-
+      // debugger;
       Promise.all([mainApi.getUserData(), allMoviesApi.getAllMovies()])
         .then(([myData, movieData]) => {
           setIsFailed(false)
           setCurrentUser(myData)
+          console.log(myData)
           localStorage.setItem('movies',  JSON.stringify(movieData));
         
           const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
@@ -65,7 +66,6 @@ function App() {
     setIsLoading(true)
     return mainApi.getSavedMovies()
       .then((movies) => {
-        console.log(movies)
         setIsFailed(false)
         setSavedMovies(movies);
         localStorage.setItem('savedMovies', JSON.stringify(movies));
@@ -164,9 +164,7 @@ function App() {
           if (res) {
               setIsSuccess(true)
               handleLogin({email, password})
-              setCurrentUser(true)
               setInfoTooltipActive(true)
-              // history.push('/signin')
               return res
           }
         })
@@ -184,6 +182,7 @@ function App() {
       .then((res) => {
           if (res) {
             setLoggedIn(true)
+            setCurrentUser(res)
             history.push('/movies')
             return res
           }
