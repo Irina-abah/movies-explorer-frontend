@@ -86,7 +86,13 @@ function App() {
             setLoggedIn(true)
             setCurrentUser(res)
             console.log(currentUser)
-            history.push('/movies')
+            if (location.pathname === '/movies') {
+              history.push('/movies')
+            } else if (location.pathname === '/profile') {
+              history.push('/profile')
+            } else if (location.pathname === '/saved-movies') {
+              history.push('/saved-movies')
+            }
             return res
           }
         })
