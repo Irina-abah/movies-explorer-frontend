@@ -16,7 +16,6 @@ export class MainApi {
 
   getSavedMovies() {
     return fetch(`${this._address}/movies`, {
-      // headers: this._headers
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -42,7 +41,6 @@ export class MainApi {
   changeUserData(data) {
     return fetch(`${this._address}/users/me`, {
       method: 'PATCH',
-      // headers: this._headers,
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -60,7 +58,6 @@ export class MainApi {
   addMovie(data) {
     return fetch(`${this._address}/movies`, {
       method: 'POST',
-      // headers: this._headers,
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -87,7 +84,6 @@ export class MainApi {
   deleteMovie(movie) {
     return fetch(`${this._address}/movies/${movie}`, {
       method: 'DELETE',
-      // headers: this._headers
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -101,8 +97,8 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  // address: "https://api.movie-portal.nomoredomains.monster",
-  address: "http://localhost:3005",
+  address: "https://api.movie-portal.nomoredomains.monster",
+  // address: "http://localhost:3005",
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json"

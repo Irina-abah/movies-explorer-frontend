@@ -96,7 +96,7 @@ function App() {
         })
       .catch((err) => console.log(err));
     }
-  }, [history, loggedIn]);
+  }, [history, loggedIn, location.pathname]);
 
   function handleSignOut() {
     localStorage.clear();
