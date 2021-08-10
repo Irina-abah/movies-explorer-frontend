@@ -65,7 +65,6 @@ function App() {
           if (res) {
               setIsSuccess(true)
               handleLogin({email, password})
-              // history push('/signin')
               setInfoTooltipActive(true)
               return res
           }
@@ -173,21 +172,21 @@ function App() {
 
   // загрузка сохраненных фильмов
 
-  function getSaveMovies() {
-      setIsLoading(true)
-      return mainApi.getSavedMovies()
-        .then((movies) => {
-            setIsFailed(false)
-            setSavedMovies(movies);
-            localStorage.setItem('savedMovies', JSON.stringify(movies));
-            setIsLoading(false)
-            return movies
-          })
-          .catch((err) => {
-            setIsFailed(true)
-            console.log(err)
-          }) 
-    }
+  // function getSaveMovies() {
+  //     setIsLoading(true)
+  //     return mainApi.getSavedMovies()
+  //       .then((movies) => {
+  //           setIsFailed(false)
+  //           setSavedMovies(movies);
+  //           localStorage.setItem('savedMovies', JSON.stringify(movies));
+  //           setIsLoading(false)
+  //           return movies
+  //         })
+  //         .catch((err) => {
+  //           setIsFailed(true)
+  //           console.log(err)
+  //         }) 
+  //   }
 
 
   // поиск фильмов и фильтрация по чекбоксу
@@ -230,7 +229,15 @@ function App() {
     setSearchedMovies(searchedMovies);
     setNotFoundMessage(searchedMovies);
     if (location.pathname === '/saved-movies') {
-      getSaveMovies()
+      // getSaveMovies()
+      mainApi.getSavedMovies()
+      .then((movies) => {
+        const userSavedMovies = movies.filter((movie) => {
+          return movie.owner === currentUser._id
+        })
+        setSavedMovies(userSavedMovies)
+      })
+      .catch((err) => console.log(err))
     }
   }
 
@@ -275,14 +282,14 @@ function App() {
   function handleDeleteMovieClick(movie) {
       mainApi.deleteMovie(movie._id || savedMovie._id)
       .then(() => {
-        getSaveMovies()
-        .then((res) => {
-          let userMovies = []
-              res.forEach(movie => {
-                userMovies.push(movie);
-              })
-            setSavedMovies(userMovies)
+        mainApi.getSavedMovies()
+        .then((movies) => {
+          const userSavedMovies = movies.filter((movie) => {
+            return movie.owner === currentUser._id
           })
+          setSavedMovies(userSavedMovies)
+          })
+        .catch((err) => console.log(err))
         })
       .catch((err) => console.log(err)); 
     }
