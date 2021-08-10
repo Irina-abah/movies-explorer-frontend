@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from '../Header/Header';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import SearchForm from '../Movies/SearchForm/SearchForm';
@@ -5,6 +6,7 @@ import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
 
 function SavedMovies(props) {
+
   return (
     <section className="main movies">
       <Header loggedIn={props.loggedIn}/>

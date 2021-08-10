@@ -16,7 +16,11 @@ export class MainApi {
 
   getSavedMovies() {
     return fetch(`${this._address}/movies`, {
-      headers: this._headers
+      // headers: this._headers
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      }
     })
     .then((res) => {
       return this._checkResponse(res)
@@ -38,7 +42,11 @@ export class MainApi {
   changeUserData(data) {
     return fetch(`${this._address}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      // headers: this._headers,
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
       body: JSON.stringify({
         name: data.name,
         email: data.email
@@ -52,7 +60,11 @@ export class MainApi {
   addMovie(data) {
     return fetch(`${this._address}/movies`, {
       method: 'POST',
-      headers: this._headers,
+      // headers: this._headers,
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
       body: JSON.stringify({
         country: data.country,  
         director: data.director,
@@ -75,7 +87,11 @@ export class MainApi {
   deleteMovie(movie) {
     return fetch(`${this._address}/movies/${movie}`, {
       method: 'DELETE',
-      headers: this._headers
+      // headers: this._headers
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
     })
     .then((res) => {
       return this._checkResponse(res)
