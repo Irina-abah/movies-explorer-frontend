@@ -63,6 +63,11 @@
   background-color: #EBEBEB;
 }
 
+input[type="checkbox"]:focus{
+  outline: 0;
+  border-radius: 30px;
+}
+
 @media screen and (max-width: 1023px) {
 
   .search-form__filter-elements {

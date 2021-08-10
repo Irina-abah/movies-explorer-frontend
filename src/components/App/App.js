@@ -36,7 +36,7 @@ function App() {
   const history = useHistory();
   const location = useLocation();
 
-  // проверка токена, авторизация и регистрация
+  // авторизация, регистрация, проверка токена и выход из аккаунта
 
   const handleLogin = ({email, password}) => {
     return auth.authorize({email, password})
@@ -84,7 +84,6 @@ function App() {
           if (res) {
             setLoggedIn(true)
             setCurrentUser(res)
-            console.log(currentUser)
             if (location.pathname === '/movies') {
               history.push('/movies')
             } else if (location.pathname === '/profile') {
@@ -96,7 +95,7 @@ function App() {
           }
         })
       .catch((err) => console.log(err));
-  }
+    }
   }, [history, loggedIn]);
 
   function handleSignOut() {
@@ -107,29 +106,6 @@ function App() {
   }
 
   // загрузка всех фильмов и данных пользователя
-
-  // React.useEffect(() => {
-  //   let jwt = localStorage.getItem('jwt');
-  //   if (jwt) {
-  //     Promise.all([mainApi.getUserData(), allMoviesApi.getAllMovies()])
-  //       .then(([myData, movieData]) => {
-  //         setIsFailed(false)
-  //         setCurrentUser(myData)
-  //         console.log(currentUser._id)
-  //         localStorage.setItem('movies',  JSON.stringify(movieData));
-        
-  //         const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
-  //         if (searchedMovies) {
-  //           setSearchedMovies(searchedMovies)
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         setIsFailed(true)
-  //         console.log(err);
-  //       });
-  //       getSaveMovies()
-  //     }
-  //   }, [loggedIn]);
 
   React.useEffect(() => {
     let jwt = localStorage.getItem('jwt');
@@ -148,20 +124,18 @@ function App() {
         console.log(err);
       })
     }
-  })
+  }, [loggedIn]);
 
   React.useEffect(() => {
     if (loggedIn) {
       Promise.all([mainApi.getUserData(), mainApi.getSavedMovies()])
         .then(([myData, savedMovieData]) => {
           setIsFailed(false)
-    
           const userSavedMovies = savedMovieData.filter((movie) => {
             return movie.owner === currentUser._id
           })
           setSavedMovies(userSavedMovies)
-          setCurrentUser(myData)
-          
+          setCurrentUser(myData) 
         })
         .catch((err) => {
           setIsFailed(true)
@@ -169,25 +143,6 @@ function App() {
         });
       }
     }, [loggedIn, currentUser._id]);
-
-  // загрузка сохраненных фильмов
-
-  // function getSaveMovies() {
-  //     setIsLoading(true)
-  //     return mainApi.getSavedMovies()
-  //       .then((movies) => {
-  //           setIsFailed(false)
-  //           setSavedMovies(movies);
-  //           localStorage.setItem('savedMovies', JSON.stringify(movies));
-  //           setIsLoading(false)
-  //           return movies
-  //         })
-  //         .catch((err) => {
-  //           setIsFailed(true)
-  //           console.log(err)
-  //         }) 
-  //   }
-
 
   // поиск фильмов и фильтрация по чекбоксу
 
@@ -198,13 +153,10 @@ function App() {
       localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
       setSearchedMovies(searchedMovies)
       setNotFoundMessage(searchedMovies)
-      setNotFoundMessage(searchedMovies)
     } else if (location.pathname === '/saved-movies') {
       setIsLoading(true)
-      const savedMoviesList = JSON.parse(localStorage.getItem('savedMovies'));
-      const searchedSavedMovies = searchMovieByKeyword(savedMoviesList, input)
+      const searchedSavedMovies = searchMovieByKeyword(savedMovies, input)
       setSavedMovies(searchedSavedMovies)
-      setNotFoundMessage(searchedSavedMovies)
       setNotFoundMessage(searchedSavedMovies)
       setIsLoading(false)
     }
@@ -225,11 +177,11 @@ function App() {
 
   function handleShowSearchedMovies() {
     setChecked(!checked);
+
     const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
     setSearchedMovies(searchedMovies);
     setNotFoundMessage(searchedMovies);
     if (location.pathname === '/saved-movies') {
-      // getSaveMovies()
       mainApi.getSavedMovies()
       .then((movies) => {
         const userSavedMovies = movies.filter((movie) => {
@@ -268,31 +220,30 @@ function App() {
 // сохранение фильма в коллекцию 
 
   function handleSaveMovieClick(movie) {
-      mainApi.addMovie(movie)
-      .then((newMovie) => {
-        setSavedMovies([...savedMovies, newMovie]);
-        // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-        setSavedMovie(newMovie)
-      })
-      .catch((err) => console.log(err));
+    mainApi.addMovie(movie)
+    .then((newMovie) => {
+      setSavedMovies([...savedMovies, newMovie]);
+      setSavedMovie(newMovie)
+    })
+    .catch((err) => console.log(err));
   } 
 
 // удаление фильма из коллекции
 
   function handleDeleteMovieClick(movie) {
-      mainApi.deleteMovie(movie._id || savedMovie._id)
-      .then(() => {
-        mainApi.getSavedMovies()
-        .then((movies) => {
-          const userSavedMovies = movies.filter((movie) => {
-            return movie.owner === currentUser._id
-          })
-          setSavedMovies(userSavedMovies)
-          })
-        .catch((err) => console.log(err))
+    mainApi.deleteMovie(movie._id || savedMovie._id)
+    .then(() => {
+      mainApi.getSavedMovies()
+      .then((movies) => {
+        const userSavedMovies = movies.filter((movie) => {
+          return movie.owner === currentUser._id
         })
-      .catch((err) => console.log(err)); 
-    }
+        setSavedMovies(userSavedMovies)
+        })
+      .catch((err) => console.log(err))
+      })
+    .catch((err) => console.log(err)); 
+  }
 
 // закрытие попапа со статусом события
 
