@@ -90,7 +90,11 @@ function App() {
               history.push('/profile')
             } else if (location.pathname === '/saved-movies') {
               history.push('/saved-movies')
-            }
+            } else if (location.pathname === '/signin') {
+              history.push('/movies')
+            } else if (location.pathname === '/signup') {
+              history.push('/movies')
+            }  
             return res
           }
         })

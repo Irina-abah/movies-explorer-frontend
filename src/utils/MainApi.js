@@ -97,8 +97,8 @@ export class MainApi {
 }
 
 const mainApi = new MainApi({
-  address: "https://api.movie-portal.nomoredomains.monster",
-  // address: "http://localhost:3005",
+  // address: "https://api.movie-portal.nomoredomains.monster",
+  address: "http://localhost:3005",
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json"
