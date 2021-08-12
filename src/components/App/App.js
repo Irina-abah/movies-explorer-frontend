@@ -50,6 +50,15 @@ function App() {
           setInfoTooltipActive(true)
           return data
         }
+        mainApi.getUserData()
+        .then((myData) => {
+          setIsFailed(false)
+          setCurrentUser(myData) 
+        })
+        .catch((err) => {
+          setIsFailed(true)
+          console.log(err);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -109,7 +118,7 @@ function App() {
     setCurrentUser({});
   }
 
-  // загрузка всех фильмов и данных пользователя
+  // загрузка всех фильмов
 
   React.useEffect(() => {
     let jwt = localStorage.getItem('jwt');
@@ -128,25 +137,25 @@ function App() {
         console.log(err);
       })
     }
-  }, [loggedIn]);
+  }, []);
 
-  React.useEffect(() => {
-    if (loggedIn) {
-      Promise.all([mainApi.getUserData(), mainApi.getSavedMovies()])
-        .then(([myData, savedMovieData]) => {
-          setIsFailed(false)
-          const userSavedMovies = savedMovieData.filter((movie) => {
-            return movie.owner === currentUser._id
-          })
-          setSavedMovies(userSavedMovies)
-          setCurrentUser(myData) 
-        })
-        .catch((err) => {
-          setIsFailed(true)
-          console.log(err);
-        });
-      }
-    }, [loggedIn, currentUser._id]);
+    React.useEffect(() => {
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+          mainApi.getSavedMovies()
+            .then((savedMovieData) => {
+              setIsFailed(false)
+              const userSavedMovies = savedMovieData.filter((movie) => {
+                return movie.owner === currentUser._id
+              })
+              setSavedMovies(userSavedMovies)
+            })
+            .catch((err) => {
+              setIsFailed(true)
+              console.log(err);
+            });
+          }
+        }, [currentUser._id]);
 
   // поиск фильмов и фильтрация по чекбоксу
 
