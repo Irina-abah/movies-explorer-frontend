@@ -2,7 +2,18 @@ import React from 'react';
 import { Route, useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import {MOVIE_NOT_FOUND_MESSAGE} from '../../../utils/constants';
-import {SEARCH_ERROR_MESSAGE} from '../../../utils/constants';
+import {
+  SEARCH_ERROR_MESSAGE,
+  BREAKPOINT_MOBILE,
+  BREAKPOINT_TABLET,
+  BREAKPOINT_DESKTOP,
+  VISIBLE_MOVIES_MOBILE,
+  MOVIES_TO_LOAD_MOBILE,
+  VISIBLE_MOVIES_TABLET,
+  MOVIES_TO_LOAD_TABLET,
+  VISIBLE_MOVIES_DESKTOP,
+  MOVIES_TO_LOAD_DESKTOP } 
+  from '../../../utils/constants';
 import DisplayMovieCards from '../../../utils/MoviesToDisplay';
 
 function MoviesCardList(props) {
@@ -15,15 +26,15 @@ function MoviesCardList(props) {
 
   React.useState(() => {
     if (location.pathname === '/movies') {
-      if (windowWidth <= 480) {
-        setVisibleMovies(5);
-        setMoviesToLoad(2);
-      } else if (windowWidth <= 768) {
-        setVisibleMovies(8);
-        setMoviesToLoad(2);
-      } else if (windowWidth <= 1280) {
-        setVisibleMovies(12);
-        setMoviesToLoad(3);
+      if (windowWidth <= BREAKPOINT_MOBILE) {
+        setVisibleMovies(VISIBLE_MOVIES_MOBILE);
+        setMoviesToLoad(MOVIES_TO_LOAD_MOBILE);
+      } else if (windowWidth <= BREAKPOINT_TABLET) {
+        setVisibleMovies(VISIBLE_MOVIES_TABLET);
+        setMoviesToLoad(MOVIES_TO_LOAD_TABLET);
+      } else if (windowWidth <= BREAKPOINT_DESKTOP) {
+        setVisibleMovies(VISIBLE_MOVIES_DESKTOP);
+        setMoviesToLoad(MOVIES_TO_LOAD_DESKTOP);
       } else {
         setVisibleMovies(props.movies.length)
       }

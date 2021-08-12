@@ -24,7 +24,6 @@ function App() {
     name: '',
     email: '',
   });
-  const [savedMovie, setSavedMovie] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFailed, setIsFailed] = React.useState(false);
@@ -137,7 +136,7 @@ function App() {
         console.log(err);
       })
     }
-  }, []);
+  }, [loggedIn]);
 
     React.useEffect(() => {
       const jwt = localStorage.getItem('jwt');
@@ -244,7 +243,7 @@ function App() {
         mainApi.addMovie(movie)
         .then((newMovie) => {
           setSavedMovies([...savedMovies, newMovie])
-          setSavedMovie(newMovie)
+          // setSavedMov  ie(newMovie)
         })
         .catch((err) => console.log(err))
       } else {

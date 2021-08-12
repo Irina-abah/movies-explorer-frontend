@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
-import {BASE_URL} from '../../../utils/constants';
+import {BASE_URL, MINUTES_SECONDS} from '../../../utils/constants';
 
 function MoviesCard(props) {
 
@@ -20,7 +20,7 @@ function MoviesCard(props) {
     props.onMovieDelete(props.movie);
   }
 
-  const duration = `${Math.floor(props.movie.duration / 60)}ч ${props.movie.duration % 60}м`;
+  const duration = `${Math.floor(props.movie.duration / MINUTES_SECONDS)}ч ${props.movie.duration % MINUTES_SECONDS}м`;
   const movieImage = props.movie.image.url ? BASE_URL + props.movie.image.url : props.movie.image;
 
   return (
