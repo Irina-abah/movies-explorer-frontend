@@ -9,11 +9,7 @@ function MoviesCard(props) {
   const movieCardClassName = `button button_type_save ${isSaved ? 'button_type_save-active' : ''}`;
 
   function handleSaveClick() {
-    if (!isSaved) {
       props.onSaveClick(props.movie);
-    } else {
-      handleDeleteClick();
-    }
   }
 
   function handleOpenTrailerClick() {

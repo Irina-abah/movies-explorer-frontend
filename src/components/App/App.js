@@ -24,7 +24,7 @@ function App() {
     name: '',
     email: '',
   });
-  const [savedMovie, setSavedMovie] = React.useState(false);
+  const [savedMovie, setSavedMovie] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFailed, setIsFailed] = React.useState(false);
@@ -239,18 +239,24 @@ function App() {
 // сохранение фильма в коллекцию 
 
   function handleSaveMovieClick(movie) {
-    mainApi.addMovie(movie)
-    .then((newMovie) => {
-      setSavedMovies([...savedMovies, newMovie]);
-      setSavedMovie(newMovie)
-    })
-    .catch((err) => console.log(err));
-  } 
+    const isSaved = savedMovies.some((item) => item.movieId === movie.id);
+      if (!isSaved) {
+        mainApi.addMovie(movie)
+        .then((newMovie) => {
+          setSavedMovies([...savedMovies, newMovie])
+          setSavedMovie(newMovie)
+        })
+        .catch((err) => console.log(err))
+      } else {
+        const movieToDelete = savedMovies.find(item => item.movieId === movie.id);
+        handleDeleteMovieClick(movieToDelete)
+      }
+    }
 
 // удаление фильма из коллекции
 
   function handleDeleteMovieClick(movie) {
-    mainApi.deleteMovie(movie._id || savedMovie._id)
+    mainApi.deleteMovie(movie._id)
     .then(() => {
       mainApi.getSavedMovies()
       .then((movies) => {
@@ -261,7 +267,7 @@ function App() {
         })
       .catch((err) => console.log(err))
       })
-    .catch((err) => console.log(err)); 
+    .catch((err) => console.log(err));
   }
 
 // закрытие попапа со статусом события

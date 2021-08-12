@@ -23,7 +23,8 @@ function Movies(props) {
         savedMovies={props.savedMovies}
         notFound={props.onNotFound}
         isLoading={props.isLoading}
-        isFailed={props.isFailed}/> }
+        isFailed={props.isFailed}
+        savedMovie={props.savedMovie}/> }
       <Footer/> 
     </main>
     
