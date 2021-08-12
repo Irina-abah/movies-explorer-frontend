@@ -159,10 +159,18 @@ function App() {
       setNotFoundMessage(searchedMovies)
     } else if (location.pathname === '/saved-movies') {
       setIsLoading(true)
-      const searchedSavedMovies = searchMovieByKeyword(savedMovies, input)
+      mainApi.getSavedMovies()
+      .then((movies) => {
+        const userSavedMovies = movies.filter((movie) => {
+          return movie.owner === currentUser._id
+        })
+        const searchedSavedMovies = searchMovieByKeyword(userSavedMovies, input)
+      localStorage.setItem('searchedSavedMovies', JSON.stringify(searchedSavedMovies));
       setSavedMovies(searchedSavedMovies)
       setNotFoundMessage(searchedSavedMovies)
       setIsLoading(false)
+      })
+      .catch((err) => console.log(err))
     }
   }
   
@@ -187,11 +195,9 @@ function App() {
     setNotFoundMessage(searchedMovies);
     if (location.pathname === '/saved-movies') {
       mainApi.getSavedMovies()
-      .then((movies) => {
-        const userSavedMovies = movies.filter((movie) => {
-          return movie.owner === currentUser._id
-        })
-        setSavedMovies(userSavedMovies)
+      .then(() => {
+        const searchedSavedMovies = JSON.parse(localStorage.getItem('searchedSavedMovies'));
+        setSavedMovies(searchedSavedMovies)
       })
       .catch((err) => console.log(err))
     }
