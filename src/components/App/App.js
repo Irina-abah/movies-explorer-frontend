@@ -38,6 +38,7 @@ function App() {
   // авторизация, регистрация, проверка токена и выход из аккаунта
 
   const handleLogin = ({email, password}) => {
+    setIsLoading(true)
     return auth.authorize({email, password})
       .then((data) => {
         if (!data) throw new Error('Неверные имя пользователя или пароль')
@@ -47,6 +48,7 @@ function App() {
           history.push('/movies')
           setIsSuccess(true)
           setInfoTooltipActive(true)
+          setIsLoading(false)
           return data
         }
         mainApi.getUserData()
@@ -68,21 +70,23 @@ function App() {
     };
 
   const handleRegister = ({name, email, password}) => {
-      return auth.register({name, email, password})
-      .then((res) => {
-          if (res) {
-              setIsSuccess(true)
-              handleLogin({email, password})
-              setInfoTooltipActive(true)
-              return res
-          }
-        })
-      .catch((err) => {
-        console.log(err);
-        setIsSuccess(false)
-        setInfoTooltipActive(true)
-      });  
-    };
+    setIsLoading(true)
+    return auth.register({name, email, password})
+    .then((res) => {
+        if (res) {
+            setIsSuccess(true)
+            handleLogin({email, password})
+            setInfoTooltipActive(true)
+            setIsLoading(false)
+            return res
+        }
+      })
+    .catch((err) => {
+      console.log(err);
+      setIsSuccess(false)
+      setInfoTooltipActive(true)
+    });  
+  };
 
   React.useEffect(() => {
     if (localStorage.getItem('jwt')) {
@@ -122,6 +126,7 @@ function App() {
   React.useEffect(() => {
     let jwt = localStorage.getItem('jwt');
     if (jwt) {
+      setIsLoading(true)
       allMoviesApi.getAllMovies()
       .then((movieData) => {
         setIsFailed(false)
@@ -130,6 +135,7 @@ function App() {
           if (searchedMovies) {
             setSearchedMovies(searchedMovies)
           }
+        setIsLoading(false)
       })
       .catch((err) => {
         setIsFailed(true)
@@ -338,7 +344,8 @@ function App() {
           </ProtectedRoute>
           <Route path="/signin">
             <Login 
-            onLogin={handleLogin}/>
+            onLogin={handleLogin}
+            isLoading={isLoading}/>
           </Route>
           <Route path="/signup">
             <Register 

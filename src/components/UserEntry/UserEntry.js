@@ -18,7 +18,7 @@ function UserEntry(props) {
           </div>
           <button 
             type="submit" 
-            className={`button button_type_sign ${!props.isFormValid ? "button_type_sign_disabled" : ""}`}>
+            className={`button button_type_sign ${!props.isFormValid ? "button_type_sign_disabled" : ""}`} disabled={props.isLoading}>
             {props.buttonName}
           </button>
           <p className="user-entry__message">

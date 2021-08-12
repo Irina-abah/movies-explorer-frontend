@@ -21,7 +21,8 @@ function Login(props) {
     link="/signup"
     linkName="Регистрация"
     onSubmit={handleSubmit}
-    isFormValid={validation.isFormValid}>
+    isFormValid={validation.isFormValid}
+    isLoading={props.isLoading}>
       <div className="user-entry__container">
         <label className="user-entry__lable" htmlFor="email">E-mail</label>
         <input 
@@ -33,6 +34,7 @@ function Login(props) {
         onChange={validation.handleChange} 
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
         title="Введите Ваш email" 
+        disabled={props.isLoading}
         required />
       </div>
       <span 
@@ -50,6 +52,7 @@ function Login(props) {
           onChange={validation.handleChange} 
           minLength="8"
           title="Введите Ваш пароль" 
+          disabled={props.isLoading}
           required 
         />
       </div>
