@@ -14,7 +14,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import allMoviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import * as auth from '../../utils/auth'; 
-import {searchMovieByKeyword, searchShortMovie} from '../../utils/FilterMovies';
+import {searchMovieByKeyword, searchShortMovie, filterMovies} from '../../utils/FilterMovies';
 
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
     email: '',
   });
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [allMovies, setAllMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFailed, setIsFailed] = React.useState(false);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
@@ -131,9 +132,11 @@ function App() {
       .then((movieData) => {
         setIsFailed(false)
         localStorage.setItem('movies',  JSON.stringify(movieData));
+        setAllMovies(movieData)
         const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
           if (searchedMovies) {
             setSearchedMovies(searchedMovies)
+            // console.log(searchedMovies.length)
           }
         setIsLoading(false)
       })
@@ -154,6 +157,7 @@ function App() {
                 return movie.owner === currentUser._id
               })
               setSavedMovies(userSavedMovies)
+              // console.log(userSavedMovies.length)
             })
             .catch((err) => {
               setIsFailed(true)
@@ -166,11 +170,17 @@ function App() {
 
   function handleMovieSearchSubmit(input) {
     if (location.pathname === '/movies') {
-      const allMovies = JSON.parse(localStorage.getItem('movies'));
-      const searchedMovies = searchMovieByKeyword(allMovies, input)
-      localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
-      setSearchedMovies(searchedMovies)
-      setNotFoundMessage(searchedMovies)
+        const searchedMovies = filterMovies(allMovies, input, checked)
+        if (checked) {
+          localStorage.setItem('searchedShortMovies', JSON.stringify(searchedMovies));
+          const searchedExtraMovies = searchMovieByKeyword(allMovies, input)
+          localStorage.setItem('searchedMovies', JSON.stringify(searchedExtraMovies));
+        } else {
+          localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
+        }
+        setSearchedMovies(searchedMovies)
+        setNotFoundMessage(searchedMovies)
+      
     } else if (location.pathname === '/saved-movies') {
       setIsLoading(true)
       mainApi.getSavedMovies()
@@ -179,7 +189,7 @@ function App() {
           return movie.owner === currentUser._id
         })
         const searchedSavedMovies = searchMovieByKeyword(userSavedMovies, input)
-      localStorage.setItem('searchedSavedMovies', JSON.stringify(searchedSavedMovies));
+          localStorage.setItem('searchedSavedMovies', JSON.stringify(searchedSavedMovies));
       setSavedMovies(searchedSavedMovies)
       setNotFoundMessage(searchedSavedMovies)
       setIsLoading(false)
@@ -188,34 +198,70 @@ function App() {
     }
   }
   
-  function handleChangeCheckbox(evt) {
+  function handleChangeCheckbox() {
     setChecked(!checked);
-    
-    const shortMovies = searchShortMovie(searchedMovies)
-    setSearchedMovies(shortMovies)
-    setNotFoundMessage(shortMovies)
-    if (location.pathname === '/saved-movies') {
-      const shortMovies = searchShortMovie(savedMovies)
-      setSavedMovies(shortMovies)
-      setNotFoundMessage(shortMovies)
+
+     if (location.pathname === '/movies') {
+       if (searchedMovies.length === 0) {
+        setNotFound(false)
+       } else {
+        const shortMovies = searchShortMovie(searchedMovies)
+        localStorage.setItem('searchedShortMovies', JSON.stringify(shortMovies));
+        setSearchedMovies(shortMovies)
+        setNotFoundMessage(shortMovies)
+        
+       }
+      
+     }
+      else if (location.pathname === '/saved-movies') {
+        if (savedMovies.length === 0) {
+          setNotFound(false)
+        } else {
+          const shortMovies = searchShortMovie(savedMovies)
+          localStorage.setItem('searchedSavedShortMovies', JSON.stringify(shortMovies));
+          setSavedMovies(shortMovies)
+          setNotFoundMessage(shortMovies)
+          console.log(shortMovies.length)
+        }
     }
   }
 
   function handleShowSearchedMovies() {
     setChecked(!checked);
-
-    const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
-    setSearchedMovies(searchedMovies);
-    setNotFoundMessage(searchedMovies);
-    if (location.pathname === '/saved-movies') {
-      mainApi.getSavedMovies()
-      .then(() => {
-        const searchedSavedMovies = JSON.parse(localStorage.getItem('searchedSavedMovies'));
-        setSavedMovies(searchedSavedMovies)
-      })
-      .catch((err) => console.log(err))
+    if (location.pathname === '/movies') {
+      if (searchedMovies.length === 0) {
+        setAllMovies(searchedMovies)
+      } else {
+        const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+        setSearchedMovies(searchedMovies);
+      }
     }
-  }
+        else if (location.pathname === '/saved-movies') {
+          mainApi.getSavedMovies()
+          .then(() => {
+            const searchedSavedMovies = JSON.parse(localStorage.getItem('searchedSavedMovies'));
+            if (!searchedSavedMovies) {
+              mainApi.getSavedMovies()
+                .then((savedMovieData) => {
+                  setIsFailed(false)
+                  const userSavedMovies = savedMovieData.filter((movie) => {
+                    return movie.owner === currentUser._id
+                  })
+                  setSavedMovies(userSavedMovies)
+                  setNotFound(false)
+                })
+                .catch((err) => {
+                  setIsFailed(true)
+                  console.log(err);
+                });
+            } else {
+              setSavedMovies(searchedSavedMovies)
+              setNotFoundMessage(searchedSavedMovies)
+            }
+          })
+          .catch((err) => console.log(err))
+        }
+      }
 
   function setNotFoundMessage(movies) {
     if (movies.length === 0) {
@@ -249,9 +295,12 @@ function App() {
         mainApi.addMovie(movie)
         .then((newMovie) => {
           setSavedMovies([...savedMovies, newMovie])
-          // setSavedMov  ie(newMovie)
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log(err);
+          setIsSuccess(false)
+          setInfoTooltipActive(true)
+        });
       } else {
         const movieToDelete = savedMovies.find(item => item.movieId === movie.id);
         handleDeleteMovieClick(movieToDelete)
@@ -269,6 +318,11 @@ function App() {
           return movie.owner === currentUser._id
         })
         setSavedMovies(userSavedMovies)
+
+        if (userSavedMovies.length === 0) {
+          localStorage.removeItem('searchedSavedMovies')
+          localStorage.removeItem('searchedShortSavedMovies')
+        }
         })
       .catch((err) => console.log(err))
       })
@@ -318,7 +372,6 @@ function App() {
             isLoading={isLoading}
             isFailed={isFailed}
             onNotFound={notFound}
-            // savedMovie={savedMovie}
             >
           </ProtectedRoute>
           <ProtectedRoute path="/saved-movies"

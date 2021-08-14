@@ -4,7 +4,6 @@ import { Link, Route, useLocation } from "react-router-dom";
 import Navigation from '../Header/Navigation/Navigation';
 import Menu from '../Header/Menu/Menu';
 import DisplayMovieCards from '../../utils/MoviesToDisplay';
-// import Account from '../Profile/Acount/Account';
 
 function Header(props) {
 

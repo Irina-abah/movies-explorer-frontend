@@ -10,10 +10,19 @@ function searchMovieByKeyword(movies, input) {
 
   function searchShortMovie(movies) {
     const shortMovies = movies.filter((item) => {
-        return item.duration < SHORT_MOVIE_DURATION;
+        return item.duration <= SHORT_MOVIE_DURATION;
     });
 
     return shortMovies
 }
 
-export {searchMovieByKeyword, searchShortMovie};
+const filterMovies = (movies, input, checked) => {
+  if (checked) {
+    const filteredByCheckboxMovies = searchShortMovie(movies);
+    return searchMovieByKeyword(filteredByCheckboxMovies, input)
+  } else {
+    return searchMovieByKeyword(movies, input)
+  }
+};
+
+export {searchMovieByKeyword, searchShortMovie, filterMovies};
