@@ -21,7 +21,7 @@ function Movies(props) {
         onSaveClick={props.onSaveClick}
         onMovieDelete={props.onMovieDelete}
         savedMovies={props.savedMovies}
-        notFound={props.onNotFound}
+        moviesNotFound={props.onMoviesNotFound}
         isLoading={props.isLoading}
         isFailed={props.isFailed}
         savedMovie={props.savedMovie}/> }

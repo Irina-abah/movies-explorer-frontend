@@ -30,7 +30,8 @@ function App() {
   const [isFailed, setIsFailed] = React.useState(false);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [checked, setChecked] = React.useState(false);
-  const [notFound, setNotFound] = React.useState(false);
+  const [moviesNotFound, setMoviesNotFound] = React.useState(false);
+  const [savedMoviesNotFound, setSavedMoviesNotFound] = React.useState(false);
   const [isInfoTooltipActive, setInfoTooltipActive] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const history = useHistory();
@@ -133,6 +134,7 @@ function App() {
         setIsFailed(false)
         localStorage.setItem('movies',  JSON.stringify(movieData));
         setAllMovies(movieData)
+
         const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
           if (searchedMovies) {
             setSearchedMovies(searchedMovies)
@@ -179,7 +181,7 @@ function App() {
           localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
         }
         setSearchedMovies(searchedMovies)
-        setNotFoundMessage(searchedMovies)
+        setMoviesNotFoundMessage(searchedMovies)
       
     } else if (location.pathname === '/saved-movies') {
       setIsLoading(true)
@@ -191,7 +193,7 @@ function App() {
         const searchedSavedMovies = searchMovieByKeyword(userSavedMovies, input)
           localStorage.setItem('searchedSavedMovies', JSON.stringify(searchedSavedMovies));
       setSavedMovies(searchedSavedMovies)
-      setNotFoundMessage(searchedSavedMovies)
+      setSavedMoviesNotFoundMessage(searchedSavedMovies)
       setIsLoading(false)
       })
       .catch((err) => console.log(err))
@@ -203,24 +205,24 @@ function App() {
 
      if (location.pathname === '/movies') {
        if (searchedMovies.length === 0) {
-        setNotFound(false)
+        setMoviesNotFound(false)
        } else {
         const shortMovies = searchShortMovie(searchedMovies)
         localStorage.setItem('searchedShortMovies', JSON.stringify(shortMovies));
         setSearchedMovies(shortMovies)
-        setNotFoundMessage(shortMovies)
+        setMoviesNotFoundMessage(shortMovies)
         
        }
       
      }
       else if (location.pathname === '/saved-movies') {
         if (savedMovies.length === 0) {
-          setNotFound(false)
+          setSavedMoviesNotFound(false)
         } else {
           const shortMovies = searchShortMovie(savedMovies)
           localStorage.setItem('searchedSavedShortMovies', JSON.stringify(shortMovies));
           setSavedMovies(shortMovies)
-          setNotFoundMessage(shortMovies)
+          setSavedMoviesNotFoundMessage(shortMovies)
           console.log(shortMovies.length)
         }
     }
@@ -248,7 +250,7 @@ function App() {
                     return movie.owner === currentUser._id
                   })
                   setSavedMovies(userSavedMovies)
-                  setNotFound(false)
+                  setSavedMoviesNotFound(false)
                 })
                 .catch((err) => {
                   setIsFailed(true)
@@ -256,18 +258,34 @@ function App() {
                 });
             } else {
               setSavedMovies(searchedSavedMovies)
-              setNotFoundMessage(searchedSavedMovies)
+              setSavedMoviesNotFoundMessage(searchedSavedMovies)
             }
           })
           .catch((err) => console.log(err))
         }
       }
 
-  function setNotFoundMessage(movies) {
+  // function setNotFoundMessage(movies) {
+  //   if (movies.length === 0) {
+  //     setNotFound(true)
+  //   } else {
+  //     setNotFound(false)
+  //   }
+  // }
+
+  function setMoviesNotFoundMessage(movies) {
     if (movies.length === 0) {
-      setNotFound(true)
+      setMoviesNotFound(true)
     } else {
-      setNotFound(false)
+      setMoviesNotFound(false)
+    }
+  }
+
+  function setSavedMoviesNotFoundMessage(movies) {
+    if (movies.length === 0) {
+      setSavedMoviesNotFound(true)
+    } else {
+      setSavedMoviesNotFound(false)
     }
   }
 
@@ -371,7 +389,7 @@ function App() {
             onShowSearchedMovies={handleShowSearchedMovies}
             isLoading={isLoading}
             isFailed={isFailed}
-            onNotFound={notFound}
+            onMoviesNotFound={moviesNotFound}
             >
           </ProtectedRoute>
           <ProtectedRoute path="/saved-movies"
@@ -386,7 +404,7 @@ function App() {
             onHandleSubmit={handleMovieSearchSubmit}
             onChangeCheckbox={handleChangeCheckbox}
             onShowSearchedMovies={handleShowSearchedMovies}
-            onNotFound={notFound}
+            onSavedNotFound={savedMoviesNotFound}
             >
           </ProtectedRoute>
           <ProtectedRoute path="/profile"

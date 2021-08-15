@@ -44,17 +44,19 @@ function MoviesCardList(props) {
 
   const handleShowMoreMovies = () => {
     setVisibleMovies(prevVisibleMovies => prevVisibleMovies + moviesToLoad)
-  }
+  } 
 
   return (
-    props.notFound ? <p className="movie-list__not-found">{MOVIE_NOT_FOUND_MESSAGE}</p> :
-    (!props.isLoading && props.isFailed ? <p className="movie-list__not-found">{SEARCH_ERROR_MESSAGE}</p> : <section className="movie-list">
+    <section className="movie-list">
+
     <Route exact path="/movies">
+      {props.moviesNotFound && <p className="movie-list__not-found">{MOVIE_NOT_FOUND_MESSAGE}</p>}
+      {!props.isLoading && props.isFailed && <p className="movie-list__not-found">{SEARCH_ERROR_MESSAGE}</p>}
       <ul className="movie-list__container">
         {
           props.movies.slice(0, visibleMovies).map((movie, i) => (
             <MoviesCard
-            key={i}
+            key={movie.id || movie.movieId}
             movie={movie}
             onSaveClick={props.onSaveClick}
             savedMovies={props.savedMovies}
@@ -70,11 +72,13 @@ function MoviesCardList(props) {
         onClick={handleShowMoreMovies}>Еще</button>
     </Route>
     <Route path="/saved-movies">
+    {props.savedMoviesNotFound && <p className="movie-list__not-found">{MOVIE_NOT_FOUND_MESSAGE}</p>}
+      {!props.isLoading && props.isFailed && <p className="movie-list__not-found">{SEARCH_ERROR_MESSAGE}</p>}
       <ul className="movie-list__container">
           {
             props.movies.map((movie, i) => (
               <MoviesCard
-              key={i}
+              key={movie._id}
               movie={movie}
               savedMovies={props.savedMovies}
               onMovieDelete={props.onMovieDelete}
@@ -84,9 +88,7 @@ function MoviesCardList(props) {
         </ul>
     </Route>
   </section>)  
-    
-  )
-    
+
   // return (
   //   props.notFound ? <p className="movie-list__not-found">{MOVIE_NOT_FOUND_MESSAGE}</p> :
   //   (!props.isLoading && props.isFailed ? <p className="movie-list__not-found">{SEARCH_ERROR_MESSAGE}</p> : <section className="movie-list">

@@ -20,7 +20,7 @@ function SavedMovies(props) {
         movies={props.movies}
         onMovieDelete={props.onMovieDelete}
         savedMovies={props.savedMovies}
-        notFound={props.onNotFound}
+        savedMoviesNotFound={props.onSavedNotFound}
         isLoading={props.isLoading}
         isFailed={props.isFailed}/> }
       <Footer/>
