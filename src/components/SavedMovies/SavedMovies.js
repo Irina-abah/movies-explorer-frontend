@@ -13,8 +13,8 @@ function SavedMovies(props) {
       <SearchForm 
         onSubmit={props.onHandleSubmit} 
         onChangeCheckbox={props.onChangeCheckbox}
-        onChecked={props.onChecked}
-        onShowSearchedMovies={props.onShowSearchedMovies}/>
+        checked={props.checked}
+        />
         { props.isLoading ? <Preloader/> :
       <MoviesCardList 
         movies={props.movies}

@@ -1,11 +1,7 @@
 function FilterCheckbox(props) {
 
   function handleCheck(evt) {
-    if (evt.target.checked) {
       props.onToggleCheckbox(evt.target.checked)
-    } else {
-      props.onShowSearchedMovies()
-    }
   }
 
   return (
@@ -16,7 +12,7 @@ function FilterCheckbox(props) {
           type="checkbox" 
           id="short-movie"
           name="short-movie"
-          checked={props.onChecked}
+          checked={props.checked}
           onChange={handleCheck}/>
         <label className="search-form__filter-name" htmlFor="short-movie">Короткометражки</label>
       </div>

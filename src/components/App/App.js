@@ -60,6 +60,7 @@ function App() {
         })
         .catch((err) => {
           setIsFailed(true)
+          setIsLoading(false)
           console.log(err);
         });
       })
@@ -67,6 +68,7 @@ function App() {
         console.log(err);
         setLoggedIn(false)
         setIsSuccess(false)
+        setIsLoading(false)
         setInfoTooltipActive(true)
       })
     };
@@ -86,6 +88,7 @@ function App() {
     .catch((err) => {
       console.log(err);
       setIsSuccess(false)
+      setIsLoading(false)
       setInfoTooltipActive(true)
     });  
   };
@@ -123,7 +126,7 @@ function App() {
     setCurrentUser({});
   }
 
-  // загрузка всех фильмов
+  // загрузка фильмов с внешнего сервера
 
   React.useEffect(() => {
     let jwt = localStorage.getItem('jwt');
@@ -138,7 +141,6 @@ function App() {
         const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
           if (searchedMovies) {
             setSearchedMovies(searchedMovies)
-            // console.log(searchedMovies.length)
           }
         setIsLoading(false)
       })
@@ -148,6 +150,8 @@ function App() {
       })
     }
   }, [loggedIn]);
+
+  // загрузка сохраненных фильмов
 
     React.useEffect(() => {
       const jwt = localStorage.getItem('jwt');
@@ -159,7 +163,6 @@ function App() {
                 return movie.owner === currentUser._id
               })
               setSavedMovies(userSavedMovies)
-              // console.log(userSavedMovies.length)
             })
             .catch((err) => {
               setIsFailed(true)
@@ -168,7 +171,7 @@ function App() {
           }
         }, [currentUser._id]);
 
-  // поиск фильмов и фильтрация по чекбоксу
+  // поиск фильмов
 
   function handleMovieSearchSubmit(input) {
     if (location.pathname === '/movies') {
@@ -199,79 +202,70 @@ function App() {
       .catch((err) => console.log(err))
     }
   }
-  
-  function handleChangeCheckbox() {
-    setChecked(!checked);
 
-     if (location.pathname === '/movies') {
-       if (searchedMovies.length === 0) {
-        setMoviesNotFound(false)
-       } else {
-        const shortMovies = searchShortMovie(searchedMovies)
-        localStorage.setItem('searchedShortMovies', JSON.stringify(shortMovies));
-        setSearchedMovies(shortMovies)
-        setMoviesNotFoundMessage(shortMovies)
-        
-       }
-      
-     }
-      else if (location.pathname === '/saved-movies') {
-        if (savedMovies.length === 0) {
-          setSavedMoviesNotFound(false)
+  // фильтр по чекбоксу
+
+  function handleChangeCheckbox(evt) {
+    setChecked(!checked);
+    if (!checked) {
+      if (location.pathname === '/movies') {
+        if (searchedMovies.length === 0) {
+          setMoviesNotFound(false)
         } else {
-          const shortMovies = searchShortMovie(savedMovies)
-          localStorage.setItem('searchedSavedShortMovies', JSON.stringify(shortMovies));
-          setSavedMovies(shortMovies)
-          setSavedMoviesNotFoundMessage(shortMovies)
-          console.log(shortMovies.length)
+          const shortMovies = searchShortMovie(searchedMovies)
+          localStorage.setItem('searchedShortMovies', JSON.stringify(shortMovies));
+          setSearchedMovies(shortMovies)
+          setMoviesNotFoundMessage(shortMovies)
         }
-    }
-  }
-
-  function handleShowSearchedMovies() {
-    setChecked(!checked);
-    if (location.pathname === '/movies') {
-      if (searchedMovies.length === 0) {
-        setAllMovies(searchedMovies)
-      } else {
-        const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
-        setSearchedMovies(searchedMovies);
       }
-    }
         else if (location.pathname === '/saved-movies') {
-          mainApi.getSavedMovies()
-          .then(() => {
-            const searchedSavedMovies = JSON.parse(localStorage.getItem('searchedSavedMovies'));
-            if (!searchedSavedMovies) {
-              mainApi.getSavedMovies()
-                .then((savedMovieData) => {
-                  setIsFailed(false)
-                  const userSavedMovies = savedMovieData.filter((movie) => {
-                    return movie.owner === currentUser._id
-                  })
-                  setSavedMovies(userSavedMovies)
-                  setSavedMoviesNotFound(false)
-                })
-                .catch((err) => {
-                  setIsFailed(true)
-                  console.log(err);
-                });
+          setChecked(!checked);
+            if (savedMovies.length === 0) {
+              setSavedMoviesNotFound(false)
             } else {
-              setSavedMovies(searchedSavedMovies)
-              setSavedMoviesNotFoundMessage(searchedSavedMovies)
+              const shortMovies = searchShortMovie(savedMovies)
+              localStorage.setItem('searchedSavedShortMovies', JSON.stringify(shortMovies));
+              setSavedMovies(shortMovies)
+              setSavedMoviesNotFoundMessage(shortMovies)
+              console.log(shortMovies.length)
             }
-          })
-          .catch((err) => console.log(err))
+          }
+        } else {
+          if (location.pathname === '/movies') {
+            if (searchedMovies.length === 0) {
+              setAllMovies(searchedMovies)
+            } else {
+              const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+              setSearchedMovies(searchedMovies);
+            }
+          }
+            else if (location.pathname === '/saved-movies') {
+              mainApi.getSavedMovies()
+              .then(() => {
+                const searchedSavedMovies = JSON.parse(localStorage.getItem('searchedSavedMovies'));
+                if (!searchedSavedMovies) {
+                  mainApi.getSavedMovies()
+                    .then((savedMovieData) => {
+                      setIsFailed(false)
+                      const userSavedMovies = savedMovieData.filter((movie) => {
+                        return movie.owner === currentUser._id
+                      })
+                      setSavedMovies(userSavedMovies)
+                      setSavedMoviesNotFound(false)
+                    })
+                    .catch((err) => {
+                      setIsFailed(true)
+                      console.log(err);
+                    });
+                  } else {
+                  setSavedMovies(searchedSavedMovies)
+                  setSavedMoviesNotFoundMessage(searchedSavedMovies)
+                }
+              })
+              .catch((err) => console.log(err))
+            }
+          }  
         }
-      }
-
-  // function setNotFoundMessage(movies) {
-  //   if (movies.length === 0) {
-  //     setNotFound(true)
-  //   } else {
-  //     setNotFound(false)
-  //   }
-  // }
 
   function setMoviesNotFoundMessage(movies) {
     if (movies.length === 0) {
@@ -385,8 +379,8 @@ function App() {
             onHandleSubmit={handleMovieSearchSubmit}
             onMovieDelete={handleDeleteMovieClick}
             onChangeCheckbox={handleChangeCheckbox}
-            onChecked={checked}
-            onShowSearchedMovies={handleShowSearchedMovies}
+            checked={checked}
+            // onShowSearchedMovies={handleShowSearchedMovies}
             isLoading={isLoading}
             isFailed={isFailed}
             onMoviesNotFound={moviesNotFound}
@@ -396,14 +390,14 @@ function App() {
             component={SavedMovies}
             loggedIn={loggedIn}
             movies={savedMovies}
-            onChecked={checked}
+            checked={checked}
             savedMovies={savedMovies}
             isLoading={isLoading}
             isFailed={isFailed}
             onMovieDelete={handleDeleteMovieClick}
             onHandleSubmit={handleMovieSearchSubmit}
             onChangeCheckbox={handleChangeCheckbox}
-            onShowSearchedMovies={handleShowSearchedMovies}
+            // onShowSearchedMovies={handleShowSearchedMovies}
             onSavedNotFound={savedMoviesNotFound}
             >
           </ProtectedRoute>
