@@ -205,38 +205,46 @@ function App() {
 
   // фильтр по чекбоксу
 
-  function handleChangeCheckbox(evt) {
+  function handleChangeCheckbox(evt, input) {
     setChecked(!checked);
     if (!checked) {
       if (location.pathname === '/movies') {
-        if (searchedMovies.length === 0) {
+
+        let searchedMovies = localStorage.getItem('searchedMovies');
+        const searchedbyKeyWordMovies = JSON.parse(localStorage.getItem('searchedMovies')); 
+        
+        if (!searchedMovies) {
           setMoviesNotFound(false)
+        } else if (searchedbyKeyWordMovies.length === 0) {
+          setMoviesNotFound(true)
         } else {
-          const shortMovies = searchShortMovie(searchedMovies)
+          const shortMovies = searchShortMovie(searchedbyKeyWordMovies)
           localStorage.setItem('searchedShortMovies', JSON.stringify(shortMovies));
           setSearchedMovies(shortMovies)
           setMoviesNotFoundMessage(shortMovies)
         }
       }
         else if (location.pathname === '/saved-movies') {
-          setChecked(!checked);
-            if (savedMovies.length === 0) {
-              setSavedMoviesNotFound(false)
-            } else {
+          if (savedMovies.length === 0) {
+            setSavedMoviesNotFound(false)
+          } else {
               const shortMovies = searchShortMovie(savedMovies)
               localStorage.setItem('searchedSavedShortMovies', JSON.stringify(shortMovies));
               setSavedMovies(shortMovies)
               setSavedMoviesNotFoundMessage(shortMovies)
-              console.log(shortMovies.length)
             }
           }
         } else {
           if (location.pathname === '/movies') {
-            if (searchedMovies.length === 0) {
-              setAllMovies(searchedMovies)
+
+            let searchedMovies = localStorage.getItem('searchedMovies');
+            const searchedbyKeyWordMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+
+            if (!searchedMovies) {
+              setMoviesNotFound(false)
             } else {
-              const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
-              setSearchedMovies(searchedMovies);
+              setSearchedMovies(searchedbyKeyWordMovies);
+              setMoviesNotFound(false)
             }
           }
             else if (location.pathname === '/saved-movies') {

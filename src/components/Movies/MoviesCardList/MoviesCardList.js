@@ -56,7 +56,7 @@ function MoviesCardList(props) {
         {
           props.movies.slice(0, visibleMovies).map((movie, i) => (
             <MoviesCard
-            key={movie.id || movie.movieId}
+            key={i}
             movie={movie}
             onSaveClick={props.onSaveClick}
             savedMovies={props.savedMovies}
@@ -78,7 +78,7 @@ function MoviesCardList(props) {
           {
             props.movies.map((movie, i) => (
               <MoviesCard
-              key={movie._id}
+              key={i}
               movie={movie}
               savedMovies={props.savedMovies}
               onMovieDelete={props.onMovieDelete}
