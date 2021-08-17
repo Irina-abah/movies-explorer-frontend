@@ -1,5 +1,3 @@
-// import React from 'react';
-
 function FilterCheckbox(props) {
 
   function handleCheck(evt) {
@@ -14,7 +12,6 @@ function FilterCheckbox(props) {
           type="checkbox" 
           id="short-movie"
           name="short-movie"
-          // checked={props.checked}
           checked={props.checked}
           onChange={handleCheck}
           />
