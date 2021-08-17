@@ -30,6 +30,7 @@ function App() {
   const [isFailed, setIsFailed] = React.useState(false);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [checked, setChecked] = React.useState(false);
+  const [checkedSaved, setCheckedSaved] = React.useState(false);
   const [moviesNotFound, setMoviesNotFound] = React.useState(false);
   const [savedMoviesNotFound, setSavedMoviesNotFound] = React.useState(false);
   const [isInfoTooltipActive, setInfoTooltipActive] = React.useState(false);
@@ -139,6 +140,7 @@ function App() {
         setAllMovies(movieData)
 
         const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+
           if (searchedMovies) {
             setSearchedMovies(searchedMovies)
           }
@@ -208,72 +210,69 @@ function App() {
   function handleChangeCheckbox(evt) {
     setChecked(!checked);
     if (!checked) {
-      if (location.pathname === '/movies') {
+      let searchedMovies = localStorage.getItem('searchedMovies');
+      const searchedbyKeyWordMovies = JSON.parse(localStorage.getItem('searchedMovies')); 
+      
+      if (!searchedMovies) {
+        setMoviesNotFound(false)
+      } else if (searchedbyKeyWordMovies.length === 0) {
+        setMoviesNotFound(true)
+      } else {
+        const shortMovies = searchShortMovie(searchedbyKeyWordMovies)
+        localStorage.setItem('searchedShortMovies', JSON.stringify(shortMovies));
+        setSearchedMovies(shortMovies)
+        setMoviesNotFoundMessage(shortMovies)
+      } 
+    } else {
+      let searchedMovies = localStorage.getItem('searchedMovies');
+      const searchedbyKeyWordMovies = JSON.parse(localStorage.getItem('searchedMovies'));
 
-        let searchedMovies = localStorage.getItem('searchedMovies');
-        const searchedbyKeyWordMovies = JSON.parse(localStorage.getItem('searchedMovies')); 
-        
-        if (!searchedMovies) {
-          setMoviesNotFound(false)
-        } else if (searchedbyKeyWordMovies.length === 0) {
-          setMoviesNotFound(true)
-        } else {
-          const shortMovies = searchShortMovie(searchedbyKeyWordMovies)
-          localStorage.setItem('searchedShortMovies', JSON.stringify(shortMovies));
-          setSearchedMovies(shortMovies)
-          setMoviesNotFoundMessage(shortMovies)
-        }
+      if (!searchedMovies) {
+        setMoviesNotFound(false)
+      } else {
+        setSearchedMovies(searchedbyKeyWordMovies);
+        setMoviesNotFound(false)
       }
-        else if (location.pathname === '/saved-movies') {
-          if (savedMovies.length === 0) {
-            setSavedMoviesNotFound(false)
-          } else {
-              const shortMovies = searchShortMovie(savedMovies)
-              localStorage.setItem('searchedSavedShortMovies', JSON.stringify(shortMovies));
-              setSavedMovies(shortMovies)
-              setSavedMoviesNotFoundMessage(shortMovies)
-            }
-          }
-        } else {
-          if (location.pathname === '/movies') {
+    }
+  }
 
-            let searchedMovies = localStorage.getItem('searchedMovies');
-            const searchedbyKeyWordMovies = JSON.parse(localStorage.getItem('searchedMovies'));
-
-            if (!searchedMovies) {
-              setMoviesNotFound(false)
-            } else {
-              setSearchedMovies(searchedbyKeyWordMovies);
-              setMoviesNotFound(false)
-            }
-          }
-            else if (location.pathname === '/saved-movies') {
-              mainApi.getSavedMovies()
-              .then(() => {
-                const searchedSavedMovies = JSON.parse(localStorage.getItem('searchedSavedMovies'));
-                if (!searchedSavedMovies) {
-                  mainApi.getSavedMovies()
-                    .then((savedMovieData) => {
-                      setIsFailed(false)
-                      const userSavedMovies = savedMovieData.filter((movie) => {
-                        return movie.owner === currentUser._id
-                      })
-                      setSavedMovies(userSavedMovies)
-                      setSavedMoviesNotFound(false)
-                    })
-                    .catch((err) => {
-                      setIsFailed(true)
-                      console.log(err);
-                    });
-                  } else {
-                  setSavedMovies(searchedSavedMovies)
-                  setSavedMoviesNotFoundMessage(searchedSavedMovies)
-                }
-              })
-              .catch((err) => console.log(err))
-            }
-          }  
+  function handleSavedChangeCheckbox(evt) {
+    setCheckedSaved(!checkedSaved)
+    if (!checkedSaved) {
+      if (savedMovies.length === 0) {
+        setSavedMoviesNotFound(false)
+      } else {
+          const shortMovies = searchShortMovie(savedMovies)
+          localStorage.setItem('searchedSavedShortMovies', JSON.stringify(shortMovies));
+          setSavedMovies(shortMovies)
+          setSavedMoviesNotFoundMessage(shortMovies)
         }
+    } else {
+      mainApi.getSavedMovies()
+        .then(() => {
+          const searchedSavedMovies = JSON.parse(localStorage.getItem('searchedSavedMovies'));
+          if (!searchedSavedMovies) {
+            mainApi.getSavedMovies()
+              .then((savedMovieData) => {
+                setIsFailed(false)
+                const userSavedMovies = savedMovieData.filter((movie) => {
+                  return movie.owner === currentUser._id
+                })
+                setSavedMovies(userSavedMovies)
+                setSavedMoviesNotFound(false)
+              })
+              .catch((err) => {
+                setIsFailed(true)
+                console.log(err);
+              });
+            } else {
+            setSavedMovies(searchedSavedMovies)
+            setSavedMoviesNotFoundMessage(searchedSavedMovies)
+          }
+        })
+        .catch((err) => console.log(err))
+      }
+    }
 
   function setMoviesNotFoundMessage(movies) {
     if (movies.length === 0) {
@@ -397,13 +396,13 @@ function App() {
             component={SavedMovies}
             loggedIn={loggedIn}
             movies={savedMovies}
-            checked={checked}
+            checked={checkedSaved}
             savedMovies={savedMovies}
             isLoading={isLoading}
             isFailed={isFailed}
             onMovieDelete={handleDeleteMovieClick}
             onHandleSubmit={handleMovieSearchSubmit}
-            onChangeCheckbox={handleChangeCheckbox}
+            onChangeCheckbox={handleSavedChangeCheckbox}
             onSavedNotFound={savedMoviesNotFound}
             >
           </ProtectedRoute>

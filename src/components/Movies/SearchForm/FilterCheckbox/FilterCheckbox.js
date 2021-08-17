@@ -2,12 +2,9 @@
 
 function FilterCheckbox(props) {
 
-  // const [checked, setChecked] = React.useState(false);
-
-  // function handleCheck(evt) {
-  //   // setChecked(!checked)
-  //   props.onToggleCheckbox(evt.target.checked)
-  // }
+  function handleCheck(evt) {
+    props.onToggleCheckbox(evt.target.checked)
+  }
 
   return (
     <div className="search-form__filter">
@@ -17,9 +14,9 @@ function FilterCheckbox(props) {
           type="checkbox" 
           id="short-movie"
           name="short-movie"
+          // checked={props.checked}
           checked={props.checked}
-          // onChange={handleCheck}
-          onChange={props.handleCheck}
+          onChange={handleCheck}
           />
         <label className="search-form__filter-name" htmlFor="short-movie">Короткометражки</label>
       </div>
