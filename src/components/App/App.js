@@ -205,7 +205,7 @@ function App() {
 
   // фильтр по чекбоксу
 
-  function handleChangeCheckbox(evt, input) {
+  function handleChangeCheckbox(evt) {
     setChecked(!checked);
     if (!checked) {
       if (location.pathname === '/movies') {
@@ -388,7 +388,6 @@ function App() {
             onMovieDelete={handleDeleteMovieClick}
             onChangeCheckbox={handleChangeCheckbox}
             checked={checked}
-            // onShowSearchedMovies={handleShowSearchedMovies}
             isLoading={isLoading}
             isFailed={isFailed}
             onMoviesNotFound={moviesNotFound}
@@ -405,7 +404,6 @@ function App() {
             onMovieDelete={handleDeleteMovieClick}
             onHandleSubmit={handleMovieSearchSubmit}
             onChangeCheckbox={handleChangeCheckbox}
-            // onShowSearchedMovies={handleShowSearchedMovies}
             onSavedNotFound={savedMoviesNotFound}
             >
           </ProtectedRoute>

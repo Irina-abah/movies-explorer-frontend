@@ -48,7 +48,6 @@ function MoviesCardList(props) {
 
   return (
     <section className="movie-list">
-
     <Route exact path="/movies">
       {props.moviesNotFound && <p className="movie-list__not-found">{MOVIE_NOT_FOUND_MESSAGE}</p>}
       {!props.isLoading && props.isFailed && <p className="movie-list__not-found">{SEARCH_ERROR_MESSAGE}</p>}
