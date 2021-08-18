@@ -23,7 +23,6 @@ function MoviesCardList(props) {
   const { windowWidth } = DisplayMovieCards();
   const location = useLocation();
 
-
   React.useState(() => {
     if (location.pathname === '/movies') {
       if (windowWidth <= BREAKPOINT_MOBILE) {
@@ -32,13 +31,13 @@ function MoviesCardList(props) {
       } else if (windowWidth <= BREAKPOINT_TABLET) {
         setVisibleMovies(VISIBLE_MOVIES_TABLET);
         setMoviesToLoad(MOVIES_TO_LOAD_TABLET);
-      } else if (windowWidth <= BREAKPOINT_DESKTOP) {
+      } else if (windowWidth < BREAKPOINT_DESKTOP && windowWidth >= BREAKPOINT_TABLET) {
         setVisibleMovies(VISIBLE_MOVIES_DESKTOP);
         setMoviesToLoad(MOVIES_TO_LOAD_DESKTOP);
-      } 
-      // else {
-      //   setVisibleMovies(props.movies.length)
-      // }
+      } else if (windowWidth >= BREAKPOINT_DESKTOP) {
+        setVisibleMovies(VISIBLE_MOVIES_DESKTOP)
+        setMoviesToLoad(MOVIES_TO_LOAD_DESKTOP);
+      }
     }
   }, [windowWidth, location]);
 
