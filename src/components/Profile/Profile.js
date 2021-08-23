@@ -16,11 +16,11 @@ function Profile(props) {
         name: currentUser.name, 
         email: currentUser.email})
   }, [currentUser]);
-  
 
   function handleSubmit(evt) {
     evt.preventDefault();
     props.onUpdateUser({ name, email});
+    validation.resetForm();
 }
 
   return (
@@ -72,7 +72,8 @@ function Profile(props) {
         </div> 
         <button 
           type="submit" 
-          className={`button button_type_edit ${!validation.isFormValid ? "button_type_edit_disabled" : ""}`}>
+          className={`button button_type_edit ${!validation.isFormValid ? "button_type_edit_disabled" : ""}`}
+          disabled={!validation.isFormValid}>
           Редактировать
         </button>
         <Link className="link profile__signout-link" to='/' onClick={props.onSignOut}>Выйти из аккаунта</Link>
