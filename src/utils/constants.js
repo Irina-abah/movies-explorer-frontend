@@ -1,70 +1,47 @@
-const movies = [
-  {    
-    _id: 1,
-    nameRU: 'Корраловый Риф', 
-    duration: '1ч 47м',
-    thumbnail: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2468&q=80',  
-  }, 
-  { 
-    _id: 2,
-    nameRU: 'Горы', 
-    duration: '1ч 4м',
-    thumbnail: 'https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2626&q=80', 
-  }, 
-  { 
-    _id: 13,
-    nameRU: 'Шамони', 
-    duration: '1ч 7м',
-    thumbnail: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2516&q=80',  
-  }, 
-  { 
-    _id: 12,
-    nameRU: 'Пераст', 
-    duration: '1ч 37м',
-    thumbnail: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2553&q=80', 
-  }, 
-  { 
-    _id: 4,
-    nameRU: 'Исландия',
-    duration: '1ч 27м', 
-    thumbnail: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80', 
-  }, 
-  { 
-    _id: 25,
-    nameRU: '12 Апостолов', 
-    duration: '1ч 57м',
-    thumbnail: 'https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80', 
-  },
-  { 
-    _id: 102,
-    nameRU: 'Порто', 
-    duration: '1ч 4м',
-    thumbnail: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2549&q=80', 
-  }, 
-  { 
-    _id: 33,
-    nameRU: 'Пьемонт', 
-    duration: '1ч 7м',
-    thumbnail: 'https://images.unsplash.com/photo-1552083375-1447ce886485?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80',  
-  }, 
-  { 
-    _id: 15,
-    nameRU: 'Лозовая', 
-    duration: '1ч 37м',
-    thumbnail: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80', 
-  }, 
-  { 
-    _id: 8,
-    nameRU: 'Стокпорт',
-    duration: '1ч 27м', 
-    thumbnail: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2048&q=80', 
-  }, 
-  { 
-    _id: 21,
-    nameRU: 'Гамбург', 
-    duration: '1ч 57м',
-    thumbnail: 'https://images.unsplash.com/photo-1492724724894-7464c27d0ceb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2534&q=80', 
-  }
-];
+const MOVIE_NOT_FOUND_MESSAGE = 'Ничего не найдено';
+const SEARCH_ERROR_MESSAGE = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
+const SEARCH_VALIDATE_MESSAGE = 'Введите ключевое слово';
 
-export default movies;
+const BASE_URL = 'https://api.nomoreparties.co';
+const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+// const BACKEND_URL = 'https://api.movie-portal.nomoredomains.monster';
+
+const SUCCESS_MESSAGE = 'Успешно!';
+const FAILED_MESSAGE = 'Что-то пошло не так! Попробуйте еще раз.';
+
+const SHORT_MOVIE_DURATION = 40;
+const MINUTES_SECONDS = 60;
+
+const BREAKPOINT_MOBILE = 480;
+const BREAKPOINT_TABLET = 768;
+const BREAKPOINT_DESKTOP = 1280;
+
+
+const VISIBLE_MOVIES_MOBILE = 5;
+const MOVIES_TO_LOAD_MOBILE = 2;
+const VISIBLE_MOVIES_TABLET = 8;
+const MOVIES_TO_LOAD_TABLET = 2;
+const VISIBLE_MOVIES_DESKTOP = 12;
+const MOVIES_TO_LOAD_DESKTOP = 3;
+
+export { 
+  MOVIE_NOT_FOUND_MESSAGE, 
+  SEARCH_ERROR_MESSAGE,
+  BASE_URL,
+  SEARCH_VALIDATE_MESSAGE,
+  SUCCESS_MESSAGE,
+  FAILED_MESSAGE,
+  SHORT_MOVIE_DURATION,
+  MOVIES_URL,
+  MINUTES_SECONDS,
+  BREAKPOINT_MOBILE,
+  BREAKPOINT_TABLET,
+  BREAKPOINT_DESKTOP,
+  VISIBLE_MOVIES_MOBILE,
+  MOVIES_TO_LOAD_MOBILE,
+  VISIBLE_MOVIES_TABLET,
+  MOVIES_TO_LOAD_TABLET,
+  VISIBLE_MOVIES_DESKTOP,
+  MOVIES_TO_LOAD_DESKTOP
+  // BACKEND_URL
+};

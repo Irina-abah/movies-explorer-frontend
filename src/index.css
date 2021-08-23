@@ -25,6 +25,7 @@
 @import url('./components/SavedMovies/SavedMovies.css');
 @import url('./components/PageNotFound/PageNotFound.css');
 @import url('./components/UserEntry/UserEntry.css');
+@import url('./components/InfoTooltip/InfoTooltip.css');
 @import url('./styles/button.css');
 @import url('./styles/section.css');
 @import url('./styles/link.css');

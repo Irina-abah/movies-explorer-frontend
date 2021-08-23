@@ -15,7 +15,10 @@
 
 .form-wrapper {
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
+  text-align: left;
+  flex-direction: column;
+  /* border: 1px solid red; */
 }
 
 .search-form__input_type_movie::placeholder {
@@ -45,6 +48,11 @@
 .search-form__icon {
   width: 34px;
   height: 34px;
+}
+
+.search-form__block {
+  display: flex;
+  flex-direction: row;
 }
 
 @media screen and (max-width: 1023px) {

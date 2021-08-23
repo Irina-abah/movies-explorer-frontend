@@ -1,5 +1,5 @@
 .user-entry {
-  margin: 0 auto;
+  margin: auto;
   max-width: 396px;
   width: 100%;
   text-align: left;
@@ -62,12 +62,18 @@
   font-weight: 400;
   color: #A0A0A0;
   margin-bottom: 5px;
+  margin-top: 24px;
 }
+
+/* .user-entry__lable:nth-of-type(1) {
+  margin-top: 0;
+} */
 
 @media screen and (max-width: 425px) {
 
   .user-entry {
     text-align: center;
+    margin: 0 auto;
   }
 
   .user-entry__message {

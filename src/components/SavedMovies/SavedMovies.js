@@ -1,12 +1,30 @@
+import React from 'react';
+import Header from '../Header/Header';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import SearchForm from '../Movies/SearchForm/SearchForm';
-import movies from '../../utils/constants';
+import Footer from '../Footer/Footer';
+import Preloader from '../Preloader/Preloader';
 
-function SavedMovies() {
+function SavedMovies(props) {
+
   return (
     <section className="main movies">
-      <SearchForm />
-      <MoviesCardList movies={movies}/>
+      <Header loggedIn={props.loggedIn}/>
+      <SearchForm 
+        onSubmit={props.onHandleSubmit} 
+        onChangeCheckbox={props.onChangeCheckbox}
+        checked={props.checked}
+        />
+        { props.isLoading ? <Preloader/> :
+      <MoviesCardList 
+        movies={props.movies}
+        onMovieDelete={props.onMovieDelete}
+        savedMovies={props.savedMovies}
+        savedMoviesNotFound={props.onSavedNotFound}
+        moviesNotFound={props.onMoviesNotFound}
+        isLoading={props.isLoading}
+        isFailed={props.isFailed}/> }
+      <Footer/>
     </section> 
    
   )

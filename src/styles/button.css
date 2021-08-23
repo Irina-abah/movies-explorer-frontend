@@ -41,12 +41,21 @@ box-shadow: none;
   background-color: #e8e8e8;
   }
 
+.button_type_more_disabled {
+  display: none;
+}
+
 .button_type_search {
   background: url(../images/search-icon-white.svg) center no-repeat;
   width: 80px;
   height: 34px;
   border-radius: 25px;
   background-color: #3456F3;
+}
+
+.button_type_search_disabled {
+  background-color: #EBEBEB;
+  pointer-events: none;
 }
 
 .button_type_account {
@@ -64,6 +73,11 @@ box-shadow: none;
   margin: 29px 0 16px;
 }
 
+.button_type_edit_disabled {
+  color: #EBEBEB;
+  pointer-events: none;
+}
+
 .button_type_sign {
   background-color: #3456F3;
   font-size: 14px;
@@ -72,6 +86,11 @@ box-shadow: none;
   color: #fff;
   height: 45px;
   margin: 69px 0 16px;
+}
+
+.button_type_sign_disabled {
+  background-color: #EBEBEB;
+  pointer-events: none;
 }
 
 .button_type_back {
@@ -92,6 +111,17 @@ box-shadow: none;
 
 .button_type_burger {
   display: none;
+}
+
+.button_type_close-popup {
+  background: url(../images/close-icon.svg) center no-repeat;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  padding: 0;
+  margin: 0;
 }
 
 @media screen and (max-width: 767px) {

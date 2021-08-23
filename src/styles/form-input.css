@@ -6,7 +6,22 @@
   outline: none;
   box-shadow: none;
   border: 1px solid #EBEBEB;
-  border-radius: 9px;
+  border-radius: 2px;
+}
+
+.form-input:-webkit-autofill:hover {
+  background-color: #fff;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.form-input-error {
+  color: #EE3465;
 }
 
 .input-error {
@@ -16,5 +31,13 @@
   color: #EE3465;
   margin: 6px 0 6px;
   height: 12px;
+  display: none;
+}
+
+.input-error_type_movie {
+  margin: 0;
+}
+
+.input-error_active {
   display: block;
 }

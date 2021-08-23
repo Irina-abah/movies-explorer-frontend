@@ -8,15 +8,19 @@
   row-gap: 30px;
   column-gap: 24px;
   list-style: none; 
-  grid-template-columns: repeat(auto-fit, minmax(364px, 1fr));
+  grid-template-columns: repeat(auto-fit, 364px);
   margin: 0;
   padding: 0;
+}
+
+.movie-list__not-found {
+  color: #EE3465;
 }
 
 @media screen and (max-width: 1023px) {
 
   .movie-list__container {
-    grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
+    grid-template-columns: repeat(auto-fit, 339px);
     row-gap: 36px;
     column-gap: 30px;
   } 
@@ -30,7 +34,7 @@
   }
 
   .movie-list__container {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, 300px);
     row-gap: 16px;
   } 
 

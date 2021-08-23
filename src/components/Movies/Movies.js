@@ -1,15 +1,31 @@
+import React from 'react';
+import Header from '../Header/Header';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
-// import Preloader from '../Preloader/Preloader';
-import movies from '../../utils/constants';
+import Footer from '../Footer/Footer';
+import Preloader from '../Preloader/Preloader';
 
-function Movies() {
+function Movies(props) {  
+
   return (
     <main className="main movies">
-      <SearchForm />
-      <MoviesCardList movies={movies}/>
-      <button className="button button_type_more" type="button" aria-label="more button">Еще</button>
-      {/* <Preloader /> */}
+      <Header loggedIn={props.loggedIn}/>
+      <SearchForm 
+        onSubmit={props.onHandleSubmit} 
+        onChangeCheckbox={props.onChangeCheckbox} 
+        checked={props.checked}
+        />
+        { props.isLoading ? <Preloader/> :
+      <MoviesCardList 
+        movies={props.movies}
+        onSaveClick={props.onSaveClick}
+        onMovieDelete={props.onMovieDelete}
+        savedMovies={props.savedMovies}
+        moviesNotFound={props.onMoviesNotFound}
+        isLoading={props.isLoading}
+        isFailed={props.isFailed}
+        savedMovie={props.savedMovie}/> }
+      <Footer/> 
     </main>
     
   )

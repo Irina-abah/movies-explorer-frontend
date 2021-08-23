@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import Account from '../../Profile/Acount/Account';
 
 function Navigation(props) {
 
   return (
-    <section className="navigation">
+    <section className={`navigation ${props.loggedIn ? "navigation__logged" : ""}`}>
       {props.loggedIn ? 
         (
           <nav className={props.isMenuOpen ? "header__navigation-mobile" : "header__navigation"}>
@@ -31,6 +32,7 @@ function Navigation(props) {
                 </NavLink>
                 </li>
             </ul>
+            <Account />
           </nav> 
       )
       : (
